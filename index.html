@@ -9,11 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1:#fff7ed;
-      --bg2:#eef6ff;
-      --ink:#172033;
-      --muted:#637083;
-      --white:#ffffff;
+      --ink:#162033;
+      --muted:#657286;
+      --white:#fff;
       --blue:#2563eb;
       --cyan:#06b6d4;
       --orange:#f97316;
@@ -21,10 +19,10 @@
       --green:#10b981;
       --purple:#7c3aed;
       --yellow:#facc15;
-      --line:rgba(23,32,51,.12);
-      --glass:rgba(255,255,255,.74);
-      --shadow:0 28px 90px rgba(23,32,51,.16);
-      --radius:34px;
+      --line:rgba(22,32,51,.12);
+      --glass:rgba(255,255,255,.76);
+      --shadow:0 24px 80px rgba(22,32,51,.15);
+      --radius:30px;
     }
 
     *{box-sizing:border-box}
@@ -36,292 +34,47 @@
       overflow:hidden;
       background:
         radial-gradient(circle at 12% 18%, rgba(37,99,235,.22), transparent 28%),
-        radial-gradient(circle at 88% 14%, rgba(249,115,22,.24), transparent 30%),
-        radial-gradient(circle at 72% 86%, rgba(124,58,237,.16), transparent 32%),
-        linear-gradient(135deg,var(--bg1),var(--bg2));
+        radial-gradient(circle at 88% 14%, rgba(249,115,22,.22), transparent 30%),
+        radial-gradient(circle at 74% 88%, rgba(124,58,237,.15), transparent 30%),
+        linear-gradient(135deg,#fff7ed,#eef6ff);
     }
-
     body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.44) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.44) 1px, transparent 1px);
-      background-size:52px 52px;
-      mask-image:linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
-      pointer-events:none;
+      content:"";position:fixed;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.48) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.48) 1px,transparent 1px);
+      background-size:56px 56px;
+      mask-image:linear-gradient(to bottom,transparent,black 15%,black 85%,transparent);
     }
 
-    .app{
-      width:100vw;
-      height:100vh;
-      display:grid;
-      grid-template-rows:auto 1fr auto;
-      padding:18px;
-      gap:14px;
-      position:relative;
-      z-index:1;
-    }
+    .app{height:100vh;width:100vw;padding:14px;display:grid;grid-template-rows:56px 1fr 58px;gap:12px;position:relative;z-index:1}
+    .topbar,.controls{border-radius:999px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.78);box-shadow:0 12px 38px rgba(22,32,51,.08);backdrop-filter:blur(18px)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}.brand-mark{width:36px;height:36px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(37,99,235,.22)}
+    .progress{display:flex;gap:7px;align-items:center;justify-content:flex-end}.dot{width:8px;height:8px;border-radius:999px;background:rgba(22,32,51,.18);transition:.22s;cursor:pointer}.dot.active{width:28px;background:linear-gradient(90deg,var(--blue),var(--orange))}
 
-    .topbar{
-      height:58px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-      padding:0 18px;
-      border-radius:999px;
-      background:rgba(255,255,255,.62);
-      border:1px solid rgba(255,255,255,.7);
-      box-shadow:0 14px 40px rgba(23,32,51,.08);
-      backdrop-filter:blur(20px);
-    }
+    .deck{position:relative;overflow:hidden;border-radius:36px;background:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+    .slide{position:absolute;inset:0;padding:clamp(18px,3vw,42px);opacity:0;transform:translateX(34px) scale(.99);pointer-events:none;transition:.32s ease;display:grid;place-items:center;overflow:hidden}.slide.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto}.slide.prev{transform:translateX(-34px) scale(.99)}
+    .slide-scroll{max-height:100%;overflow:auto;padding-right:6px;width:100%}.slide-inner{width:100%;max-width:1160px;margin:0 auto;position:relative;z-index:2}.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}
-    .brand-mark{
-      width:38px;height:38px;border-radius:14px;
-      display:grid;place-items:center;
-      color:#fff;font-weight:900;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      box-shadow:0 12px 28px rgba(37,99,235,.24);
-    }
+    .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid var(--line);color:var(--orange);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}
+    h1,h2,h3,p{margin:0}h1{font-size:clamp(40px,6vw,80px);line-height:1;letter-spacing:-3px;font-weight:900}h2{font-size:clamp(30px,4.4vw,58px);line-height:1.05;letter-spacing:-2px;font-weight:900;max-width:980px}h3{font-size:clamp(19px,1.85vw,25px);line-height:1.18;font-weight:850;margin-bottom:8px}p{color:var(--muted);font-size:clamp(14px,1.15vw,16.5px);line-height:1.62}.lead{font-size:clamp(16px,1.65vw,20px);line-height:1.62;margin-top:16px;color:#344256;max-width:850px}.gradient-text{background:linear-gradient(90deg,var(--blue),var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-    .progress{display:flex;align-items:center;gap:8px;min-width:220px;justify-content:flex-end}
-    .dot{width:9px;height:9px;border-radius:999px;background:rgba(23,32,51,.18);transition:.25s}
-    .dot.active{width:32px;background:linear-gradient(90deg,var(--blue),var(--orange))}
+    .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.7;z-index:1}.orb.one{width:240px;height:240px;background:rgba(37,99,235,.13);right:8%;top:8%}.orb.two{width:190px;height:190px;background:rgba(249,115,22,.16);left:6%;bottom:6%}.orb.three{width:170px;height:170px;background:rgba(16,185,129,.15);right:18%;bottom:10%}
+    .hero-card{position:relative;min-height:430px;border-radius:42px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(255,255,255,.58));border:1px solid rgba(255,255,255,.88);box-shadow:0 24px 68px rgba(22,32,51,.16);display:grid;place-items:center;overflow:hidden}.hero-card::after{content:"30%";position:absolute;right:22px;top:22px;border-radius:24px;padding:12px 16px;background:var(--red);color:#fff;font-size:38px;font-weight:900;box-shadow:0 14px 34px rgba(225,29,72,.26);transform:rotate(6deg)}
+    .phone{width:min(300px,84%);aspect-ratio:9/16;border-radius:40px;background:#0f172a;border:10px solid #111827;box-shadow:0 30px 72px rgba(15,23,42,.32);padding:16px;color:#fff;transform:rotate(-4deg)}.notch{width:82px;height:8px;border-radius:99px;background:#334155;margin:0 auto 16px}.map{height:46%;border-radius:26px;background:linear-gradient(135deg,#172554,#0891b2);position:relative;overflow:hidden;margin-bottom:14px}.map::before,.map::after{content:"";position:absolute;height:9px;border-radius:99px;background:rgba(255,255,255,.32)}.map::before{width:260px;left:-42px;top:72px;transform:rotate(-18deg)}.map::after{width:220px;right:-56px;bottom:58px;transform:rotate(22deg)}.pin{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:900;box-shadow:0 0 0 14px rgba(250,204,21,.22)}.screen-card{border-radius:20px;background:#1e293b;border:1px solid rgba(255,255,255,.08);padding:12px;margin-bottom:10px}.screen-card b{display:block}.screen-card span{color:#cbd5e1;font-size:12.5px;line-height:1.42;display:block;margin-top:3px}
 
-    .deck{
-      position:relative;
-      overflow:hidden;
-      border-radius:42px;
-      background:rgba(255,255,255,.36);
-      border:1px solid rgba(255,255,255,.72);
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(20px);
-    }
+    .choice-card,.info-card,.result-card,.theory-card{border-radius:28px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.86);padding:20px;box-shadow:0 16px 44px rgba(22,32,51,.09)}.badge{width:44px;height:44px;border-radius:17px;display:grid;place-items:center;color:#fff;font-weight:900;margin-bottom:14px;background:linear-gradient(135deg,var(--blue),var(--cyan))}.badge.orange{background:linear-gradient(135deg,var(--orange),var(--red))}.badge.green{background:linear-gradient(135deg,var(--green),var(--cyan));color:#083b2f}.badge.purple{background:linear-gradient(135deg,var(--purple),var(--blue))}
+    .quiz-title{font-size:clamp(24px,2.8vw,36px);font-weight:900;line-height:1.14;margin-bottom:18px}.answers{display:grid;gap:10px;margin-top:14px}.answer{position:relative;display:flex;gap:12px;align-items:flex-start;border-radius:20px;background:rgba(255,255,255,.72);border:1px solid var(--line);padding:13px 15px;cursor:pointer;font-weight:750;color:#2e394b;transition:.18s}.answer:hover{background:#fff;transform:translateX(5px)}.answer input{margin-top:5px;accent-color:var(--blue)}.feedback{display:none;margin-top:14px;border-radius:20px;padding:14px 16px;font-weight:700;color:#273548;background:#fff;border:1px dashed rgba(22,32,51,.26)}.choice-card:has(input:checked) .feedback{display:block}.choice-card:has(.right:checked) .feedback{background:#ecfdf5;border-color:rgba(16,185,129,.35)}.choice-card:has(.wrong:checked) .feedback{background:#fff1f2;border-color:rgba(225,29,72,.35)}
+    .case-list{display:grid;gap:12px;margin-top:18px}.case-item{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid var(--line)}.case-item strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}.case-dot{width:32px;height:32px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;background:var(--orange);color:#fff;font-weight:900}.quote{margin-top:18px;border-radius:28px;padding:20px;color:#fff;background:linear-gradient(135deg,#0f172a,#1e3a8a);box-shadow:0 22px 62px rgba(15,23,42,.16);font-size:clamp(18px,1.8vw,24px);font-weight:800;line-height:1.45}
+    .theory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}.theory-card:nth-child(1){background:linear-gradient(145deg,#eff6ff,rgba(255,255,255,.8))}.theory-card:nth-child(2){background:linear-gradient(145deg,#fff7ed,rgba(255,255,255,.8))}.theory-card:nth-child(3){background:linear-gradient(145deg,#ecfdf5,rgba(255,255,255,.8))}.vs-box{display:grid;grid-template-columns:1fr 70px 1fr;gap:16px;align-items:stretch;margin-top:18px}.vs-mid{align-self:center;justify-self:center;width:70px;height:70px;border-radius:50%;background:#0f172a;color:#fff;display:grid;place-items:center;font-weight:900;font-size:22px;box-shadow:0 18px 46px rgba(15,23,42,.2)}
+    .video-shell{border-radius:38px;padding:12px;background:#0f172a;box-shadow:0 26px 76px rgba(15,23,42,.24);margin-top:20px}.video-box{position:relative;width:100%;padding-bottom:52%;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#0f172a,#1e3a8a 48%,#f97316)}.video-box iframe,.video-box video{position:absolute;inset:0;width:100%;height:100%;border:0}.video-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:22px}.video-placeholder b{display:block;font-size:clamp(32px,5vw,70px);line-height:1;font-weight:900;margin-bottom:10px}.video-placeholder span{font-weight:650;color:#dbeafe}
+    .table-wrap{overflow:auto;border-radius:28px;box-shadow:0 20px 60px rgba(22,32,51,.11);background:#fff;margin-top:20px;max-height:54vh}table{width:100%;border-collapse:collapse;min-width:820px;background:#fff}th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#0f172a;color:#fff;font-size:13px}td{color:#46556a;font-weight:600;font-size:14px}.tag{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;padding:5px 9px;font-weight:850;white-space:nowrap}
+    .ending-card{border-radius:42px;padding:clamp(26px,4vw,52px);background:linear-gradient(135deg,#0f172a,#1e1b4b 55%,#7f1d1d);color:#fff;text-align:center;box-shadow:0 28px 82px rgba(15,23,42,.26);position:relative;overflow:hidden}.ending-card p{color:#dbeafe;max-width:900px;margin:16px auto 0}.final-q{display:inline-flex;margin-top:22px;border-radius:999px;padding:12px 18px;background:#fff;color:#0f172a;font-weight:900;box-shadow:0 16px 42px rgba(255,255,255,.16)}
 
-    .slide{
-      position:absolute;
-      inset:0;
-      padding:clamp(24px,4vw,58px);
-      opacity:0;
-      transform:translateX(42px) scale(.985);
-      pointer-events:none;
-      transition:opacity .35s ease, transform .35s ease;
-      display:grid;
-      align-items:center;
-      overflow:hidden;
-    }
-    .slide.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto}
-    .slide.prev{transform:translateX(-42px) scale(.985)}
+    .game-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch;margin-top:18px}.board{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);border-radius:28px;padding:14px;box-shadow:0 16px 44px rgba(22,32,51,.1)}.cell{position:relative;min-height:70px;border-radius:18px;background:#fff;border:1px solid var(--line);padding:8px;font-size:11px;font-weight:800;color:#475569;display:flex;align-items:flex-start}.cell.start{background:#ecfeff}.cell.tax{background:#fff1f2}.cell.bonus{background:#ecfdf5}.cell.question{background:#eff6ff}.cell.finish{background:#fef9c3}.token{position:absolute;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;bottom:7px;border:2px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.18)}.player{left:7px;background:var(--blue);color:#fff}.boss{right:7px;background:var(--orange);color:#fff}.game-panel{border-radius:28px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.86);padding:20px;box-shadow:0 16px 44px rgba(22,32,51,.1);display:flex;flex-direction:column;gap:14px}.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{border-radius:18px;background:#fff;border:1px solid var(--line);padding:12px}.stat b{display:block;font-size:22px;color:#0f172a}.stat span{font-size:12px;color:var(--muted);font-weight:700}.game-message{border-radius:20px;background:#0f172a;color:#e2e8f0;padding:14px;min-height:86px;font-weight:650;line-height:1.55}.game-question{border-radius:22px;background:#fff;border:1px solid var(--line);padding:14px}.game-question h3{font-size:18px}.game-options{display:grid;gap:9px;margin-top:10px}.game-option{border:1px solid var(--line);background:#f8fafc;border-radius:16px;padding:10px 12px;cursor:pointer;font-family:inherit;text-align:left;font-weight:750;color:#334155}.game-option:hover{background:#eff6ff}.game-option.correct{background:#dcfce7}.game-option.wrong{background:#ffe4e6}.dice-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.dice{width:54px;height:54px;border-radius:18px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:28px;font-weight:900;box-shadow:0 12px 28px rgba(22,32,51,.08)}
 
-    .slide-inner{position:relative;z-index:2;width:100%;max-width:1160px;margin:0 auto}
-    .two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
-    .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 8px}.btn{border:0;cursor:pointer;border-radius:999px;padding:12px 18px;font-family:inherit;font-weight:900;color:#fff;background:#0f172a;box-shadow:0 12px 32px rgba(15,23,42,.16);transition:.18s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.76);color:#0f172a;border:1px solid rgba(255,255,255,.84);box-shadow:none}.counter{font-weight:900;color:#334155;background:rgba(255,255,255,.68);padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.82)}
 
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      border-radius:999px;
-      background:rgba(255,255,255,.78);
-      border:1px solid var(--line);
-      color:var(--orange);
-      font-size:13px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      margin-bottom:18px;
-    }
-
-    h1,h2,h3,p{margin:0}
-    h1{
-      font-size:clamp(44px,7vw,92px);
-      line-height:.98;
-      letter-spacing:-3.6px;
-      font-weight:900;
-      max-width:920px;
-    }
-    h2{
-      font-size:clamp(34px,5vw,68px);
-      line-height:1.04;
-      letter-spacing:-2.4px;
-      font-weight:900;
-      max-width:980px;
-    }
-    h3{font-size:clamp(20px,2.1vw,28px);line-height:1.18;font-weight:850;margin-bottom:10px}
-    p{color:var(--muted);font-size:clamp(15px,1.35vw,18px);line-height:1.7}
-    .lead{font-size:clamp(18px,2vw,23px);line-height:1.65;margin-top:20px;color:#344256;max-width:850px}
-    .gradient-text{background:linear-gradient(90deg,var(--blue),var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
-
-    .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.8;z-index:1}
-    .orb.one{width:280px;height:280px;background:rgba(37,99,235,.14);right:8%;top:8%}
-    .orb.two{width:220px;height:220px;background:rgba(249,115,22,.18);left:8%;bottom:8%}
-    .orb.three{width:190px;height:190px;background:rgba(16,185,129,.16);right:18%;bottom:12%}
-
-    .hero-card{
-      position:relative;
-      min-height:520px;
-      border-radius:46px;
-      padding:26px;
-      background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(255,255,255,.56));
-      border:1px solid rgba(255,255,255,.88);
-      box-shadow:0 28px 75px rgba(23,32,51,.18);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-    }
-    .hero-card::after{
-      content:"30%";
-      position:absolute;
-      right:24px;
-      top:24px;
-      border-radius:26px;
-      padding:14px 18px;
-      background:var(--red);
-      color:#fff;
-      font-size:46px;
-      font-weight:900;
-      box-shadow:0 16px 36px rgba(225,29,72,.28);
-      transform:rotate(6deg);
-    }
-
-    .phone{
-      width:min(330px,86%);
-      aspect-ratio:9/16;
-      border-radius:42px;
-      background:#0f172a;
-      border:10px solid #111827;
-      box-shadow:0 34px 80px rgba(15,23,42,.34);
-      padding:18px;
-      color:#fff;
-      transform:rotate(-4deg);
-    }
-    .notch{width:86px;height:8px;border-radius:99px;background:#334155;margin:0 auto 18px}
-    .map{height:48%;border-radius:28px;background:linear-gradient(135deg,#172554,#0891b2);position:relative;overflow:hidden;margin-bottom:16px}
-    .map::before,.map::after{content:"";position:absolute;height:10px;border-radius:99px;background:rgba(255,255,255,.32)}
-    .map::before{width:280px;left:-44px;top:80px;transform:rotate(-18deg)}
-    .map::after{width:240px;right:-60px;bottom:64px;transform:rotate(22deg)}
-    .pin{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:900;box-shadow:0 0 0 16px rgba(250,204,21,.22)}
-    .screen-card{border-radius:22px;background:#1e293b;border:1px solid rgba(255,255,255,.08);padding:14px;margin-bottom:12px}
-    .screen-card b{display:block;color:#fff}.screen-card span{color:#cbd5e1;font-size:13px;line-height:1.45;display:block;margin-top:3px}
-
-    .choice-card,.info-card,.result-card{
-      border-radius:30px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(255,255,255,.84);
-      padding:22px;
-      box-shadow:0 18px 50px rgba(23,32,51,.10);
-      min-height:100%;
-    }
-    .choice-card{transition:.2s}
-    .choice-card:hover{transform:translateY(-4px);box-shadow:0 26px 66px rgba(23,32,51,.14)}
-    .badge{
-      width:46px;height:46px;border-radius:18px;
-      display:grid;place-items:center;
-      color:#fff;font-weight:900;
-      margin-bottom:16px;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-    }
-    .badge.orange{background:linear-gradient(135deg,var(--orange),var(--red))}
-    .badge.green{background:linear-gradient(135deg,var(--green),var(--cyan));color:#073b2e}
-    .badge.purple{background:linear-gradient(135deg,var(--purple),var(--blue))}
-
-    .quiz-title{font-size:clamp(24px,3vw,38px);font-weight:900;line-height:1.16;margin-bottom:22px;max-width:980px}
-    .answers{display:grid;gap:12px;margin-top:18px}
-    .answer{
-      position:relative;
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      border-radius:22px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-      padding:15px 16px;
-      cursor:pointer;
-      font-weight:750;
-      color:#2e394b;
-      transition:.18s;
-    }
-    .answer:hover{background:#fff;transform:translateX(5px)}
-    .answer input{margin-top:5px;accent-color:var(--blue)}
-    .feedback{display:none;margin-top:16px;border-radius:22px;padding:16px 18px;font-weight:700;color:#273548;background:#fff;border:1px dashed rgba(23,32,51,.26)}
-    .choice-card:has(input:checked) .feedback{display:block}
-    .choice-card:has(.right:checked) .feedback{background:#ecfdf5;border-color:rgba(16,185,129,.35)}
-    .choice-card:has(.wrong:checked) .feedback{background:#fff1f2;border-color:rgba(225,29,72,.35)}
-
-    .case-list{display:grid;gap:14px;margin-top:22px}
-    .case-item{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:24px;background:rgba(255,255,255,.72);border:1px solid var(--line)}
-    .case-item strong{display:block;color:var(--ink);font-size:18px;margin-bottom:3px}
-    .case-dot{width:34px;height:34px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;background:var(--orange);color:#fff;font-weight:900}
-
-    .quote{
-      margin-top:24px;
-      border-radius:30px;
-      padding:24px;
-      color:#fff;
-      background:linear-gradient(135deg,#0f172a,#1e3a8a);
-      box-shadow:0 26px 70px rgba(15,23,42,.18);
-      font-size:clamp(20px,2vw,27px);
-      font-weight:800;
-      line-height:1.45;
-    }
-
-    .theory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
-    .theory-card{border-radius:34px;padding:24px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.84);box-shadow:0 20px 54px rgba(23,32,51,.1)}
-    .theory-card:nth-child(1){background:linear-gradient(145deg,#eff6ff,rgba(255,255,255,.8))}
-    .theory-card:nth-child(2){background:linear-gradient(145deg,#fff7ed,rgba(255,255,255,.8))}
-    .theory-card:nth-child(3){background:linear-gradient(145deg,#ecfdf5,rgba(255,255,255,.8))}
-
-    .vs-box{display:grid;grid-template-columns:1fr 74px 1fr;gap:18px;align-items:stretch;margin-top:22px}
-    .vs-mid{align-self:center;justify-self:center;width:74px;height:74px;border-radius:50%;background:#0f172a;color:#fff;display:grid;place-items:center;font-weight:900;font-size:24px;box-shadow:0 20px 50px rgba(15,23,42,.22)}
-
-    .video-shell{border-radius:42px;padding:14px;background:#0f172a;box-shadow:0 30px 86px rgba(15,23,42,.26)}
-    .video-box{position:relative;width:100%;padding-bottom:56.25%;border-radius:30px;overflow:hidden;background:linear-gradient(135deg,#0f172a,#1e3a8a 48%,#f97316)}
-    .video-box iframe,.video-box video{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .video-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:24px}
-    .video-placeholder b{display:block;font-size:clamp(36px,6vw,80px);line-height:1;font-weight:900;margin-bottom:12px}.video-placeholder span{font-weight:650;color:#dbeafe}
-
-    .table-wrap{overflow:auto;border-radius:30px;box-shadow:0 24px 70px rgba(23,32,51,.12);background:#fff}
-    table{width:100%;border-collapse:collapse;min-width:840px;background:#fff}
-    th,td{padding:16px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-    th{background:#0f172a;color:#fff;font-size:14px;letter-spacing:.02em}td{color:#46556a;font-weight:600}.tag{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;padding:5px 10px;font-weight:850;white-space:nowrap}
-
-    .ending-card{
-      border-radius:46px;
-      padding:clamp(28px,4vw,56px);
-      background:linear-gradient(135deg,#0f172a,#1e1b4b 55%,#7f1d1d);
-      color:#fff;
-      text-align:center;
-      box-shadow:0 30px 90px rgba(15,23,42,.28);
-      position:relative;
-      overflow:hidden;
-    }
-    .ending-card p{color:#dbeafe;max-width:900px;margin:18px auto 0}.final-q{display:inline-flex;margin-top:24px;border-radius:999px;padding:13px 20px;background:#fff;color:#0f172a;font-weight:900;box-shadow:0 18px 46px rgba(255,255,255,.18)}
-
-    .controls{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .btn{
-      border:0;
-      cursor:pointer;
-      border-radius:999px;
-      padding:13px 18px;
-      font-family:inherit;
-      font-weight:900;
-      color:#fff;
-      background:#0f172a;
-      box-shadow:0 14px 36px rgba(15,23,42,.18);
-      transition:.18s;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn.secondary{background:rgba(255,255,255,.76);color:#0f172a;border:1px solid rgba(255,255,255,.84);box-shadow:none}
-    .counter{font-weight:900;color:#334155;background:rgba(255,255,255,.68);padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.82)}
-
-    @media(max-width:980px){
-      body{overflow:auto}.app{height:auto;min-height:100vh}.deck{height:auto;min-height:calc(100vh - 170px)}.slide{position:relative;display:none;min-height:calc(100vh - 170px)}.slide.active{display:grid}.two-col,.three-col,.grid-2,.theory-grid,.vs-box{grid-template-columns:1fr}.progress{display:none}.brand span:last-child{display:none}.hero-card{min-height:420px}.phone{max-height:390px;width:260px}h1{letter-spacing:-2px}.controls{position:sticky;bottom:0;padding-bottom:4px}.slide{padding:24px}.topbar{border-radius:24px}.video-box{border-radius:24px}.deck{border-radius:28px}
-    }
+    @media(max-width:980px){body{overflow:auto}.app{height:auto;min-height:100vh;grid-template-rows:56px auto 58px}.deck{min-height:calc(100vh - 154px)}.slide{position:relative;display:none;min-height:calc(100vh - 154px)}.slide.active{display:grid}.two-col,.grid-2,.grid-3,.theory-grid,.vs-box,.game-layout{grid-template-columns:1fr}.progress{display:none}.brand span:last-child{display:none}.hero-card{min-height:380px}.phone{max-height:350px;width:245px}.slide{padding:20px}.topbar,.controls{border-radius:24px}.deck{border-radius:28px}.video-box{border-radius:24px}.board{grid-template-columns:repeat(4,1fr)}.cell{min-height:66px}.controls{position:sticky;bottom:0}.table-wrap{max-height:none}}
   </style>
 </head>
 <body>
@@ -351,43 +104,54 @@
         </div>
       </section>
 
-      <section class="slide">
-        <div class="orb three"></div>
+      <section class="slide quiz-slide" data-quiz="0">
         <div class="slide-inner">
           <div class="kicker">01 · Khởi động vấn đề</div>
           <h2>Chọn đáp án trước khi phân tích</h2>
-          <p class="lead">Các câu hỏi dưới đây giúp nhận ra sự khác nhau giữa tên gọi “đối tác” và vị trí thực tế của tài xế trong quá trình lao động.</p>
-          <div class="three-col" style="margin-top:28px">
-            <div class="choice-card">
-              <div class="badge">1</div>
-              <div class="quiz-title">Có xe riêng thì chắc chắn là người làm chủ?</div>
-              <div class="answers">
-                <label class="answer"><input class="wrong" type="radio" name="q1">A. Chắc chắn đúng</label>
-                <label class="answer"><input class="right" type="radio" name="q1">B. Chưa chắc, phải xem ai kiểm soát giá, khách và điều kiện lao động</label>
-                <label class="answer"><input class="wrong" type="radio" name="q1">C. Không liên quan</label>
-              </div>
-              <div class="feedback">Đáp án gợi ý: B. Sở hữu xe chỉ là một biểu hiện; cần xét vị trí trong toàn bộ hệ thống sản xuất dịch vụ.</div>
+          <p class="lead">Mỗi trang chỉ có một câu hỏi để cả lớp dễ trả lời và thảo luận.</p>
+          <div class="choice-card" style="margin-top:24px;max-width:920px">
+            <div class="badge">1</div>
+            <div class="quiz-title">Có xe riêng thì chắc chắn là người làm chủ?</div>
+            <div class="answers">
+              <label class="answer"><input class="wrong" type="radio" name="q1">A. Chắc chắn đúng</label>
+              <label class="answer"><input class="right" type="radio" name="q1">B. Chưa chắc, phải xem ai kiểm soát giá, khách và điều kiện lao động</label>
+              <label class="answer"><input class="wrong" type="radio" name="q1">C. Không liên quan</label>
             </div>
-            <div class="choice-card">
-              <div class="badge orange">2</div>
-              <div class="quiz-title">Ai đang nắm quyền tổ chức lao động?</div>
-              <div class="answers">
-                <label class="answer"><input class="wrong" type="radio" name="q2">A. Hoàn toàn là tài xế</label>
-                <label class="answer"><input class="right" type="radio" name="q2">B. Nền tảng giữ quyền kiểm soát quan trọng</label>
-                <label class="answer"><input class="wrong" type="radio" name="q2">C. Khách hàng quyết định tất cả</label>
-              </div>
-              <div class="feedback">Đáp án gợi ý: B. Giá cước, thuật toán phân phối cuốc, điểm đánh giá và khóa tài khoản đều thuộc quyền kiểm soát của nền tảng.</div>
+            <div class="feedback">Đáp án gợi ý: B. Sở hữu xe chỉ là một biểu hiện; cần xét vị trí trong toàn bộ hệ thống sản xuất dịch vụ.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide quiz-slide" data-quiz="1">
+        <div class="slide-inner">
+          <div class="kicker">02 · Khởi động vấn đề</div>
+          <h2>Quyền kiểm soát nằm ở đâu?</h2>
+          <div class="choice-card" style="margin-top:24px;max-width:920px">
+            <div class="badge orange">2</div>
+            <div class="quiz-title">Nếu nền tảng quyết định giá cước và chiết khấu, ai đang nắm quyền tổ chức lao động?</div>
+            <div class="answers">
+              <label class="answer"><input class="wrong" type="radio" name="q2">A. Hoàn toàn là tài xế</label>
+              <label class="answer"><input class="right" type="radio" name="q2">B. Nền tảng giữ quyền kiểm soát quan trọng</label>
+              <label class="answer"><input class="wrong" type="radio" name="q2">C. Khách hàng quyết định tất cả</label>
             </div>
-            <div class="choice-card">
-              <div class="badge purple">3</div>
-              <div class="quiz-title">Tắt ứng dụng tập thể là gì?</div>
-              <div class="answers">
-                <label class="answer"><input class="wrong" type="radio" name="q3">A. Thói quen cá nhân</label>
-                <label class="answer"><input class="wrong" type="radio" name="q3">B. Lỗi kỹ thuật</label>
-                <label class="answer"><input class="right" type="radio" name="q3">C. Hình thức đấu tranh tập thể trong kinh tế số</label>
-              </div>
-              <div class="feedback">Đáp án gợi ý: C. Khi nhiều người cùng hành động để bảo vệ lợi ích kinh tế chung, nó mang tính đấu tranh tập thể.</div>
+            <div class="feedback">Đáp án gợi ý: B. Giá cước, thuật toán phân phối cuốc, điểm đánh giá và khóa tài khoản đều thuộc quyền kiểm soát của nền tảng.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide quiz-slide" data-quiz="2">
+        <div class="slide-inner">
+          <div class="kicker">03 · Khởi động vấn đề</div>
+          <h2>Tắt ứng dụng tập thể là hành động gì?</h2>
+          <div class="choice-card" style="margin-top:24px;max-width:920px">
+            <div class="badge purple">3</div>
+            <div class="quiz-title">Khi tài xế đồng loạt tắt ứng dụng để phản đối chiết khấu, hành động đó gần với hình thức nào?</div>
+            <div class="answers">
+              <label class="answer"><input class="wrong" type="radio" name="q3">A. Một thói quen cá nhân</label>
+              <label class="answer"><input class="wrong" type="radio" name="q3">B. Một lỗi kỹ thuật của ứng dụng</label>
+              <label class="answer"><input class="right" type="radio" name="q3">C. Một hình thức đấu tranh tập thể trong kinh tế số</label>
             </div>
+            <div class="feedback">Đáp án gợi ý: C. Khi nhiều người cùng hành động để bảo vệ lợi ích kinh tế chung, nó mang tính đấu tranh tập thể.</div>
           </div>
         </div>
       </section>
@@ -396,10 +160,10 @@
         <div class="orb one"></div>
         <div class="slide-inner two-col">
           <div>
-            <div class="kicker">02 · Tình huống trung tâm</div>
+            <div class="kicker">04 · Tình huống trung tâm</div>
             <h2>Khi “đối tác” không được quyết định luật chơi</h2>
             <p class="lead">Nền tảng gọi xe X gọi tài xế là “đối tác”, nhưng tài xế không tự quyết định những yếu tố quan trọng nhất của quá trình lao động.</p>
-            <div class="quote">Câu hỏi cốt lõi không phải là “tài xế có xe hay không?”, mà là “ai kiểm soát quá trình lao động và phân chia kết quả lao động?”</div>
+            <div class="quote">Câu hỏi cốt lõi: ai kiểm soát quá trình lao động và phân chia kết quả lao động?</div>
           </div>
           <div class="case-list">
             <div class="case-item"><div class="case-dot">1</div><div><strong>Không tự định giá cước</strong><p>Giá do thuật toán và chính sách nền tảng quyết định.</p></div></div>
@@ -412,26 +176,14 @@
 
       <section class="slide">
         <div class="orb two"></div><div class="orb three"></div>
-        <div class="slide-inner">
-          <div class="kicker">03 · Cơ sở lý luận</div>
+        <div class="slide-inner slide-scroll">
+          <div class="kicker">05 · Cơ sở lý luận</div>
           <h2>Ba tiêu chí để nhìn đúng bản chất giai cấp</h2>
           <p class="lead">Theo cách tiếp cận của chủ nghĩa Mác – Lênin, cần xem xét địa vị trong hệ thống sản xuất, quan hệ với tư liệu sản xuất và phương thức hưởng thụ phần của cải xã hội.</p>
           <div class="theory-grid">
-            <div class="theory-card">
-              <div class="badge">I</div>
-              <h3>Địa vị trong hệ thống sản xuất</h3>
-              <p>Tài xế là người trực tiếp tạo ra dịch vụ vận chuyển, nhưng không quyết định toàn bộ cơ chế vận hành dịch vụ.</p>
-            </div>
-            <div class="theory-card">
-              <div class="badge orange">II</div>
-              <h3>Quan hệ với tư liệu sản xuất</h3>
-              <p>Chiếc xe là công cụ trực tiếp; còn app, dữ liệu, thuật toán định giá và hệ thống phân phối khách là yếu tố then chốt.</p>
-            </div>
-            <div class="theory-card">
-              <div class="badge green">III</div>
-              <h3>Phương thức hưởng thụ của cải</h3>
-              <p>Tài xế nhận phần còn lại sau chiết khấu; nền tảng hưởng lợi nhờ kiểm soát hệ thống kết nối và tổ chức lao động.</p>
-            </div>
+            <div class="theory-card"><div class="badge">I</div><h3>Địa vị trong hệ thống sản xuất</h3><p>Tài xế là người trực tiếp tạo ra dịch vụ vận chuyển, nhưng không quyết định toàn bộ cơ chế vận hành dịch vụ.</p></div>
+            <div class="theory-card"><div class="badge orange">II</div><h3>Quan hệ với tư liệu sản xuất</h3><p>Chiếc xe là công cụ trực tiếp; còn app, dữ liệu, thuật toán định giá và hệ thống phân phối khách là yếu tố then chốt.</p></div>
+            <div class="theory-card"><div class="badge green">III</div><h3>Phương thức hưởng thụ của cải</h3><p>Tài xế nhận phần còn lại sau chiết khấu; nền tảng hưởng lợi nhờ kiểm soát hệ thống kết nối và tổ chức lao động.</p></div>
           </div>
           <div class="vs-box">
             <div class="info-card"><h3>Nhìn bề ngoài</h3><p>Tài xế có xe riêng, tự bật/tắt app, không có quản lý trực tiếp đứng cạnh.</p></div>
@@ -443,17 +195,36 @@
 
       <section class="slide">
         <div class="slide-inner">
-          <div class="kicker">04 · Video tình huống</div>
-          <h2>Từ màn hình ứng dụng đến mâu thuẫn lợi ích</h2>
-          <p class="lead">Video được đặt sau phần câu hỏi và lý thuyết để người xem có khung phân tích trước khi theo dõi tình huống.</p>
-          <div class="video-shell" style="margin-top:26px">
-            <div class="video-box">
-              <div class="video-placeholder">
-                <div>
-                  <b>VIDEO TÌNH HUỐNG</b>
-                  <span>Chèn YouTube/MP4 sau khi dựng xong</span>
-                </div>
+          <div class="kicker">06 · Trò chơi tương tác</div>
+          <h2>Mini game: Đường đua nền tảng</h2>
+          <p class="lead">Người chơi là tài xế công nghệ. Trả lời đúng để được lăn xúc xắc. Trả lời sai sẽ mất lượt. Ông chủ nền tảng tự động đi sau lượt của người chơi; nếu ra số 6 thì ông chủ mất lượt.</p>
+          <div class="game-layout">
+            <div class="board" id="board"></div>
+            <div class="game-panel">
+              <div class="stat-grid">
+                <div class="stat"><b id="playerPos">0</b><span>Vị trí tài xế</span></div>
+                <div class="stat"><b id="bossPos">0</b><span>Vị trí ông chủ</span></div>
               </div>
+              <div class="game-message" id="gameMessage">Bắt đầu trò chơi: trả lời câu hỏi để nhận quyền lăn xúc xắc.</div>
+              <div class="game-question" id="gameQuestion"></div>
+              <div class="dice-row">
+                <button class="btn" id="rollBtn" disabled>Lăn xúc xắc</button>
+                <button class="btn secondary" id="resetGameBtn">Chơi lại</button>
+                <div class="dice" id="dice">?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-inner">
+          <div class="kicker">07 · Video tình huống</div>
+          <h2>Từ màn hình ứng dụng đến mâu thuẫn lợi ích</h2>
+          <p class="lead">Video được đặt sau phần câu hỏi, lý thuyết và trò chơi để người xem đã có khung phân tích trước khi theo dõi tình huống.</p>
+          <div class="video-shell">
+            <div class="video-box">
+              <div class="video-placeholder"><div><b>VIDEO TÌNH HUỐNG</b><span>Chèn YouTube/MP4 sau khi dựng xong</span></div></div>
               <!-- Thay VIDEO_ID rồi bỏ comment iframe này nếu dùng YouTube
               <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               -->
@@ -463,44 +234,17 @@
       </section>
 
       <section class="slide">
-        <div class="slide-inner">
-          <div class="kicker">05 · Kết luận phân tích</div>
+        <div class="slide-inner slide-scroll">
+          <div class="kicker">08 · Kết luận phân tích</div>
           <h2>Tài xế công nghệ là người làm chủ hay làm thuê kiểu mới?</h2>
-          <div class="table-wrap" style="margin-top:24px">
+          <div class="table-wrap">
             <table>
-              <thead>
-                <tr>
-                  <th>Tiêu chí</th>
-                  <th>Biểu hiện bên ngoài</th>
-                  <th>Bản chất trong nền tảng gọi xe</th>
-                  <th>Nhận định</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Tiêu chí</th><th>Biểu hiện bên ngoài</th><th>Bản chất trong nền tảng gọi xe</th><th>Nhận định</th></tr></thead>
               <tbody>
-                <tr>
-                  <td><span class="tag">Công cụ lao động</span></td>
-                  <td>Tài xế có xe riêng.</td>
-                  <td>Xe không phải toàn bộ hệ thống sản xuất; app, dữ liệu và thuật toán mới quyết định khả năng tiếp cận khách.</td>
-                  <td>Không đủ để xem là làm chủ.</td>
-                </tr>
-                <tr>
-                  <td><span class="tag">Quyền định giá</span></td>
-                  <td>Tài xế trực tiếp chở khách.</td>
-                  <td>Giá cước do nền tảng tính toán và áp đặt.</td>
-                  <td>Tài xế không nắm quyền quyết định.</td>
-                </tr>
-                <tr>
-                  <td><span class="tag">Tổ chức lao động</span></td>
-                  <td>Tài xế tự bật hoặc tắt app.</td>
-                  <td>Thuật toán phân phối cuốc, điểm đánh giá, tỷ lệ hủy và khóa tài khoản tạo cơ chế kiểm soát.</td>
-                  <td>Tự do chỉ tồn tại trong giới hạn của nền tảng.</td>
-                </tr>
-                <tr>
-                  <td><span class="tag">Phân chia của cải</span></td>
-                  <td>Tài xế nhận tiền sau mỗi chuyến.</td>
-                  <td>Nền tảng trích chiết khấu từ doanh thu và hưởng lợi nhờ kiểm soát hệ thống.</td>
-                  <td>Gần với người làm thuê kiểu mới.</td>
-                </tr>
+                <tr><td><span class="tag">Công cụ lao động</span></td><td>Tài xế có xe riêng.</td><td>Xe không phải toàn bộ hệ thống sản xuất; app, dữ liệu và thuật toán mới quyết định khả năng tiếp cận khách.</td><td>Không đủ để xem là làm chủ.</td></tr>
+                <tr><td><span class="tag">Quyền định giá</span></td><td>Tài xế trực tiếp chở khách.</td><td>Giá cước do nền tảng tính toán và áp đặt.</td><td>Tài xế không nắm quyền quyết định.</td></tr>
+                <tr><td><span class="tag">Tổ chức lao động</span></td><td>Tài xế tự bật hoặc tắt app.</td><td>Thuật toán phân phối cuốc, điểm đánh giá, tỷ lệ hủy và khóa tài khoản tạo cơ chế kiểm soát.</td><td>Tự do chỉ tồn tại trong giới hạn của nền tảng.</td></tr>
+                <tr><td><span class="tag">Phân chia của cải</span></td><td>Tài xế nhận tiền sau mỗi chuyến.</td><td>Nền tảng trích chiết khấu từ doanh thu và hưởng lợi nhờ kiểm soát hệ thống.</td><td>Gần với người làm thuê kiểu mới.</td></tr>
               </tbody>
             </table>
           </div>
@@ -510,16 +254,8 @@
       <section class="slide">
         <div class="orb one"></div><div class="orb two"></div>
         <div class="slide-inner grid-2">
-          <div class="result-card">
-            <div class="badge green">✓</div>
-            <h2 style="font-size:clamp(30px,4vw,54px)">Vì sao là người làm thuê kiểu mới?</h2>
-            <p class="lead">Tài xế không bị quản lý theo kiểu nhà máy truyền thống, nhưng lại phụ thuộc vào nền tảng số. Họ có hình thức độc lập, song không làm chủ các điều kiện cốt lõi của lao động.</p>
-          </div>
-          <div class="result-card">
-            <div class="badge orange">↔</div>
-            <h2 style="font-size:clamp(30px,4vw,54px)">Tắt app tập thể có ý nghĩa gì?</h2>
-            <p class="lead">Đó là cách người lao động rút sức lao động khỏi nền tảng để gây áp lực. Hình thức này khác bãi công đập phá máy móc thế kỷ 19 vì không tấn công công cụ vật chất, mà phản kháng cơ chế kiểm soát số.</p>
-          </div>
+          <div class="result-card"><div class="badge green">✓</div><h2 style="font-size:clamp(30px,4vw,52px)">Vì sao là người làm thuê kiểu mới?</h2><p class="lead">Tài xế không bị quản lý theo kiểu nhà máy truyền thống, nhưng lại phụ thuộc vào nền tảng số. Họ có hình thức độc lập, song không làm chủ các điều kiện cốt lõi của lao động.</p></div>
+          <div class="result-card"><div class="badge orange">↔</div><h2 style="font-size:clamp(30px,4vw,52px)">Tắt app tập thể có ý nghĩa gì?</h2><p class="lead">Đó là cách người lao động rút sức lao động khỏi nền tảng để gây áp lực. Hình thức này khác bãi công đập phá máy móc thế kỷ 19 vì không tấn công công cụ vật chất, mà phản kháng cơ chế kiểm soát số.</p></div>
         </div>
       </section>
 
@@ -537,7 +273,7 @@
 
     <footer class="controls">
       <button class="btn secondary" id="prevBtn">← Trang trước</button>
-      <div class="counter" id="counter">1 / 8</div>
+      <div class="counter" id="counter">1 / 11</div>
       <button class="btn" id="nextBtn">Trang sau →</button>
     </footer>
   </div>
@@ -575,13 +311,154 @@
 
     prevBtn.addEventListener('click', () => showSlide(current - 1));
     nextBtn.addEventListener('click', () => showSlide(current + 1));
-
     document.addEventListener('keydown', (e) => {
+      const tag = (e.target.tagName || '').toLowerCase();
+      if(tag === 'input' || tag === 'button') return;
       if(e.key === 'ArrowRight' || e.key === ' ') showSlide(current + 1);
       if(e.key === 'ArrowLeft') showSlide(current - 1);
     });
 
+    document.getElementById('deck').addEventListener('click', (e) => {
+      const interactive = e.target.closest('input, label, button, .answer, .game-panel, .board, iframe, video, a');
+      if(interactive) return;
+      showSlide(current + 1);
+    });
+
     showSlide(0);
+
+    const gameQuestions = [
+      {q:'Theo tiêu chí phân tích giai cấp, chỉ có xe riêng đã đủ để xem tài xế là người làm chủ chưa?', a:['Đủ, vì xe là tài sản cá nhân','Chưa đủ, cần xem ai kiểm soát hệ thống sản xuất dịch vụ','Không cần xét đến tư liệu sản xuất'], correct:1},
+      {q:'Trong mô hình gọi xe, yếu tố nào là tư liệu sản xuất then chốt?', a:['Chỉ có chiếc xe máy','App, dữ liệu, thuật toán và hệ thống phân phối khách','Chỉ có đồng phục tài xế'], correct:1},
+      {q:'Tài xế nhận tiền sau khi app trích chiết khấu. Điều này liên quan đến tiêu chí nào?', a:['Phương thức hưởng thụ phần của cải','Màu sắc thương hiệu','Sở thích cá nhân'], correct:0},
+      {q:'Tắt ứng dụng tập thể nhằm mục đích gì?', a:['Làm lỗi điện thoại','Rút sức lao động khỏi nền tảng để gây áp lực','Tăng thời gian nghỉ giải lao'], correct:1},
+      {q:'Vì sao tài xế được xem là người làm thuê kiểu mới?', a:['Vì họ không có xe','Vì họ phụ thuộc vào nền tảng dù có vẻ độc lập','Vì họ không biết dùng điện thoại'], correct:1},
+      {q:'Điểm khác với đập phá máy móc thế kỷ 19 là gì?', a:['Không phản kháng gì cả','Không phá công cụ vật chất, mà phản kháng cơ chế kiểm soát số','Chỉ là trò chơi may rủi'], correct:1}
+    ];
+    const boardNames = ['Start','Cuốc xe','Câu hỏi','Thưởng tip','Chiết khấu','Đơn xa','Câu hỏi','Kẹt xe','Tăng giá xăng','Câu hỏi','Điểm tốt','App lỗi','Câu hỏi','Tắt app','Về đích'];
+    const boardTypes = ['start','','question','bonus','tax','','question','tax','tax','question','bonus','tax','question','bonus','finish'];
+    let player = 0, boss = 0, canRoll = false, qIndex = 0, gameOver = false;
+    const board = document.getElementById('board');
+    const playerPos = document.getElementById('playerPos');
+    const bossPos = document.getElementById('bossPos');
+    const gameMessage = document.getElementById('gameMessage');
+    const gameQuestion = document.getElementById('gameQuestion');
+    const dice = document.getElementById('dice');
+    const rollBtn = document.getElementById('rollBtn');
+    const resetGameBtn = document.getElementById('resetGameBtn');
+
+    function buildBoard(){
+      board.innerHTML = '';
+      boardNames.forEach((name, i) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell ' + boardTypes[i];
+        cell.innerHTML = `<span>${i}. ${name}</span>`;
+        if(i === player) cell.innerHTML += '<div class="token player">🛵</div>';
+        if(i === boss) cell.innerHTML += '<div class="token boss">💼</div>';
+        board.appendChild(cell);
+      });
+      playerPos.textContent = player;
+      bossPos.textContent = boss;
+    }
+
+    function renderQuestion(){
+      if(gameOver) return;
+      const item = gameQuestions[qIndex % gameQuestions.length];
+      gameQuestion.innerHTML = `<h3>${item.q}</h3><div class="game-options">${item.a.map((x,i)=>`<button class="game-option" data-i="${i}">${String.fromCharCode(65+i)}. ${x}</button>`).join('')}</div>`;
+      document.querySelectorAll('.game-option').forEach(btn => {
+        btn.addEventListener('click', () => answerGameQuestion(Number(btn.dataset.i), item.correct, btn));
+      });
+      rollBtn.disabled = true;
+      canRoll = false;
+    }
+
+    function answerGameQuestion(choice, correct, btn){
+      if(gameOver || canRoll) return;
+      document.querySelectorAll('.game-option').forEach(b => b.disabled = true);
+      if(choice === correct){
+        btn.classList.add('correct');
+        gameMessage.textContent = 'Trả lời đúng! Tài xế được lăn xúc xắc để di chuyển.';
+        canRoll = true;
+        rollBtn.disabled = false;
+      } else {
+        btn.classList.add('wrong');
+        document.querySelector(`.game-option[data-i="${correct}"]`)?.classList.add('correct');
+        gameMessage.textContent = 'Trả lời sai: tài xế mất lượt. Ông chủ nền tảng tự động đi.';
+        setTimeout(bossTurn, 850);
+      }
+      qIndex++;
+    }
+
+    function roll(){ return Math.floor(Math.random()*6)+1; }
+    function move(type, steps){
+      if(type === 'player') player = Math.min(boardNames.length-1, player + steps);
+      else boss = Math.min(boardNames.length-1, boss + steps);
+      applyCell(type);
+      buildBoard();
+      checkWinner();
+    }
+
+    function applyCell(type){
+      const pos = type === 'player' ? player : boss;
+      const tile = boardTypes[pos];
+      if(tile === 'bonus'){
+        if(type === 'player') player = Math.min(boardNames.length-1, player + 1);
+        else boss = Math.min(boardNames.length-1, boss + 1);
+      }
+      if(tile === 'tax'){
+        if(type === 'player') player = Math.max(0, player - 1);
+        else boss = Math.max(0, boss - 1);
+      }
+    }
+
+    function checkWinner(){
+      if(player >= boardNames.length-1){
+        gameOver = true;
+        gameMessage.textContent = 'Tài xế về đích! Kết luận: hiểu đúng lý thuyết giúp nhìn ra bản chất của quan hệ lao động trong nền tảng số.';
+        gameQuestion.innerHTML = '<h3>Chiến thắng!</h3><p>Tài xế đã vượt qua các ô thuật toán, chiết khấu và câu hỏi lý luận.</p>';
+        rollBtn.disabled = true;
+      } else if(boss >= boardNames.length-1){
+        gameOver = true;
+        gameMessage.textContent = 'Ông chủ nền tảng về đích trước. Hãy chơi lại và trả lời thật chắc để giành lợi thế.';
+        gameQuestion.innerHTML = '<h3>Kết thúc lượt chơi</h3><p>Quyền kiểm soát nền tảng tạo lợi thế lớn cho ông chủ.</p>';
+        rollBtn.disabled = true;
+      }
+    }
+
+    function bossTurn(){
+      if(gameOver) return;
+      const d = roll();
+      dice.textContent = d;
+      if(d === 6){
+        gameMessage.textContent = 'Ông chủ nền tảng ra số 6 nên mất lượt. Tới lượt tài xế trả lời câu hỏi mới.';
+        buildBoard();
+        renderQuestion();
+        return;
+      }
+      move('boss', d);
+      if(!gameOver){
+        gameMessage.textContent = `Ông chủ nền tảng tự động đi ${d} ô. Tới lượt tài xế trả lời câu hỏi.`;
+        renderQuestion();
+      }
+    }
+
+    rollBtn.addEventListener('click', () => {
+      if(!canRoll || gameOver) return;
+      const d = roll();
+      dice.textContent = d;
+      gameMessage.textContent = `Tài xế lăn được ${d} và di chuyển.`;
+      rollBtn.disabled = true;
+      canRoll = false;
+      move('player', d);
+      if(!gameOver) setTimeout(bossTurn, 900);
+    });
+
+    function resetGame(){
+      player = 0; boss = 0; canRoll = false; qIndex = 0; gameOver = false; dice.textContent = '?';
+      gameMessage.textContent = 'Bắt đầu trò chơi: trả lời câu hỏi để nhận quyền lăn xúc xắc.';
+      buildBoard(); renderQuestion();
+    }
+    resetGameBtn.addEventListener('click', resetGame);
+    resetGame();
   </script>
 </body>
 </html>
