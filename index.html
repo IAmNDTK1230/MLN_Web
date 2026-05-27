@@ -68,9 +68,7 @@
     .table-wrap{overflow:auto;border-radius:28px;box-shadow:0 20px 60px rgba(22,32,51,.11);background:#fff;margin-top:20px;max-height:54vh;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,.35) transparent}table{width:100%;border-collapse:collapse;min-width:820px;background:#fff}th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#0f172a;color:#fff;font-size:13px}td{color:#46556a;font-weight:600;font-size:14px}.tag{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;padding:5px 9px;font-weight:850;white-space:nowrap}
     .ending-card{border-radius:42px;padding:clamp(26px,4vw,52px);background:linear-gradient(135deg,#0f172a,#1e1b4b 55%,#7f1d1d);color:#fff;text-align:center;box-shadow:0 28px 82px rgba(15,23,42,.26);position:relative;overflow:hidden}.ending-card p{color:#dbeafe;max-width:900px;margin:16px auto 0}.final-q{display:inline-flex;margin-top:22px;border-radius:999px;padding:12px 18px;background:#fff;color:#0f172a;font-weight:900;box-shadow:0 16px 42px rgba(255,255,255,.16)}
 
-    .game-full{height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:12px}.game-top{display:flex;gap:12px;align-items:center;justify-content:space-between}.game-stats{display:flex;gap:10px;flex-wrap:wrap}.stat{border-radius:18px;background:rgba(255,255,255,.86);border:1px solid var(--line);padding:10px 14px;min-width:130px}.stat b{font-size:22px;color:#0f172a}.stat span{font-size:12px;color:var(--muted);font-weight:750;display:block}.board-wrap{display:grid;place-items:center;min-height:0}.board{height:min(58vh,590px);aspect-ratio:1/1;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:8px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.86);border-radius:32px;padding:16px;box-shadow:0 18px 52px rgba(22,32,51,.13)}.cell{position:relative;border-radius:18px;background:#fff;border:1px solid var(--line);padding:7px;font-size:11px;font-weight:850;color:#475569;display:flex;align-items:flex-start;min-width:0}.cell.blank{opacity:0;background:transparent;border:0}.cell.start{background:#ecfeff}.cell.tax{background:#fff1f2}.cell.bonus{background:#ecfdf5}.cell.question{background:#eff6ff}.cell.finish{background:#fef9c3}.token{position:absolute;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;bottom:6px;border:2px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.18)}.player{left:6px;background:var(--blue);color:#fff}.boss{right:6px;background:var(--orange);color:#fff}.game-bottom{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}.game-message{border-radius:22px;background:#0f172a;color:#e2e8f0;padding:13px 16px;font-weight:650;line-height:1.5;min-width:min(620px,100%);text-align:center}.dice{width:62px;height:62px;border-radius:20px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:32px;font-weight:900;box-shadow:0 12px 28px rgba(22,32,51,.08)}.dice.rolling{animation:shake .45s infinite}@keyframes shake{0%{transform:rotate(0) scale(1)}25%{transform:rotate(12deg) scale(1.06)}50%{transform:rotate(-10deg) scale(.98)}75%{transform:rotate(8deg) scale(1.05)}100%{transform:rotate(0) scale(1)}}
-    .modal{position:absolute;inset:0;background:rgba(15,23,42,.58);backdrop-filter:blur(8px);display:none;place-items:center;z-index:20;padding:24px}.modal.show{display:grid}.modal-card{width:min(720px,100%);border-radius:34px;background:#fff;padding:26px;box-shadow:0 34px 90px rgba(15,23,42,.32)}.modal-card h3{font-size:24px}.game-options{display:grid;gap:10px;margin-top:14px}.game-option{border:1px solid var(--line);background:#f8fafc;border-radius:18px;padding:12px 14px;cursor:pointer;font-family:inherit;text-align:left;font-weight:750;color:#334155}.game-option:hover{background:#eff6ff}.game-option.correct{background:#dcfce7}.game-option.wrong{background:#ffe4e6}
-    .controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 8px}.btn{border:0;cursor:pointer;border-radius:999px;padding:12px 18px;font-family:inherit;font-weight:900;color:#fff;background:#0f172a;box-shadow:0 12px 32px rgba(15,23,42,.16);transition:.18s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.76);color:#0f172a;border:1px solid rgba(255,255,255,.84);box-shadow:none}.counter{font-weight:900;color:#334155;background:rgba(255,255,255,.68);padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.82)}
+    .word-game{height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:14px}.word-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.word-score{display:flex;gap:10px;flex-wrap:wrap}.word-stat{border-radius:18px;background:rgba(255,255,255,.86);border:1px solid var(--line);padding:10px 14px;min-width:130px}.word-stat b{font-size:22px;color:#0f172a}.word-stat span{font-size:12px;color:var(--muted);font-weight:750;display:block}.word-body{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;align-items:center;min-height:0}.draw-card,.guess-card{border-radius:34px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 52px rgba(22,32,51,.11);padding:22px}.draw-card{height:min(55vh,520px);display:grid;place-items:center}.draw-stage{width:min(390px,100%);aspect-ratio:1/1;position:relative;border-radius:32px;background:linear-gradient(135deg,#eff6ff,#fff7ed);overflow:hidden}.draw-part{position:absolute;opacity:0;transform:scale(.92);transition:.25s ease}.draw-part.show{opacity:1;transform:scale(1)}.p1{left:12%;right:12%;bottom:16%;height:18px;border-radius:999px;background:#0f172a}.p2{left:22%;bottom:16%;width:18px;height:62%;border-radius:999px;background:#0f172a}.p3{left:22%;top:20%;width:44%;height:18px;border-radius:999px;background:#0f172a}.p4{left:60%;top:20%;width:18px;height:18%;border-radius:999px;background:#0f172a}.p5{left:49%;top:34%;width:94px;height:94px;border-radius:28px;background:var(--blue);box-shadow:0 14px 34px rgba(37,99,235,.22)}.p5::after{content:'APP';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}.p6{left:43%;top:60%;width:150px;height:70px;border-radius:34px;background:var(--orange);box-shadow:0 14px 34px rgba(249,115,22,.22)}.p6::after{content:'LOCK';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}.word-clue{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-weight:900;padding:8px 12px;margin-bottom:14px}.word-display{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.letter-box{width:44px;height:54px;border-radius:16px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:24px;font-weight:900;color:#0f172a;box-shadow:0 10px 26px rgba(22,32,51,.07)}.letter-space{width:18px}.keyboard{display:grid;grid-template-columns:repeat(9,1fr);gap:7px;margin-top:16px}.key{border:0;border-radius:13px;background:#fff;border:1px solid var(--line);padding:9px 0;font-family:inherit;font-weight:900;cursor:pointer;color:#334155}.key:hover{background:#eff6ff}.key:disabled{opacity:.45;cursor:not-allowed}.key.good{background:#dcfce7;color:#166534}.key.bad{background:#ffe4e6;color:#9f1239}.word-message{border-radius:22px;background:#0f172a;color:#e2e8f0;padding:13px 16px;font-weight:650;line-height:1.5;text-align:center}.word-actions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 8px}.btn{border:0;cursor:pointer;border-radius:999px;padding:12px 18px;font-family:inherit;font-weight:900;color:#fff;background:#0f172a;box-shadow:0 12px 32px rgba(15,23,42,.16);transition:.18s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.76);color:#0f172a;border:1px solid rgba(255,255,255,.84);box-shadow:none}.counter{font-weight:900;color:#334155;background:rgba(255,255,255,.68);padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.82)}
     @media(max-width:980px){body{overflow:auto}.app{height:auto;min-height:100vh;grid-template-rows:56px auto 58px}.deck{min-height:calc(100vh - 154px)}.slide{position:relative;display:none;min-height:calc(100vh - 154px)}.slide.active{display:grid}.two-col,.grid-2,.grid-3,.theory-grid,.vs-box{grid-template-columns:1fr}.progress{display:none}.brand span:last-child{display:none}.hero-card{min-height:380px}.phone{max-height:350px;width:245px}.slide{padding:20px}.topbar,.controls{border-radius:24px}.deck{border-radius:28px}.video-box{height:42vh;border-radius:24px}.controls{position:sticky;bottom:0}.table-wrap{max-height:none}.board{width:100%;height:auto;max-width:560px}.game-top{display:grid}.game-message{min-width:0}}
   </style>
 </head>
@@ -87,7 +85,7 @@
       <section class="slide video-slide"><div class="slide-inner"><div class="kicker">06 · Video tình huống</div><h2>Từ màn hình ứng dụng đến mâu thuẫn lợi ích</h2><p class="lead">Video được đặt ở đây để người xem theo dõi tình huống tài xế, nền tảng tăng chiết khấu và hành động tắt app tập thể.</p><div class="video-shell"><div class="video-box"><div class="video-placeholder"><div><b>VIDEO TÌNH HUỐNG</b><span>Chèn YouTube/MP4 sau khi dựng xong</span></div></div><!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> --></div></div></div></section>
       <section class="slide"><div class="slide-inner slide-scroll"><div class="kicker">07 · Kết luận phân tích</div><h2>Tài xế công nghệ là người làm chủ hay làm thuê kiểu mới?</h2><div class="table-wrap"><table><thead><tr><th>Tiêu chí</th><th>Biểu hiện bên ngoài</th><th>Bản chất trong nền tảng gọi xe</th><th>Nhận định</th></tr></thead><tbody><tr><td><span class="tag">Công cụ lao động</span></td><td>Tài xế có xe riêng.</td><td>Xe không phải toàn bộ hệ thống sản xuất; app, dữ liệu và thuật toán mới quyết định khả năng tiếp cận khách.</td><td>Không đủ để xem là làm chủ.</td></tr><tr><td><span class="tag">Quyền định giá</span></td><td>Tài xế trực tiếp chở khách.</td><td>Giá cước do nền tảng tính toán và áp đặt.</td><td>Tài xế không nắm quyền quyết định.</td></tr><tr><td><span class="tag">Tổ chức lao động</span></td><td>Tài xế tự bật hoặc tắt app.</td><td>Thuật toán phân phối cuốc, điểm đánh giá, tỷ lệ hủy và khóa tài khoản tạo cơ chế kiểm soát.</td><td>Tự do chỉ tồn tại trong giới hạn của nền tảng.</td></tr><tr><td><span class="tag">Phân chia của cải</span></td><td>Tài xế nhận tiền sau mỗi chuyến.</td><td>Nền tảng trích chiết khấu từ doanh thu và hưởng lợi nhờ kiểm soát hệ thống.</td><td>Gần với người làm thuê kiểu mới.</td></tr></tbody></table></div></div></section>
       <section class="slide"><div class="orb one"></div><div class="orb two"></div><div class="slide-inner grid-2"><div class="result-card"><div class="badge green">✓</div><h2 style="font-size:clamp(30px,4vw,52px)">Vì sao là người làm thuê kiểu mới?</h2><p class="lead">Tài xế không bị quản lý theo kiểu nhà máy truyền thống, nhưng lại phụ thuộc vào nền tảng số. Họ có hình thức độc lập, song không làm chủ các điều kiện cốt lõi của lao động.</p></div><div class="result-card"><div class="badge orange">↔</div><h2 style="font-size:clamp(30px,4vw,52px)">Tắt app tập thể có ý nghĩa gì?</h2><p class="lead">Đó là cách người lao động rút sức lao động khỏi nền tảng để gây áp lực. Hình thức này khác bãi công đập phá máy móc thế kỷ 19 vì không tấn công công cụ vật chất, mà phản kháng cơ chế kiểm soát số.</p></div></div></section>
-      <section class="slide"><div class="slide-inner game-full"><div class="game-top"><div><div class="kicker">09 · Ôn tập tương tác</div><h2>Mini game: Đường đua nền tảng</h2></div><div class="game-stats"><div class="stat"><b id="playerPos">0</b><span>Vị trí tài xế Grab</span></div><div class="stat"><b id="bossPos">0</b><span>Vị trí ông chủ</span></div></div></div><div class="board-wrap"><div class="board" id="board"></div></div><div class="game-bottom"><button class="btn" id="rollBtn">Đổ xúc xắc</button><button class="btn secondary" id="resetGameBtn">Chơi lại</button><div class="dice" id="dice">?</div><div class="game-message" id="gameMessage">Nhấn “Đổ xúc xắc” để bắt đầu lượt của tài xế.</div></div></div><div class="modal" id="questionModal"><div class="modal-card" id="gameQuestion"></div></div></section>
+      <section class="slide"><div class="slide-inner word-game"><div class="word-head"><div><div class="kicker">09 · Ôn tập tương tác</div><h2>Mini game: Đoán cụm từ</h2><p class="lead">Trò chơi gồm 3 cụm từ khóa. Mỗi lần đoán sai, hệ thống sẽ vẽ thêm 1 nét biểu tượng “nền tảng kiểm soát”. Đoán đúng để chuyển sang cụm tiếp theo.</p></div><div class="word-score"><div class="word-stat"><b id="roundText">1/3</b><span>Vòng chơi</span></div><div class="word-stat"><b id="wrongText">0/6</b><span>Lượt sai</span></div></div></div><div class="word-body"><div class="draw-card"><div class="draw-stage"><div class="draw-part p1"></div><div class="draw-part p2"></div><div class="draw-part p3"></div><div class="draw-part p4"></div><div class="draw-part p5"></div><div class="draw-part p6"></div></div></div><div class="guess-card"><div class="word-clue" id="wordClue">Gợi ý</div><h3 id="wordTitle">Đoán cụm từ khóa</h3><div class="word-display" id="wordDisplay"></div><div class="keyboard" id="keyboard"></div></div></div><div class="word-actions"><button class="btn" id="nextWordBtn" style="display:none">Cụm tiếp theo</button><button class="btn secondary" id="resetWordBtn">Chơi lại</button><div class="word-message" id="wordMessage">Chọn chữ cái để đoán cụm từ.</div></div></div></section>
       <section class="slide"><div class="slide-inner"><div class="ending-card"><div class="kicker" style="background:rgba(255,255,255,.12);color:#facc15;border-color:rgba(255,255,255,.18)">Thông điệp cuối</div><h2>Đấu tranh giai cấp không biến mất trong thời đại công nghệ</h2><p>Nó chuyển từ không gian nhà máy sang không gian nền tảng; từ mâu thuẫn với máy móc vật lý sang mâu thuẫn với thuật toán, dữ liệu và cơ chế phân chia lợi ích.</p><div class="final-q">Ai thật sự làm chủ quá trình lao động?</div></div></div></section>
     </main>
     <footer class="controls"><button class="btn secondary" id="prevBtn">← Trang trước</button><div class="counter" id="counter">1 / 10</div><button class="btn" id="nextBtn">Trang sau →</button></footer>
@@ -99,31 +97,122 @@
     prevBtn.addEventListener('click',()=>showSlide(current-1));nextBtn.addEventListener('click',()=>showSlide(current+1));document.addEventListener('keydown',e=>{const tag=(e.target.tagName||'').toLowerCase();if(tag==='input'||tag==='button')return;if(e.key==='ArrowRight'||e.key===' ')showSlide(current+1);if(e.key==='ArrowLeft')showSlide(current-1)});
     document.getElementById('deck').addEventListener('click',e=>{const interactive=e.target.closest('input,label,button,.answer,.game-full,.board,iframe,video,a,.slide-scroll,.modal');if(interactive)return;showSlide(current+1)});showSlide(0);
 
-    const gameQuestions=[
-      {q:'Theo tiêu chí phân tích giai cấp, chỉ có xe riêng đã đủ để xem tài xế là người làm chủ chưa?',a:['Đủ, vì xe là tài sản cá nhân','Chưa đủ, cần xem ai kiểm soát hệ thống sản xuất dịch vụ','Không cần xét đến tư liệu sản xuất'],correct:1},
-      {q:'Trong mô hình gọi xe, yếu tố nào là tư liệu sản xuất then chốt?',a:['Chỉ có chiếc xe máy','App, dữ liệu, thuật toán và hệ thống phân phối khách','Chỉ có đồng phục tài xế'],correct:1},
-      {q:'Tài xế nhận tiền sau khi app trích chiết khấu. Điều này liên quan đến tiêu chí nào?',a:['Phương thức hưởng thụ phần của cải','Màu sắc thương hiệu','Sở thích cá nhân'],correct:0},
-      {q:'Tắt ứng dụng tập thể nhằm mục đích gì?',a:['Làm lỗi điện thoại','Rút sức lao động khỏi nền tảng để gây áp lực','Tăng thời gian nghỉ giải lao'],correct:1},
-      {q:'Vì sao tài xế được xem là người làm thuê kiểu mới?',a:['Vì họ không có xe','Vì họ phụ thuộc vào nền tảng dù có vẻ độc lập','Vì họ không biết dùng điện thoại'],correct:1},
-      {q:'Điểm khác với đập phá máy móc thế kỷ 19 là gì?',a:['Không phản kháng gì cả','Không phá công cụ vật chất, mà phản kháng cơ chế kiểm soát số','Chỉ là trò chơi may rủi'],correct:1}
+    const wordRounds = [
+      { phrase: 'NGUOI LAM THUE', clue: 'Kết luận về bản chất lao động của tài xế công nghệ' },
+      { phrase: 'TAT UNG DUNG', clue: 'Hành động tập thể của tài xế để phản đối nền tảng' },
+      { phrase: 'THUAT TOAN GIA', clue: 'Cơ chế nền tảng dùng để quyết định giá cước' }
     ];
-    const path=[0,1,2,3,4,5,6,13,20,27,34,41,48,47,46,45,44,43,42,35,28,21,14,7];
-    const boardNames=['Start','Cuốc xe','Câu hỏi','Thưởng tip','Chiết khấu','Đơn xa','Kẹt xe','App lỗi','Câu hỏi','Điểm tốt','Tăng giá xăng','Câu hỏi','Nghỉ ngắn','Thuật toán','Chiết khấu','Đơn gần','Câu hỏi','Khách hủy','Tắt app','Thảo luận','Câu hỏi','Liên kết','Áp lực','Về đích'];
-    const boardTypes=['start','','question','bonus','tax','','tax','tax','question','bonus','tax','question','bonus','','tax','','question','tax','bonus','','question','bonus','','finish'];
-    let player=0,boss=0,qIndex=0,gameOver=false,pendingSteps=0,phase='roll';
-    const board=document.getElementById('board'),playerPos=document.getElementById('playerPos'),bossPos=document.getElementById('bossPos'),gameMessage=document.getElementById('gameMessage'),dice=document.getElementById('dice'),rollBtn=document.getElementById('rollBtn'),resetGameBtn=document.getElementById('resetGameBtn'),questionModal=document.getElementById('questionModal'),gameQuestion=document.getElementById('gameQuestion');
-    function buildBoard(){board.innerHTML='';for(let i=0;i<49;i++){const cell=document.createElement('div');const idx=path.indexOf(i);if(idx===-1){cell.className='cell blank';board.appendChild(cell);continue}cell.className='cell '+boardTypes[idx];cell.innerHTML=`<span>${idx}. ${boardNames[idx]}</span>`;if(idx===player)cell.innerHTML+='<div class="token player">🛵</div>';if(idx===boss)cell.innerHTML+='<div class="token boss">💼</div>';board.appendChild(cell)}playerPos.textContent=player;bossPos.textContent=boss}
-    function roll(){return Math.floor(Math.random()*6)+1}
-    function animateDice(cb){dice.classList.add('rolling');let t=0;const timer=setInterval(()=>{dice.textContent=roll();t++},90);setTimeout(()=>{clearInterval(timer);dice.classList.remove('rolling');cb()},850)}
-    function showGameQuestion(){const item=gameQuestions[qIndex%gameQuestions.length];gameQuestion.innerHTML=`<h3>${item.q}</h3><div class="game-options">${item.a.map((x,i)=>`<button class="game-option" data-i="${i}">${String.fromCharCode(65+i)}. ${x}</button>`).join('')}</div>`;questionModal.classList.add('show');document.querySelectorAll('.game-option').forEach(btn=>btn.addEventListener('click',()=>answerGameQuestion(Number(btn.dataset.i),item.correct,btn)));qIndex++}
-    function applyCell(type){let pos=type==='player'?player:boss;let tile=boardTypes[pos];if(tile==='bonus'){if(type==='player')player=Math.min(23,player+1);else boss=Math.min(23,boss+1)}if(tile==='tax'){if(type==='player')player=Math.max(0,player-1);else boss=Math.max(0,boss-1)}}
-    function move(type,steps){if(type==='player')player=Math.min(23,player+steps);else boss=Math.min(23,boss+steps);applyCell(type);buildBoard();checkWinner()}
-    function checkWinner(){if(player>=23){gameOver=true;gameMessage.textContent='Tài xế Grab về đích! Hiểu đúng lý thuyết giúp nhận ra bản chất của quan hệ lao động trong nền tảng số.';rollBtn.disabled=true}else if(boss>=23){gameOver=true;gameMessage.textContent='Ông chủ nền tảng về đích trước. Quyền kiểm soát nền tảng tạo lợi thế lớn trong cuộc đua.';rollBtn.disabled=true}}
-    function answerGameQuestion(choice,correct,btn){if(gameOver||phase!=='answer')return;document.querySelectorAll('.game-option').forEach(b=>b.disabled=true);if(choice===correct){btn.classList.add('correct');gameMessage.textContent=`Trả lời đúng! Tài xế di chuyển ${pendingSteps} ô.`;setTimeout(()=>{questionModal.classList.remove('show');move('player',pendingSteps);afterPlayerTurn()},650)}else{btn.classList.add('wrong');document.querySelector(`.game-option[data-i="${correct}"]`)?.classList.add('correct');gameMessage.textContent='Trả lời sai: tài xế mất lượt, không được di chuyển.';setTimeout(()=>{questionModal.classList.remove('show');afterPlayerTurn()},900)}}
-    function afterPlayerTurn(){pendingSteps=0;phase='boss';if(!gameOver)setTimeout(bossTurn,650)}
-    function bossTurn(){if(gameOver)return;gameMessage.textContent='Tới lượt ông chủ nền tảng tự động đổ xúc xắc...';animateDice(()=>{const d=roll();dice.textContent=d;if(d===6){gameMessage.textContent='Ông chủ ra số 6 nên mất lượt. Tới lượt tài xế Grab.'}else{gameMessage.textContent=`Ông chủ đổ được ${d} và tự động đi ${d} ô.`;move('boss',d)}if(!gameOver){phase='roll';rollBtn.disabled=false}})}
-    rollBtn.addEventListener('click',()=>{if(gameOver||phase!=='roll')return;phase='rolling';rollBtn.disabled=true;gameMessage.textContent='Tài xế Grab đang đổ xúc xắc...';animateDice(()=>{const d=roll();dice.textContent=d;pendingSteps=d;phase='answer';gameMessage.textContent=`Tài xế đổ được ${d}. Trả lời đúng để được đi ${d} ô, trả lời sai sẽ mất lượt.`;showGameQuestion()})});
-    function resetGame(){player=0;boss=0;qIndex=0;gameOver=false;pendingSteps=0;phase='roll';dice.textContent='?';rollBtn.disabled=false;questionModal.classList.remove('show');gameMessage.textContent='Nhấn “Đổ xúc xắc” để bắt đầu lượt của tài xế.';buildBoard()}resetGameBtn.addEventListener('click',resetGame);resetGame();
+
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    let wordRound = 0;
+    let wrongCount = 0;
+    let guessed = new Set();
+    let wordFinished = false;
+
+    const roundText = document.getElementById('roundText');
+    const wrongText = document.getElementById('wrongText');
+    const wordClue = document.getElementById('wordClue');
+    const wordTitle = document.getElementById('wordTitle');
+    const wordDisplay = document.getElementById('wordDisplay');
+    const keyboard = document.getElementById('keyboard');
+    const wordMessage = document.getElementById('wordMessage');
+    const nextWordBtn = document.getElementById('nextWordBtn');
+    const resetWordBtn = document.getElementById('resetWordBtn');
+    const drawParts = Array.from(document.querySelectorAll('.draw-part'));
+
+    function normalizeChar(ch){
+      return ch.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/Đ/g,'D').replace(/đ/g,'d').toUpperCase();
+    }
+
+    function currentWord(){
+      return wordRounds[wordRound];
+    }
+
+    function renderWord(){
+      const round = currentWord();
+      roundText.textContent = `${wordRound + 1}/3`;
+      wrongText.textContent = `${wrongCount}/6`;
+      wordClue.textContent = 'Gợi ý: ' + round.clue;
+      wordTitle.textContent = wordFinished ? 'Hoàn thành cụm từ' : 'Đoán cụm từ khóa';
+      wordDisplay.innerHTML = '';
+      [...round.phrase].forEach(ch => {
+        if(ch === ' '){
+          const space = document.createElement('div');
+          space.className = 'letter-space';
+          wordDisplay.appendChild(space);
+        } else {
+          const box = document.createElement('div');
+          box.className = 'letter-box';
+          box.textContent = guessed.has(ch) || wordFinished ? ch : '';
+          wordDisplay.appendChild(box);
+        }
+      });
+      drawParts.forEach((part, index) => part.classList.toggle('show', index < wrongCount));
+      renderKeyboard();
+    }
+
+    function renderKeyboard(){
+      keyboard.innerHTML = '';
+      alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.className = 'key';
+        btn.textContent = letter;
+        btn.disabled = guessed.has(letter) || wordFinished;
+        const phrase = currentWord().phrase;
+        if(guessed.has(letter)) btn.classList.add(phrase.includes(letter) ? 'good' : 'bad');
+        btn.addEventListener('click', () => guessLetter(letter));
+        keyboard.appendChild(btn);
+      });
+    }
+
+    function guessLetter(letter){
+      if(wordFinished) return;
+      guessed.add(letter);
+      const phrase = currentWord().phrase;
+      if(phrase.includes(letter)){
+        wordMessage.textContent = `Đúng! Chữ ${letter} có trong cụm từ.`;
+      } else {
+        wrongCount++;
+        wordMessage.textContent = `Sai! Hệ thống vẽ thêm 1 nét kiểm soát. (${wrongCount}/6)`;
+      }
+      const solved = [...phrase].every(ch => ch === ' ' || guessed.has(ch));
+      if(solved){
+        wordFinished = true;
+        wordMessage.textContent = wordRound === wordRounds.length - 1 ? 'Hoàn thành cả 3 cụm từ! Bạn đã ôn lại các ý chính của bài.' : 'Đúng cụm từ! Bấm “Cụm tiếp theo” để tiếp tục.';
+        nextWordBtn.style.display = wordRound === wordRounds.length - 1 ? 'none' : 'inline-flex';
+      } else if(wrongCount >= 6){
+        wordFinished = true;
+        wordMessage.textContent = `Hết lượt sai. Cụm đúng là: ${phrase}. Bấm chơi lại hoặc sang cụm tiếp theo.`;
+        nextWordBtn.style.display = wordRound === wordRounds.length - 1 ? 'none' : 'inline-flex';
+      }
+      renderWord();
+    }
+
+    function nextWord(){
+      if(wordRound < wordRounds.length - 1){
+        wordRound++;
+        wrongCount = 0;
+        guessed = new Set();
+        wordFinished = false;
+        nextWordBtn.style.display = 'none';
+        wordMessage.textContent = 'Chọn chữ cái để đoán cụm từ mới.';
+        renderWord();
+      }
+    }
+
+    function resetWordGame(){
+      wordRound = 0;
+      wrongCount = 0;
+      guessed = new Set();
+      wordFinished = false;
+      nextWordBtn.style.display = 'none';
+      wordMessage.textContent = 'Chọn chữ cái để đoán cụm từ.';
+      renderWord();
+    }
+
+    nextWordBtn.addEventListener('click', nextWord);
+    resetWordBtn.addEventListener('click', resetWordGame);
+    resetWordGame();
   </script>
 </body>
 </html>
