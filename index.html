@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới?</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --card2: #1e293b;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent2: #f59e0b;
+      --danger: #ef4444;
+      --green: #22c55e;
+      --line: rgba(255,255,255,0.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #1e3a8a 0, #0f172a 42%, #020617 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      min-height: 86vh;
+      display: grid;
+      place-items: center;
+      padding: 48px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.18);
+      filter: blur(10px);
+      right: -120px;
+      top: -120px;
+    }
+
+    .hero {
+      max-width: 980px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.08);
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 76px);
+      line-height: 1.05;
+      margin: 22px 0 16px;
+      letter-spacing: -1.5px;
+    }
+
+    h2 {
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.15;
+      margin: 0 0 18px;
+    }
+
+    h3 { margin: 0 0 10px; font-size: 22px; }
+
+    p { color: var(--muted); margin: 0 0 14px; }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    a.button, button {
+      border: 0;
+      cursor: pointer;
+      color: #02111f;
+      background: var(--accent);
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 26px rgba(56,189,248,0.22);
+    }
+
+    a.button.secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(15,23,42,0.78);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.24);
+      backdrop-filter: blur(12px);
+    }
+
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .quote {
+      border-left: 4px solid var(--accent);
+      padding-left: 18px;
+      font-size: 20px;
+      color: var(--text);
+      margin: 18px 0 0;
+    }
+
+    .kpi {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .kpi strong {
+      font-size: 44px;
+      color: var(--accent2);
+      line-height: 1;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.12);
+      color: #bae6fd;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .danger { color: #fecaca; background: rgba(239,68,68,0.14); }
+    .green { color: #bbf7d0; background: rgba(34,197,94,0.14); }
+    .orange { color: #fed7aa; background: rgba(245,158,11,0.14); }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .comparison th, .comparison td {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .comparison th {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .comparison td { color: var(--muted); }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .scene {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .time {
+      color: #02111f;
+      background: var(--accent2);
+      border-radius: 12px;
+      padding: 8px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .scene h3 { font-size: 19px; }
+    .scene p { margin: 0 0 8px; }
+
+    .video-frame {
+      aspect-ratio: 16 / 9;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.24), rgba(245,158,11,0.2)), #020617;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .phone {
+      width: 260px;
+      max-width: 58%;
+      aspect-ratio: 9 / 16;
+      border-radius: 32px;
+      border: 8px solid #111827;
+      background: #020617;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      padding: 16px;
+    }
+
+    .app-line {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      margin: 12px 0;
+    }
+
+    .big-number {
+      font-size: clamp(42px, 8vw, 92px);
+      font-weight: 900;
+      color: var(--danger);
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .speaker {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .speaker strong { color: var(--accent); }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .role {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 44px 20px 70px;
+      border-top: 1px solid var(--line);
+      background: rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 860px) {
+      .span-4, .span-6, .span-8 { grid-column: span 12; }
+      .scene { grid-template-columns: 1fr; }
+      .role-grid { grid-template-columns: 1fr; }
+      .hero p { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <div class="badge">Chương 3 · Chủ nghĩa duy vật lịch sử · Giai cấp và đấu tranh giai cấp</div>
+      <h1>“Đối tác” hay<br />người làm thuê kiểu mới?</h1>
+      <p>Một tình huống về tài xế công nghệ, thuật toán, chiết khấu nền tảng và cuộc “tắt ứng dụng tập thể” dưới góc nhìn triết học Mác – Lênin.</p>
+      <div class="buttons">
+        <a class="button" href="#video">Xem kịch bản video</a>
+        <a class="button secondary" href="#script">Script thuyết trình</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="problem">
+    <div class="grid">
+      <div class="card span-8">
+        <span class="pill orange">Tình huống mở đầu</span>
+        <h2>Nền tảng gọi xe X gọi tài xế là “đối tác”</h2>
+        <p>Trên giấy tờ, tài xế tự sở hữu xe và tự chọn giờ làm. Nhưng trên thực tế, nền tảng quyết định giá cước, phân phối cuốc xe, kiểm soát tỷ lệ hủy, khóa tài khoản bằng thuật toán và thu 30% doanh thu.</p>
+        <p class="quote">Câu hỏi trung tâm: Ai thật sự nắm quyền trong quá trình lao động — người cầm vô lăng hay nền tảng nắm thuật toán?</p>
+      </div>
+      <div class="card span-4">
+        <span class="pill danger">Mâu thuẫn chính</span>
+        <div class="big-number">30%</div>
+        <p style="text-align:center">Mức doanh thu tài xế phải chia lại cho ứng dụng. Khi chiết khấu tăng, cuộc tắt ứng dụng tập thể nổ ra.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="theory">
+    <h2>1. Lý thuyết dùng để phân tích</h2>
+    <div class="grid">
+      <div class="card span-4">
+        <span class="pill green">Tiêu chí 1</span>
+        <h3>Địa vị trong hệ thống sản xuất</h3>
+        <p>Không chỉ xem người đó có sở hữu một công cụ lao động hay không, mà phải xem họ giữ vị trí nào trong toàn bộ hệ thống sản xuất.</p>
+      </div>
+      <div class="card span-4">
+        <span class="pill green">Tiêu chí 2</span>
+        <h3>Quan hệ với tư liệu sản xuất chủ yếu</h3>
+        <p>Tài xế có xe, nhưng tư liệu sản xuất quyết định trong mô hình gọi xe là nền tảng số, dữ liệu, thuật toán định giá và hệ thống phân phối khách.</p>
+      </div>
+      <div class="card span-4">
+        <span class="pill green">Tiêu chí 3</span>
+        <h3>Phương thức hưởng thụ của cải</h3>
+        <p>Tài xế nhận phần thu nhập sau khi nền tảng trích chiết khấu. Nền tảng hưởng phần giá trị nhờ kiểm soát hệ thống kết nối và điều phối lao động.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="answer">
+    <h2>2. Kết luận: Tài xế là ai?</h2>
+    <div class="card">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Tiêu chí</th>
+            <th>Biểu hiện “làm chủ”</th>
+            <th>Thực chất trong nền tảng X</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sở hữu công cụ</td>
+            <td>Tài xế có xe riêng.</td>
+            <td>Xe là công cụ cá nhân, nhưng không đủ để quyết định toàn bộ quá trình sản xuất dịch vụ.</td>
+          </tr>
+          <tr>
+            <td>Quyền định giá</td>
+            <td>Người làm chủ thường có quyền quyết định giá bán dịch vụ.</td>
+            <td>Tài xế không tự định giá cước; giá do thuật toán và chính sách nền tảng quyết định.</td>
+          </tr>
+          <tr>
+            <td>Quyền tổ chức lao động</td>
+            <td>Người làm chủ tự chọn khách, tự quản trị rủi ro.</td>
+            <td>Tài xế bị đánh giá, khóa tài khoản, phạt hủy chuyến, bị điều phối bởi thuật toán.</td>
+          </tr>
+          <tr>
+            <td>Hưởng thụ của cải</td>
+            <td>Người làm chủ hưởng phần còn lại sau chi phí do chính mình quyết định.</td>
+            <td>Tài xế nhận thu nhập sau khi nền tảng trích chiết khấu, trong khi nền tảng hưởng lợi từ quyền kiểm soát hệ thống.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="kpi">
+        <strong>→</strong>
+        <p><b>Kết luận:</b> Tài xế công nghệ không hoàn toàn là “người làm chủ”. Họ gần với hình thức <b>người làm thuê kiểu mới</b>: có vẻ độc lập về hình thức, nhưng phụ thuộc thực chất vào nền tảng, dữ liệu, thuật toán và chính sách phân phối thu nhập.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="strike">
+    <h2>3. “Tắt ứng dụng tập thể” có phải đấu tranh giai cấp hiện đại?</h2>
+    <div class="grid">
+      <div class="card span-6">
+        <span class="pill green">Có</span>
+        <h3>Đây là hình thức đấu tranh tập thể</h3>
+        <p>Khi tài xế cùng tắt ứng dụng để phản đối mức chiết khấu, họ không chỉ phản ứng cá nhân mà đang hành động tập thể để bảo vệ lợi ích kinh tế chung.</p>
+        <p>Đối tượng phản kháng không phải một ông chủ đứng trong nhà máy, mà là một nền tảng số vận hành bằng thuật toán.</p>
+      </div>
+      <div class="card span-6">
+        <span class="pill orange">Khác thế kỷ 19</span>
+        <h3>Từ đập phá máy móc sang rút lao động khỏi nền tảng</h3>
+        <p>Trong thế kỷ 19, công nhân có lúc phản kháng bằng cách phá máy vì xem máy móc là nguyên nhân trực tiếp làm họ mất việc hoặc bị bóc lột.</p>
+        <p>Ở đây, tài xế không phá điện thoại hay máy chủ. Họ dùng chính sự phụ thuộc của nền tảng vào lao động sống để gây áp lực: đồng loạt ngừng nhận cuốc, làm hệ thống thiếu tài xế.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <h2>4. Kịch bản video ngắn 5–6 phút</h2>
+    <div class="video-frame">
+      <div class="phone">
+        <div class="app-line" style="width:70%"></div>
+        <div class="app-line" style="width:94%"></div>
+        <div class="app-line" style="width:52%"></div>
+        <div class="big-number" style="font-size:54px;margin-top:34px">30%</div>
+        <div class="app-line" style="width:88%"></div>
+        <div class="app-line" style="width:62%"></div>
+      </div>
+    </div>
+
+    <div class="timeline" style="margin-top:22px">
+      <div class="scene">
+        <div class="time">0:00</div>
+        <div>
+          <h3>Cảnh 1: Thành phố buổi sáng</h3>
+          <p><b>Hình ảnh:</b> Xe máy, điện thoại bật app, bản đồ hiện đơn hàng.</p>
+          <p><b>Lời dẫn:</b> “Mỗi ngày, hàng nghìn tài xế mở ứng dụng và bắt đầu lao động. Trên màn hình, họ được gọi là đối tác. Nhưng họ có thật sự làm chủ không?”</p>
+        </div>
+      </div>
+      <div class="scene">
+        <div class="time">0:45</div>
+        <div>
+          <h3>Cảnh 2: Một cuốc xe bình thường</h3>
+          <p><b>Hình ảnh:</b> Tài xế bấm nhận cuốc, giá hiện sẵn, điểm đến bị ẩn trước khi nhận.</p>
+          <p><b>Đối thoại:</b> Tài xế: “Tôi có xe, tôi tự chạy. Nhưng giá bao nhiêu, đi đâu, có bị khóa tài khoản không… đều do app quyết.”</p>
+        </div>
+      </div>
+      <div class="scene">
+        <div class="time">1:40</div>
+        <div>
+          <h3>Cảnh 3: Góc nhìn lý luận</h3>
+          <p><b>Hình ảnh:</b> Bảng so sánh “sở hữu xe” và “kiểm soát nền tảng”.</p>
+          <p><b>Lời dẫn:</b> “Theo tiêu chí của Lênin, cần nhìn vào địa vị trong hệ thống sản xuất và cách mỗi nhóm hưởng phần của cải xã hội.”</p>
+        </div>
+      </div>
+      <div class="scene">
+        <div class="time">2:40</div>
+        <div>
+          <h3>Cảnh 4: Mâu thuẫn bùng nổ</h3>
+          <p><b>Hình ảnh:</b> Thông báo tăng chiết khấu, tài xế nhìn màn hình, nhóm chat phản ứng.</p>
+          <p><b>Đối thoại:</b> Tài xế A: “Mỗi cuốc mình chạy nhiều hơn, nhưng phần nhận về ít hơn.” Tài xế B: “Nếu từng người than thì không ai nghe. Vậy cùng tắt app.”</p>
+        </div>
+      </div>
+      <div class="scene">
+        <div class="time">3:35</div>
+        <div>
+          <h3>Cảnh 5: Tắt ứng dụng tập thể</h3>
+          <p><b>Hình ảnh:</b> Nhiều tài xế cùng tắt app; bản đồ khách hiển thị “khó tìm tài xế”.</p>
+          <p><b>Lời dẫn:</b> “Đây là một hình thức đấu tranh hiện đại: không chiếm nhà máy, không phá máy móc, mà rút lao động khỏi nền tảng số.”</p>
+        </div>
+      </div>
+      <div class="scene">
+        <div class="time">4:40</div>
+        <div>
+          <h3>Cảnh 6: Kết luận</h3>
+          <p><b>Hình ảnh:</b> Câu hỏi hiện lên: “Ai làm chủ thuật toán?”</p>
+          <p><b>Lời dẫn:</b> “Tài xế có vẻ tự do về thời gian, nhưng phụ thuộc vào hệ thống định giá, phân phối và kiểm soát của nền tảng. Vì vậy, họ là người làm thuê kiểu mới trong nền kinh tế số.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="script">
+    <h2>5. Script thuyết trình và dẫn dắt vào video</h2>
+    <div class="card">
+      <div class="speaker">
+        <p><strong>Mở đầu trước khi chiếu video:</strong></p>
+        <p>“Thưa thầy/cô và các bạn, nhóm em chọn tình huống tài xế công nghệ để phân tích nội dung giai cấp và đấu tranh giai cấp trong chủ nghĩa duy vật lịch sử. Đây là một ví dụ rất gần với đời sống hiện nay. Các nền tảng gọi tài xế là ‘đối tác’, nhưng trong thực tế, tài xế có thật sự nắm quyền làm chủ quá trình lao động hay không? Để trả lời, nhóm em xin mời mọi người xem video ngắn sau.”</p>
+      </div>
+      <div class="speaker">
+        <p><strong>Sau khi chiếu video:</strong></p>
+        <p>“Qua video, có thể thấy mâu thuẫn nằm ở chỗ: tài xế có xe và có vẻ tự do về thời gian, nhưng các yếu tố quyết định như giá cước, phân phối khách, tỷ lệ chiết khấu và quyền duy trì tài khoản lại thuộc về nền tảng. Nếu dựa trên tiêu chí của Lênin về địa vị trong hệ thống sản xuất và phương thức hưởng thụ của cải, tài xế công nghệ gần với người làm thuê kiểu mới hơn là người làm chủ thực sự.”</p>
+      </div>
+      <div class="speaker">
+        <p><strong>Phần kết:</strong></p>
+        <p>“Cuộc tắt ứng dụng tập thể có thể xem là hình thức đấu tranh giai cấp trong bối cảnh kinh tế số. Nó khác các cuộc bãi công đập phá máy móc thế kỷ 19 ở chỗ: tài xế không phá công cụ lao động, mà dùng hành động ngừng kết nối với nền tảng để gây áp lực. Điều này cho thấy đấu tranh giai cấp không biến mất, mà thay đổi hình thức theo sự phát triển của lực lượng sản xuất và công nghệ.”</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="roles">
+    <h2>6. Phân vai để quay trực tiếp hoặc làm hoạt cảnh AI</h2>
+    <div class="role-grid">
+      <div class="role">
+        <h3>Người dẫn chuyện</h3>
+        <p>Giải thích lý luận, nối các cảnh và đưa ra kết luận.</p>
+      </div>
+      <div class="role">
+        <h3>Tài xế công nghệ</h3>
+        <p>Thể hiện trải nghiệm lao động: nhận cuốc, bị kiểm soát, bị tăng chiết khấu.</p>
+      </div>
+      <div class="role">
+        <h3>Đại diện nền tảng</h3>
+        <p>Nói bằng ngôn ngữ “đối tác”, “linh hoạt”, “tối ưu hệ thống”.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai-prompts">
+    <h2>7. Prompt tạo video AI hoạt cảnh</h2>
+    <div class="card">
+      <p><b>Prompt tổng:</b> Tạo video tài liệu ngắn phong cách cinematic documentary, bối cảnh thành phố Việt Nam hiện đại, tài xế công nghệ mặc áo khoác xanh, điện thoại hiển thị app gọi xe, thuật toán và bản đồ số hiện bằng overlay, không khí căng thẳng khi app tăng chiết khấu 30%, nhiều tài xế cùng tắt ứng dụng, kết thúc bằng câu hỏi “Ai thật sự làm chủ nền tảng?”.</p>
+      <p><b>Prompt cảnh tắt app:</b> Wide shot of Vietnamese ride-hailing drivers standing beside motorbikes at night, each holding a phone, screens showing “offline”, digital map overlay fading, documentary style, serious mood, realistic lighting.</p>
+      <p><b>Prompt cảnh lý luận:</b> Animated infographic showing two sides: driver owns motorbike versus platform controls algorithm, price, customer allocation, account lock; clean modern educational style, blue and orange color palette.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    Sản phẩm gợi ý: Web thuyết trình + video tài liệu ngắn + diễn kịch/hoạt cảnh AI · Chủ đề: Giai cấp và đấu tranh giai cấp trong kinh tế nền tảng
+  </div>
+</body>
+</html>
