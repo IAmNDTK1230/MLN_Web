@@ -8,42 +8,365 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#172033;--muted:#64748b;--blue:#2563eb;--cyan:#06b6d4;--orange:#f97316;--red:#e11d48;--green:#10b981;--purple:#7c3aed;--yellow:#facc15;--line:rgba(23,32,51,.12);--shadow:0 24px 80px rgba(23,32,51,.15)}
-    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"Be Vietnam Pro",Arial,sans-serif;color:var(--ink);overflow:hidden;background:radial-gradient(circle at 12% 18%,rgba(37,99,235,.22),transparent 28%),radial-gradient(circle at 88% 14%,rgba(249,115,22,.22),transparent 30%),radial-gradient(circle at 74% 88%,rgba(124,58,237,.15),transparent 30%),linear-gradient(135deg,#fff7ed,#eef6ff)}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.48) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.48) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(to bottom,transparent,black 15%,black 85%,transparent)}
-    .app{height:100vh;width:100vw;padding:14px;display:grid;grid-template-rows:56px 1fr 58px;gap:12px;position:relative;z-index:1}.topbar,.controls{border-radius:999px;background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.78);box-shadow:0 12px 38px rgba(23,32,51,.08);backdrop-filter:blur(18px)}.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:14px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}.brand-mark{width:36px;height:36px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(37,99,235,.22)}.progress{display:flex;gap:7px;align-items:center;justify-content:flex-end}.dot{width:8px;height:8px;border-radius:999px;background:rgba(23,32,51,.18);transition:.22s;cursor:pointer}.dot.active{width:28px;background:linear-gradient(90deg,var(--blue),var(--orange))}
-    .deck{position:relative;overflow:hidden;border-radius:36px;background:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.slide{position:absolute;inset:0;padding:clamp(18px,3vw,42px);opacity:0;transform:translateX(34px) scale(.99);pointer-events:none;transition:.32s ease;display:grid;place-items:center;overflow:hidden}.slide::before{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:42% 58% 60% 40%;background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(249,115,22,.12));z-index:0}.slide::after{content:"";position:absolute;left:28px;bottom:24px;width:120px;height:120px;border-radius:38% 62% 46% 54%;background:linear-gradient(135deg,rgba(16,185,129,.10),rgba(124,58,237,.10));z-index:0}.slide.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto}.slide.prev{transform:translateX(-34px) scale(.99)}.slide-inner{width:100%;max-width:1160px;margin:0 auto;position:relative;z-index:2}.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid var(--line);color:var(--orange);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}h1,h2,h3,p{margin:0}h1{font-size:clamp(40px,6vw,80px);line-height:1;letter-spacing:-3px;font-weight:900}h2{font-size:clamp(30px,4.4vw,58px);line-height:1.05;letter-spacing:-2px;font-weight:900;max-width:1000px}h3{font-size:clamp(19px,1.85vw,25px);line-height:1.18;font-weight:850;margin-bottom:8px}p{color:var(--muted);font-size:clamp(14px,1.15vw,16px);line-height:1.55}.lead{font-size:clamp(16px,1.65vw,20px);line-height:1.58;margin-top:16px;color:#344256;max-width:880px}.gradient-text{background:linear-gradient(90deg,var(--blue),var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}.orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.7;z-index:1}.orb.one{width:240px;height:240px;background:rgba(37,99,235,.13);right:8%;top:8%}.orb.two{width:190px;height:190px;background:rgba(249,115,22,.16);left:6%;bottom:6%}.orb.three{width:170px;height:170px;background:rgba(16,185,129,.15);right:18%;bottom:10%}
-    .card,.choice-card,.info-card,.result-card,.theory-card,.mini-cell{border-radius:28px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.86);padding:20px;box-shadow:0 16px 44px rgba(23,32,51,.09)}.badge{width:44px;height:44px;border-radius:17px;display:grid;place-items:center;color:#fff;font-weight:900;margin-bottom:14px;background:linear-gradient(135deg,var(--blue),var(--cyan))}.badge.orange{background:linear-gradient(135deg,var(--orange),var(--red))}.badge.green{background:linear-gradient(135deg,var(--green),var(--cyan));color:#083b2f}.badge.purple{background:linear-gradient(135deg,var(--purple),var(--blue))}
-    .hero-card{position:relative;min-height:410px;border-radius:42px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(255,255,255,.58));border:1px solid rgba(255,255,255,.88);box-shadow:0 24px 68px rgba(23,32,51,.16);display:grid;place-items:center;overflow:hidden}.hero-card:after{content:"30%";position:absolute;right:22px;top:22px;border-radius:24px;padding:12px 16px;background:var(--red);color:#fff;font-size:38px;font-weight:900;box-shadow:0 14px 34px rgba(225,29,72,.26);transform:rotate(6deg)}.phone{width:min(285px,84%);aspect-ratio:9/16;border-radius:40px;background:#0f172a;border:10px solid #111827;box-shadow:0 30px 72px rgba(15,23,42,.32);padding:16px;color:#fff;transform:rotate(-4deg)}.notch{width:82px;height:8px;border-radius:99px;background:#334155;margin:0 auto 16px}.map{height:46%;border-radius:26px;background:linear-gradient(135deg,#172554,#0891b2);position:relative;overflow:hidden;margin-bottom:14px}.map:before,.map:after{content:"";position:absolute;height:9px;border-radius:99px;background:rgba(255,255,255,.32)}.map:before{width:260px;left:-42px;top:72px;transform:rotate(-18deg)}.map:after{width:220px;right:-56px;bottom:58px;transform:rotate(22deg)}.pin{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:900;box-shadow:0 0 0 14px rgba(250,204,21,.22)}.screen-card{border-radius:20px;background:#1e293b;border:1px solid rgba(255,255,255,.08);padding:12px;margin-bottom:10px}.screen-card b{display:block}.screen-card span{color:#cbd5e1;font-size:12.5px;line-height:1.42;display:block;margin-top:3px}
-    .quiz-title{font-size:clamp(24px,2.8vw,36px);font-weight:900;line-height:1.14;margin-bottom:18px}.answers{display:grid;gap:10px;margin-top:14px}.answer{position:relative;display:flex;gap:12px;align-items:flex-start;border-radius:20px;background:rgba(255,255,255,.72);border:1px solid var(--line);padding:13px 15px;cursor:pointer;font-weight:750;color:#2e394b;transition:.18s}.answer:hover{background:#fff;transform:translateX(5px)}.answer input{margin-top:5px;accent-color:var(--blue)}.feedback{display:none;margin-top:14px;border-radius:20px;padding:14px 16px;font-weight:700;color:#273548;background:#fff;border:1px dashed rgba(23,32,51,.26)}.choice-card:has(input:checked) .feedback{display:block}.choice-card:has(.right:checked) .feedback{background:#ecfdf5;border-color:rgba(16,185,129,.35)}.choice-card:has(.wrong:checked) .feedback{background:#fff1f2;border-color:rgba(225,29,72,.35)}
-    .case-list{display:grid;gap:12px;margin-top:18px}.case-item{display:flex;gap:12px;align-items:flex-start;padding:13px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid var(--line)}.case-item strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}.case-dot{width:32px;height:32px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;background:var(--orange);color:#fff;font-weight:900}.quote{margin-top:18px;border-radius:28px;padding:18px;color:#fff;background:linear-gradient(135deg,#0f172a,#1e3a8a);box-shadow:0 22px 62px rgba(15,23,42,.16);font-size:clamp(18px,1.8vw,24px);font-weight:800;line-height:1.45}.video-slide .slide-inner{height:100%;display:grid;grid-template-rows:auto auto 1fr;align-content:start}.video-shell{border-radius:34px;padding:12px;background:#0f172a;box-shadow:0 26px 76px rgba(15,23,42,.24);margin-top:18px;align-self:center}.video-box{position:relative;width:100%;height:min(46vh,430px);border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0f172a,#1e3a8a 48%,#f97316)}.video-box iframe,.video-box video{position:absolute;inset:0;width:100%;height:100%;border:0}.video-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:22px}.video-placeholder b{display:block;font-size:clamp(32px,5vw,70px);line-height:1;font-weight:900;margin-bottom:10px}.video-placeholder span{font-weight:650;color:#dbeafe}.visual-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.visual-card{min-height:96px;border-radius:26px;padding:16px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.88);box-shadow:0 14px 34px rgba(23,32,51,.08);display:flex;align-items:center;gap:12px}.visual-icon{width:54px;height:54px;border-radius:20px;display:grid;place-items:center;font-size:28px;background:linear-gradient(135deg,#eff6ff,#fff7ed);box-shadow:inset 0 0 0 1px rgba(23,32,51,.06)}.visual-card b{display:block;color:#0f172a;font-size:15px}.visual-card span{display:block;color:var(--muted);font-size:12.5px;line-height:1.35;margin-top:2px}.photo-strip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.photo-card{height:150px;border-radius:30px;position:relative;overflow:hidden;box-shadow:0 18px 42px rgba(23,32,51,.12);border:1px solid rgba(255,255,255,.86);background:linear-gradient(135deg,#1e3a8a,#06b6d4)}.photo-card.orange{background:linear-gradient(135deg,#7c2d12,#f97316)}.photo-card.purple{background:linear-gradient(135deg,#312e81,#7c3aed)}.photo-card.green{background:linear-gradient(135deg,#064e3b,#10b981)}.photo-card::before{content:attr(data-icon);position:absolute;right:18px;bottom:8px;font-size:76px;filter:drop-shadow(0 10px 20px rgba(0,0,0,.18))}.photo-card strong{position:absolute;left:18px;top:16px;color:#fff;font-size:20px;max-width:70%;line-height:1.15}.photo-card small{position:absolute;left:18px;bottom:16px;color:rgba(255,255,255,.86);font-weight:700}.mini-cell b{display:block;color:#0f172a;margin-bottom:6px}.mini-cell span{color:var(--muted);font-size:14px;line-height:1.45}.ending-card{border-radius:42px;padding:clamp(26px,4vw,52px);background:linear-gradient(135deg,#0f172a,#1e1b4b 55%,#7f1d1d);color:#fff;text-align:center;box-shadow:0 28px 82px rgba(15,23,42,.26);position:relative;overflow:hidden}.ending-card p{color:#dbeafe;max-width:900px;margin:16px auto 0}.final-q{display:inline-flex;margin-top:22px;border-radius:999px;padding:12px 18px;background:#fff;color:#0f172a;font-weight:900;box-shadow:0 16px 42px rgba(255,255,255,.16)}
-    .word-game{height:100%;display:grid;grid-template-rows:auto 1fr;gap:12px;overflow:hidden}.word-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.word-score{display:flex;gap:10px;flex-wrap:wrap}.word-stat{border-radius:18px;background:rgba(255,255,255,.86);border:1px solid var(--line);padding:10px 14px;min-width:120px}.word-stat b{font-size:22px;color:#0f172a}.word-stat span{font-size:12px;color:var(--muted);font-weight:750;display:block}.word-body{display:grid;grid-template-columns:.78fr 1.22fr;gap:18px;align-items:center;min-height:0}.draw-card,.guess-card{border-radius:34px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 52px rgba(23,32,51,.11);padding:20px}.draw-card{height:min(42vh,400px);display:grid;place-items:center}.draw-stage{width:min(350px,100%);aspect-ratio:1/1;position:relative;border-radius:32px;background:linear-gradient(135deg,#eff6ff,#fff7ed);overflow:hidden}.draw-part{position:absolute;opacity:0;transform:scale(.92);transition:.25s ease}.draw-part.show{opacity:1;transform:scale(1)}.p1{left:12%;right:12%;bottom:16%;height:18px;border-radius:999px;background:#0f172a}.p2{left:22%;bottom:16%;width:18px;height:62%;border-radius:999px;background:#0f172a}.p3{left:22%;top:20%;width:44%;height:18px;border-radius:999px;background:#0f172a}.p4{left:60%;top:20%;width:18px;height:18%;border-radius:999px;background:#0f172a}.p5{left:49%;top:34%;width:94px;height:94px;border-radius:28px;background:var(--blue);box-shadow:0 14px 34px rgba(37,99,235,.22)}.p5:after{content:'APP';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}.p6{left:43%;top:60%;width:150px;height:70px;border-radius:34px;background:var(--orange);box-shadow:0 14px 34px rgba(249,115,22,.22)}.p6:after{content:'LOCK';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}.word-clue{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-weight:900;padding:8px 12px;margin-bottom:12px;font-size:13px}.word-display{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.letter-box{width:40px;height:48px;border-radius:15px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:22px;font-weight:900;color:#0f172a;box-shadow:0 10px 26px rgba(23,32,51,.07)}.letter-space{width:14px}.keyboard{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin-top:12px}.key{border:0;border-radius:12px;background:#fff;border:1px solid var(--line);padding:8px 0;font-family:inherit;font-weight:900;cursor:pointer;color:#334155}.key:hover{background:#eff6ff}.key:disabled{opacity:.45;cursor:not-allowed}.key.good{background:#dcfce7;color:#166534}.key.bad{background:#ffe4e6;color:#9f1239}.word-message{border-radius:18px;background:#0f172a;color:#e2e8f0;padding:10px 12px;font-weight:650;line-height:1.4;text-align:center;margin-top:10px;font-size:14px}.word-actions{display:flex;gap:10px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin-top:12px}.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 8px;opacity:0;transform:translateY(12px);transition:.22s ease}.controls:hover{opacity:1;transform:translateY(0)}.btn{border:0;cursor:pointer;border-radius:999px;padding:12px 18px;font-family:inherit;font-weight:900;color:#fff;background:#0f172a;box-shadow:0 12px 32px rgba(15,23,42,.16);transition:.18s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.76);color:#0f172a;border:1px solid rgba(255,255,255,.84);box-shadow:none}.counter{font-weight:900;color:#334155;background:rgba(255,255,255,.68);padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.82)}
-    @media(max-width:980px){body{overflow:auto}.app{height:auto;min-height:100vh;grid-template-rows:56px auto 58px}.deck{min-height:calc(100vh - 154px)}.slide{position:relative;display:none;min-height:calc(100vh - 154px);overflow:auto}.slide.active{display:grid}.two-col,.grid-2,.grid-3,.grid-4,.word-body{grid-template-columns:1fr}.progress{display:none}.brand span:last-child{display:none}.hero-card{min-height:360px}.phone{max-height:330px;width:235px}.slide{padding:20px}.topbar,.controls{border-radius:24px}.deck{border-radius:28px}.video-box{height:42vh;border-radius:24px}.controls{position:sticky;bottom:0;opacity:1;transform:none}.word-game{overflow:auto}.draw-card{height:320px}}
+    :root{
+      --ink:#172033;
+      --muted:#64748b;
+      --blue:#2563eb;
+      --cyan:#06b6d4;
+      --orange:#f97316;
+      --red:#e11d48;
+      --green:#10b981;
+      --purple:#7c3aed;
+      --yellow:#facc15;
+      --line:rgba(23,32,51,.12);
+      --shadow:0 24px 80px rgba(23,32,51,.15);
+      --glass:rgba(255,255,255,.72);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Be Vietnam Pro",Arial,sans-serif;
+      color:var(--ink);
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 10% 12%,rgba(37,99,235,.20),transparent 28%),
+        radial-gradient(circle at 88% 18%,rgba(249,115,22,.22),transparent 30%),
+        radial-gradient(circle at 76% 86%,rgba(124,58,237,.14),transparent 32%),
+        linear-gradient(135deg,#fff7ed,#eef6ff);
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.48) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.48) 1px,transparent 1px);
+      background-size:56px 56px;
+      mask-image:linear-gradient(to bottom,transparent,black 14%,black 86%,transparent);
+    }
+
+    .app{
+      height:100vh;
+      width:100vw;
+      padding:14px;
+      display:grid;
+      grid-template-rows:56px 1fr 58px;
+      gap:12px;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar,.controls{
+      border-radius:999px;
+      background:rgba(255,255,255,.66);
+      border:1px solid rgba(255,255,255,.78);
+      box-shadow:0 12px 38px rgba(23,32,51,.08);
+      backdrop-filter:blur(18px);
+    }
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}
+    .brand-mark{width:36px;height:36px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(37,99,235,.22)}
+    .progress{display:flex;gap:7px;align-items:center;justify-content:flex-end}
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(23,32,51,.18);transition:.22s;cursor:pointer}
+    .dot.active{width:28px;background:linear-gradient(90deg,var(--blue),var(--orange))}
+
+    .deck{
+      position:relative;
+      overflow:hidden;
+      border-radius:36px;
+      background:rgba(255,255,255,.38);
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      padding:clamp(18px,3vw,42px);
+      opacity:0;
+      transform:translateX(34px) scale(.99);
+      pointer-events:none;
+      transition:.32s ease;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .slide::before{
+      content:"";
+      position:absolute;
+      right:-90px;top:-90px;
+      width:270px;height:270px;
+      border-radius:42% 58% 60% 40%;
+      background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(249,115,22,.12));
+      z-index:0;
+    }
+    .slide::after{
+      content:"";
+      position:absolute;
+      left:26px;bottom:22px;
+      width:120px;height:120px;
+      border-radius:38% 62% 46% 54%;
+      background:linear-gradient(135deg,rgba(16,185,129,.10),rgba(124,58,237,.10));
+      z-index:0;
+    }
+    .slide.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto}
+    .slide.prev{transform:translateX(-34px) scale(.99)}
+    .slide-inner{width:100%;max-width:1160px;margin:0 auto;position:relative;z-index:2}
+
+    .two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+    .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid var(--line);color:var(--orange);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}
+    h1,h2,h3,p{margin:0}
+    h1{font-size:clamp(40px,6vw,80px);line-height:1;letter-spacing:-3px;font-weight:900}
+    h2{font-size:clamp(30px,4.4vw,58px);line-height:1.05;letter-spacing:-2px;font-weight:900;max-width:1000px}
+    h3{font-size:clamp(19px,1.85vw,25px);line-height:1.18;font-weight:850;margin-bottom:8px}
+    p{color:var(--muted);font-size:clamp(14px,1.15vw,16px);line-height:1.55}
+    .lead{font-size:clamp(16px,1.65vw,20px);line-height:1.58;margin-top:16px;color:#344256;max-width:880px}
+    .gradient-text{background:linear-gradient(90deg,var(--blue),var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.7;z-index:1}
+    .orb.one{width:240px;height:240px;background:rgba(37,99,235,.13);right:8%;top:8%}
+    .orb.two{width:190px;height:190px;background:rgba(249,115,22,.16);left:6%;bottom:6%}
+    .orb.three{width:170px;height:170px;background:rgba(16,185,129,.15);right:18%;bottom:10%}
+
+    .card,.choice-card,.info-card,.result-card,.theory-card,.mini-cell{
+      border-radius:28px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.86);
+      padding:20px;
+      box-shadow:0 16px 44px rgba(23,32,51,.09);
+    }
+    .badge{width:44px;height:44px;border-radius:17px;display:grid;place-items:center;color:#fff;font-weight:900;margin-bottom:14px;background:linear-gradient(135deg,var(--blue),var(--cyan))}
+    .badge.orange{background:linear-gradient(135deg,var(--orange),var(--red))}
+    .badge.green{background:linear-gradient(135deg,var(--green),var(--cyan));color:#083b2f}
+    .badge.purple{background:linear-gradient(135deg,var(--purple),var(--blue))}
+
+    .hero-card{position:relative;min-height:410px;border-radius:42px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(255,255,255,.58));border:1px solid rgba(255,255,255,.88);box-shadow:0 24px 68px rgba(23,32,51,.16);display:grid;place-items:center;overflow:hidden}
+    .hero-card:after{content:"30%";position:absolute;right:22px;top:22px;border-radius:24px;padding:12px 16px;background:var(--red);color:#fff;font-size:38px;font-weight:900;box-shadow:0 14px 34px rgba(225,29,72,.26);transform:rotate(6deg)}
+    .phone{width:min(285px,84%);aspect-ratio:9/16;border-radius:40px;background:#0f172a;border:10px solid #111827;box-shadow:0 30px 72px rgba(15,23,42,.32);padding:16px;color:#fff;transform:rotate(-4deg)}
+    .notch{width:82px;height:8px;border-radius:99px;background:#334155;margin:0 auto 16px}
+    .map{height:46%;border-radius:26px;background:linear-gradient(135deg,#172554,#0891b2);position:relative;overflow:hidden;margin-bottom:14px}
+    .map:before,.map:after{content:"";position:absolute;height:9px;border-radius:99px;background:rgba(255,255,255,.32)}
+    .map:before{width:260px;left:-42px;top:72px;transform:rotate(-18deg)}
+    .map:after{width:220px;right:-56px;bottom:58px;transform:rotate(22deg)}
+    .pin{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:900;box-shadow:0 0 0 14px rgba(250,204,21,.22)}
+    .screen-card{border-radius:20px;background:#1e293b;border:1px solid rgba(255,255,255,.08);padding:12px;margin-bottom:10px}.screen-card b{display:block}.screen-card span{color:#cbd5e1;font-size:12.5px;line-height:1.42;display:block;margin-top:3px}
+
+    .visual-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;max-width:760px}
+    .visual-card{min-height:90px;border-radius:26px;padding:15px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.88);box-shadow:0 14px 34px rgba(23,32,51,.08);display:flex;align-items:center;gap:12px}
+    .visual-card b{display:block;color:#0f172a;font-size:15px}.visual-card span{display:block;color:var(--muted);font-size:12.5px;line-height:1.35;margin-top:2px}
+    .visual-icon{width:52px;height:52px;border-radius:20px;display:grid;place-items:center;font-size:27px;background:linear-gradient(135deg,#eff6ff,#fff7ed);box-shadow:inset 0 0 0 1px rgba(23,32,51,.06)}
+
+    .photo-card{height:150px;border-radius:30px;position:relative;overflow:hidden;box-shadow:0 18px 42px rgba(23,32,51,.12);border:1px solid rgba(255,255,255,.86);background:linear-gradient(135deg,#1e3a8a,#06b6d4)}
+    .photo-card.orange{background:linear-gradient(135deg,#7c2d12,#f97316)}.photo-card.purple{background:linear-gradient(135deg,#312e81,#7c3aed)}
+    .photo-card::before{content:attr(data-icon);position:absolute;right:18px;bottom:8px;font-size:76px;filter:drop-shadow(0 10px 20px rgba(0,0,0,.18))}
+    .photo-card strong{position:absolute;left:18px;top:16px;color:#fff;font-size:20px;max-width:70%;line-height:1.15}.photo-card small{position:absolute;left:18px;bottom:16px;color:rgba(255,255,255,.86);font-weight:700}
+
+    .real-photo-card{border-radius:34px;overflow:hidden;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 58px rgba(23,32,51,.16)}
+    .real-photo-card img{display:block;width:100%;height:360px;object-fit:cover}
+    .photo-caption{padding:13px 16px;font-size:13.5px;line-height:1.45;color:#475569;background:rgba(255,255,255,.94)}
+
+    .quiz-title{font-size:clamp(24px,2.8vw,36px);font-weight:900;line-height:1.14;margin-bottom:18px}
+    .answers{display:grid;gap:10px;margin-top:14px}
+    .answer{position:relative;display:flex;gap:12px;align-items:flex-start;border-radius:20px;background:rgba(255,255,255,.72);border:1px solid var(--line);padding:13px 15px;cursor:pointer;font-weight:750;color:#2e394b;transition:.18s}
+    .answer:hover{background:#fff;transform:translateX(5px)}.answer input{margin-top:5px;accent-color:var(--blue)}
+    .feedback{display:none;margin-top:14px;border-radius:20px;padding:14px 16px;font-weight:700;color:#273548;background:#fff;border:1px dashed rgba(23,32,51,.26)}
+    .choice-card:has(input:checked) .feedback{display:block}.choice-card:has(.right:checked) .feedback{background:#ecfdf5;border-color:rgba(16,185,129,.35)}.choice-card:has(.wrong:checked) .feedback{background:#fff1f2;border-color:rgba(225,29,72,.35)}
+
+    .case-list{display:grid;gap:11px;margin-top:18px}.case-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid var(--line)}.case-item strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}.case-dot{width:32px;height:32px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;background:var(--orange);color:#fff;font-weight:900}
+    .quote{margin-top:18px;border-radius:28px;padding:18px;color:#fff;background:linear-gradient(135deg,#0f172a,#1e3a8a);box-shadow:0 22px 62px rgba(15,23,42,.16);font-size:clamp(18px,1.8vw,24px);font-weight:800;line-height:1.45}
+
+    .video-slide .slide-inner{height:100%;display:grid;grid-template-rows:auto auto 1fr;align-content:start}.video-shell{border-radius:34px;padding:12px;background:#0f172a;box-shadow:0 26px 76px rgba(15,23,42,.24);margin-top:18px;align-self:center}.video-box{position:relative;width:100%;height:min(46vh,430px);border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0f172a,#1e3a8a 48%,#f97316)}.video-box iframe,.video-box video{position:absolute;inset:0;width:100%;height:100%;border:0}.video-placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:22px}.video-placeholder b{display:block;font-size:clamp(32px,5vw,70px);line-height:1;font-weight:900;margin-bottom:10px}.video-placeholder span{font-weight:650;color:#dbeafe}
+    .mini-cell b{display:block;color:#0f172a;margin-bottom:6px}.mini-cell span{color:var(--muted);font-size:14px;line-height:1.45}
+
+    .ending-card{border-radius:42px;padding:clamp(26px,4vw,52px);background:linear-gradient(135deg,#0f172a,#1e1b4b 55%,#7f1d1d);color:#fff;text-align:center;box-shadow:0 28px 82px rgba(15,23,42,.26);position:relative;overflow:hidden}.ending-card p{color:#dbeafe;max-width:900px;margin:16px auto 0}.final-q{display:inline-flex;margin-top:22px;border-radius:999px;padding:12px 18px;background:#fff;color:#0f172a;font-weight:900;box-shadow:0 16px 42px rgba(255,255,255,.16)}
+
+    .word-game{height:100%;display:grid;grid-template-rows:auto 1fr;gap:12px;overflow:hidden}.word-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.word-score{display:flex;gap:10px;flex-wrap:wrap}.word-stat{border-radius:18px;background:rgba(255,255,255,.86);border:1px solid var(--line);padding:10px 14px;min-width:120px}.word-stat b{font-size:22px;color:#0f172a}.word-stat span{font-size:12px;color:var(--muted);font-weight:750;display:block}.word-body{display:grid;grid-template-columns:.78fr 1.22fr;gap:18px;align-items:center;min-height:0}.draw-card,.guess-card{border-radius:34px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 52px rgba(23,32,51,.11);padding:20px}.draw-card{height:min(42vh,400px);display:grid;place-items:center}.draw-stage{width:min(350px,100%);aspect-ratio:1/1;position:relative;border-radius:32px;background:linear-gradient(135deg,#eff6ff,#fff7ed);overflow:hidden}.draw-part{position:absolute;opacity:0;transform:scale(.92);transition:.25s ease}.draw-part.show{opacity:1;transform:scale(1)}.p1{left:12%;right:12%;bottom:16%;height:18px;border-radius:999px;background:#0f172a}.p2{left:22%;bottom:16%;width:18px;height:62%;border-radius:999px;background:#0f172a}.p3{left:22%;top:20%;width:44%;height:18px;border-radius:999px;background:#0f172a}.p4{left:60%;top:20%;width:18px;height:18%;border-radius:999px;background:#0f172a}.p5{left:49%;top:34%;width:94px;height:94px;border-radius:28px;background:var(--blue);box-shadow:0 14px 34px rgba(37,99,235,.22)}.p5:after{content:'APP';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}.p6{left:43%;top:60%;width:150px;height:70px;border-radius:34px;background:var(--orange);box-shadow:0 14px 34px rgba(249,115,22,.22)}.p6:after{content:'LOCK';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}.word-clue{display:inline-flex;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-weight:900;padding:8px 12px;margin-bottom:12px;font-size:13px}.word-display{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.letter-box{width:40px;height:48px;border-radius:15px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:22px;font-weight:900;color:#0f172a;box-shadow:0 10px 26px rgba(23,32,51,.07)}.letter-space{width:14px}.keyboard{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin-top:12px}.key{border:0;border-radius:12px;background:#fff;border:1px solid var(--line);padding:8px 0;font-family:inherit;font-weight:900;cursor:pointer;color:#334155}.key:hover{background:#eff6ff}.key:disabled{opacity:.45;cursor:not-allowed}.key.good{background:#dcfce7;color:#166534}.key.bad{background:#ffe4e6;color:#9f1239}.word-message{border-radius:18px;background:#0f172a;color:#e2e8f0;padding:10px 12px;font-weight:650;line-height:1.4;text-align:center;margin-top:10px;font-size:14px}.word-actions{display:flex;gap:10px;align-items:center;justify-content:flex-start;flex-wrap:wrap;margin-top:12px}
+
+    .controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 8px;opacity:0;transform:translateY(12px);transition:.22s ease}.controls:hover{opacity:1;transform:translateY(0)}
+    .btn{border:0;cursor:pointer;border-radius:999px;padding:12px 18px;font-family:inherit;font-weight:900;color:#fff;background:#0f172a;box-shadow:0 12px 32px rgba(15,23,42,.16);transition:.18s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.76);color:#0f172a;border:1px solid rgba(255,255,255,.84);box-shadow:none}.counter{font-weight:900;color:#334155;background:rgba(255,255,255,.68);padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.82)}
+
+    @media(max-width:980px){body{overflow:auto}.app{height:auto;min-height:100vh;grid-template-rows:56px auto 58px}.deck{min-height:calc(100vh - 154px)}.slide{position:relative;display:none;min-height:calc(100vh - 154px);overflow:auto}.slide.active{display:grid}.two-col,.grid-2,.grid-3,.grid-4,.word-body,.visual-row{grid-template-columns:1fr!important}.progress{display:none}.brand span:last-child{display:none}.hero-card{min-height:360px}.phone{max-height:330px;width:235px}.slide{padding:20px}.topbar,.controls{border-radius:24px}.deck{border-radius:28px}.video-box{height:42vh;border-radius:24px}.controls{position:sticky;bottom:0;opacity:1;transform:none}.word-game{overflow:auto}.draw-card{height:320px}.real-photo-card img{height:260px}.photo-card{height:120px}}
   </style>
 </head>
 <body>
   <div class="app">
     <header class="topbar"><div class="brand"><div class="brand-mark">X</div><span>Đối tác hay làm thuê?</span></div><div class="progress" id="progress"></div></header>
     <main class="deck" id="deck">
-      <section class="slide active"><div class="orb one"></div><div class="orb two"></div><div class="slide-inner two-col"><div><div class="kicker">MLN111 · Chủ nghĩa duy vật lịch sử</div><h1>Tài xế công nghệ: <span class="gradient-text">“đối tác”</span> hay người làm thuê kiểu mới?</h1><p class="lead">Một tình huống về lao động trong kinh tế nền tảng: tự do về hình thức, nhưng bị chi phối bởi ứng dụng, dữ liệu và thuật toán.</p><div class="visual-row" style="grid-template-columns:repeat(3,1fr);max-width:760px"><div class="visual-card"><div class="visual-icon">🛵</div><div><b>Tài xế</b><span>Trực tiếp tạo dịch vụ</span></div></div><div class="visual-card"><div class="visual-icon">📱</div><div><b>Nền tảng</b><span>Điều phối bằng app</span></div></div><div class="visual-card"><div class="visual-icon">⚙️</div><div><b>Thuật toán</b><span>Quyết định giá & cuốc</span></div></div></div></div><div class="hero-card"><div class="phone"><div class="notch"></div><div class="map"><div class="pin">APP</div></div><div class="screen-card"><b>Cuốc xe mới</b><span>Giá cước do hệ thống tự tính</span></div><div class="screen-card"><b>Chiết khấu nền tảng</b><span>Tài xế nhận phần còn lại sau mỗi chuyến</span></div></div></div></div></section>
+      <section class="slide active">
+        <div class="orb one"></div><div class="orb two"></div>
+        <div class="slide-inner two-col">
+          <div>
+            <div class="kicker">MLN111 · Chủ nghĩa duy vật lịch sử</div>
+            <h1>Tài xế công nghệ: <span class="gradient-text">“đối tác”</span> hay người làm thuê kiểu mới?</h1>
+            <p class="lead">Một tình huống về lao động trong kinh tế nền tảng: tự do về hình thức, nhưng bị chi phối bởi ứng dụng, dữ liệu và thuật toán.</p>
+            <div class="visual-row">
+              <div class="visual-card"><div class="visual-icon">🛵</div><div><b>Tài xế</b><span>Trực tiếp tạo dịch vụ</span></div></div>
+              <div class="visual-card"><div class="visual-icon">📱</div><div><b>Nền tảng</b><span>Điều phối bằng app</span></div></div>
+              <div class="visual-card"><div class="visual-icon">⚙️</div><div><b>Thuật toán</b><span>Quyết định giá & cuốc</span></div></div>
+            </div>
+          </div>
+          <div class="hero-card"><div class="phone"><div class="notch"></div><div class="map"><div class="pin">APP</div></div><div class="screen-card"><b>Cuốc xe mới</b><span>Giá cước do hệ thống tự tính</span></div><div class="screen-card"><b>Chiết khấu nền tảng</b><span>Tài xế nhận phần còn lại sau mỗi chuyến</span></div></div></div>
+        </div>
+      </section>
+
       <section class="slide"><div class="slide-inner"><div class="kicker">01 · Câu hỏi khởi động</div><h2>Xe riêng có đủ để gọi là làm chủ?</h2><div class="choice-card" style="margin-top:24px;max-width:920px"><div class="badge">1</div><div class="quiz-title">Có xe riêng thì tài xế chắc chắn là người làm chủ?</div><div class="answers"><label class="answer"><input class="wrong" type="radio" name="q1">A. Chắc chắn đúng</label><label class="answer"><input class="right" type="radio" name="q1">B. Chưa chắc, phải xem ai kiểm soát giá, khách và điều kiện lao động</label><label class="answer"><input class="wrong" type="radio" name="q1">C. Không liên quan</label></div><div class="feedback">Đáp án gợi ý: B. Có xe riêng chỉ là biểu hiện bên ngoài; cần xét vị trí của tài xế trong hệ thống sản xuất dịch vụ.</div></div></div></section>
+
       <section class="slide"><div class="slide-inner"><div class="kicker">02 · Câu hỏi khởi động</div><h2>Quyền kiểm soát nằm ở đâu?</h2><div class="choice-card" style="margin-top:24px;max-width:920px"><div class="badge orange">2</div><div class="quiz-title">Nếu app quyết định giá cước, phân phối cuốc và chiết khấu, ai nắm quyền tổ chức lao động?</div><div class="answers"><label class="answer"><input class="wrong" type="radio" name="q2">A. Hoàn toàn là tài xế</label><label class="answer"><input class="right" type="radio" name="q2">B. Nền tảng giữ quyền kiểm soát quan trọng</label><label class="answer"><input class="wrong" type="radio" name="q2">C. Khách hàng quyết định tất cả</label></div><div class="feedback">Đáp án gợi ý: B. Giá cước, thuật toán, điểm đánh giá và khóa tài khoản đều là cơ chế kiểm soát của nền tảng.</div></div></div></section>
+
       <section class="slide"><div class="slide-inner"><div class="kicker">03 · Lý thuyết nền</div><h2>Giai cấp là gì?</h2><div class="grid-3" style="margin-top:22px"><div class="theory-card"><div class="badge">1</div><h3>Địa vị sản xuất</h3><p>Các tập đoàn người khác nhau về vị trí trong một hệ thống sản xuất xã hội nhất định.</p></div><div class="theory-card"><div class="badge orange">2</div><h3>Tư liệu sản xuất</h3><p>Khác nhau về quan hệ đối với tư liệu sản xuất: ai sở hữu, ai kiểm soát, ai phụ thuộc.</p></div><div class="theory-card"><div class="badge green">3</div><h3>Hưởng thụ của cải</h3><p>Khác nhau về vai trò tổ chức lao động và phần của cải xã hội mà họ được hưởng.</p></div></div></div></section>
+
       <section class="slide"><div class="slide-inner"><div class="kicker">04 · Lý thuyết nền</div><h2>Đấu tranh giai cấp là gì?</h2><div class="grid-2" style="margin-top:22px"><div class="result-card"><div class="badge purple">!</div><h3>Mâu thuẫn lợi ích</h3><p class="lead">Đấu tranh giai cấp xuất hiện khi các nhóm xã hội có lợi ích kinh tế và xã hội đối lập, dẫn đến căng thẳng hoặc xung đột.</p></div><div class="result-card"><div class="badge orange">X</div><h3>Trong tình huống này</h3><p class="lead">App X muốn tăng chiết khấu để tối đa hóa lợi nhuận; tài xế muốn giữ thu nhập và điều kiện lao động ổn định.</p></div></div></div></section>
-      <section class="slide"><div class="slide-inner"><div class="kicker">05 · So sánh lịch sử</div><h2>Phong trào Luddites thế kỷ XIX</h2><div class="photo-strip"><div class="photo-card orange" data-icon="🏭"><strong>Nhà máy thế kỷ XIX</strong><small>Máy móc, tiền công, sinh kế</small></div><div class="photo-card purple" data-icon="📱"><strong>Nền tảng số hiện đại</strong><small>App, dữ liệu, thuật toán</small></div></div><div class="grid-3" style="margin-top:22px"><div class="theory-card"><div class="badge">1811</div><h3>Bối cảnh</h3><p>Diễn ra mạnh ở Anh khoảng 1811–1816, chủ yếu trong giới thợ dệt, thợ kéo sợi và lao động thủ công.</p></div><div class="theory-card"><div class="badge orange">Máy</div><h3>Nguyên nhân</h3><p>Họ phản đối cách chủ xưởng dùng máy móc để thay lao động lành nghề, giảm tiền công và phá vỡ sinh kế.</p></div><div class="theory-card"><div class="badge purple">Ned</div><h3>Đặc điểm</h3><p>Người tham gia bí mật phá máy, lấy biểu tượng Ned Ludd/King Ludd, sau đó bị chính quyền đàn áp mạnh.</p></div></div></div></section>
-      <section class="slide"><div class="orb one"></div><div class="slide-inner two-col"><div><div class="kicker">06 · Tình huống trung tâm</div><div class="visual-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px"><div class="visual-card"><div class="visual-icon">🧑‍✈️</div><div><b>Danh nghĩa</b><span>Đối tác tự do</span></div></div><div class="visual-card"><div class="visual-icon">📊</div><div><b>Thực tế</b><span>Bị app điều phối</span></div></div><div class="visual-card"><div class="visual-icon">🔒</div><div><b>Rủi ro</b><span>Khóa tài khoản</span></div></div></div><h2>Khi “đối tác” không được quyết định luật chơi</h2><p class="lead">Bề ngoài, tài xế có xe riêng, tự chọn giờ làm và được gọi là “đối tác”. Nhưng thực tế, app quyết định giá cước, phân phối cuốc xe, chiết khấu và quyền duy trì tài khoản.</p><div class="quote">Câu hỏi cốt lõi: ai kiểm soát quá trình lao động và phân chia kết quả lao động?</div></div><div class="case-list"><div class="case-item"><div class="case-dot">1</div><div><strong>Không tự định giá</strong><p>Giá cước do thuật toán và chính sách nền tảng quyết định.</p></div></div><div class="case-item"><div class="case-dot">2</div><div><strong>Bị điều phối bằng app</strong><p>Ứng dụng kiểm soát phân phối cuốc, điểm đánh giá và tỷ lệ hủy.</p></div></div><div class="case-item"><div class="case-dot">3</div><div><strong>Phụ thuộc tài khoản</strong><p>Bị khóa tài khoản nghĩa là mất khả năng lao động trên nền tảng.</p></div></div><div class="case-item"><div class="case-dot">4</div><div><strong>Bị trích chiết khấu</strong><p>Một phần doanh thu, ví dụ 30%, thuộc về nền tảng.</p></div></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="kicker">05 · So sánh lịch sử</div><h2>Phong trào Luddites thế kỷ XIX</h2><div class="grid-3" style="margin-top:22px"><div class="theory-card"><div class="badge">1811</div><h3>Bối cảnh</h3><p>Diễn ra mạnh ở Anh khoảng 1811–1816, chủ yếu trong giới thợ dệt, thợ kéo sợi và lao động thủ công.</p></div><div class="theory-card"><div class="badge orange">Máy</div><h3>Nguyên nhân</h3><p>Họ phản đối cách chủ xưởng dùng máy móc để thay lao động lành nghề, giảm tiền công và phá vỡ sinh kế.</p></div><div class="theory-card"><div class="badge purple">Ned</div><h3>Đặc điểm</h3><p>Người tham gia bí mật phá máy, lấy biểu tượng Ned Ludd/King Ludd, sau đó bị chính quyền đàn áp mạnh.</p></div></div></div></section>
+
+      <section class="slide"><div class="orb one"></div><div class="slide-inner two-col"><div><div class="kicker">06 · Tình huống trung tâm</div><h2>Khi “đối tác” không được quyết định luật chơi</h2><p class="lead">Bề ngoài, tài xế có xe riêng, tự chọn giờ làm và được gọi là “đối tác”. Nhưng thực tế, app quyết định giá cước, phân phối cuốc xe, chiết khấu và quyền duy trì tài khoản.</p><div class="case-list"><div class="case-item"><div class="case-dot">1</div><div><strong>Không tự định giá</strong><p>Giá cước do thuật toán và chính sách nền tảng quyết định.</p></div></div><div class="case-item"><div class="case-dot">2</div><div><strong>Bị điều phối bằng app</strong><p>Ứng dụng kiểm soát phân phối cuốc, điểm đánh giá và tỷ lệ hủy.</p></div></div><div class="case-item"><div class="case-dot">3</div><div><strong>Bị trích chiết khấu</strong><p>Một phần doanh thu, ví dụ 30%, thuộc về nền tảng.</p></div></div></div></div><div class="real-photo-card"><img src="./images/tai-xe-cong-nghe.png" alt="Tài xế công nghệ xem thông báo tăng chiết khấu và trao đổi với nhau"><div class="photo-caption">Tình huống minh họa: tài xế công nghệ nhận thông báo tăng chiết khấu và cùng bàn bạc phản ứng tập thể.</div></div></div></section>
+
       <section class="slide video-slide"><div class="slide-inner"><div class="kicker">07 · Video tình huống</div><h2>Từ cuốc xe đến hành động tắt app</h2><p class="lead">Tình huống chính: tài xế chạy qua app, bị tăng chiết khấu 30%, rồi cùng tắt ứng dụng để phản đối.</p><div class="video-shell"><div class="video-box"><iframe src="https://www.youtube.com/embed/m2BqDM0cKXk" title="Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></div></section>
+
       <section class="slide"><div class="slide-inner"><div class="kicker">08 · Phân tích video</div><h2>Tài xế là người làm chủ hay làm thuê kiểu mới?</h2><div class="grid-4" style="margin-top:22px"><div class="mini-cell"><b>Công cụ</b><span>Có xe riêng nhưng không sở hữu nền tảng số.</span></div><div class="mini-cell"><b>Giá cước</b><span>Không tự định giá; giá do app và thuật toán áp đặt.</span></div><div class="mini-cell"><b>Tổ chức lao động</b><span>Bị chi phối bởi cuốc xe, điểm đánh giá và khóa tài khoản.</span></div><div class="mini-cell"><b>Của cải</b><span>Nhận phần còn lại sau khi app trích chiết khấu.</span></div></div><div class="quote">Kết luận: tài xế công nghệ là người làm thuê kiểu mới trong kinh tế nền tảng số.</div></div></section>
-      <section class="slide"><div class="slide-inner"><div class="kicker">09 · Phân tích vấn đề</div><h2>Tắt ứng dụng tập thể có phải đấu tranh giai cấp hiện đại?</h2><div class="grid-3" style="margin-top:22px"><div class="result-card"><div class="badge green">✓</div><h3>Có tính tập thể</h3><p>Đồng loạt tắt app, từ chối nhận cuốc và làm đình trệ dịch vụ để bảo vệ lợi ích kinh tế.</p></div><div class="result-card"><div class="badge orange">↔</div><h3>Khác thế kỷ XIX</h3><p>Không phá máy móc hay chống công nghệ; tài xế phản đối cơ chế phân phối lợi ích của nền tảng.</p></div><div class="result-card"><div class="badge purple">AI</div><h3>Điểm mới</h3><p>Đối tượng đấu tranh là quyền kiểm soát thuật toán, dữ liệu và lợi nhuận trong nền kinh tế số.</p></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="kicker">09 · Phân tích vấn đề</div><h2>Tắt ứng dụng tập thể có phải đấu tranh giai cấp hiện đại?</h2><div class="visual-row" style="margin-bottom:16px"><div class="visual-card"><div class="visual-icon">🚫</div><div><b>Tắt app</b><span>Ngừng nhận cuốc</span></div></div><div class="visual-card"><div class="visual-icon">👥</div><div><b>Tập thể</b><span>Cùng hành động</span></div></div><div class="visual-card"><div class="visual-icon">💰</div><div><b>Lợi ích</b><span>Bảo vệ thu nhập</span></div></div></div><div class="grid-3"><div class="result-card"><div class="badge green">✓</div><h3>Có tính tập thể</h3><p>Đồng loạt tắt app, từ chối nhận cuốc và làm đình trệ dịch vụ để bảo vệ lợi ích kinh tế.</p></div><div class="result-card"><div class="badge orange">↔</div><h3>Khác thế kỷ XIX</h3><p>Không phá máy móc hay chống công nghệ; tài xế phản đối cơ chế phân phối lợi ích.</p></div><div class="result-card"><div class="badge purple">AI</div><h3>Điểm mới</h3><p>Đối tượng đấu tranh là quyền kiểm soát thuật toán, dữ liệu và lợi nhuận trong kinh tế số.</p></div></div></div></section>
+
       <section class="slide"><div class="slide-inner"><div class="kicker">10 · Kết luận</div><h2>Từ “đập máy” đến “tắt app”</h2><div class="grid-2" style="margin-top:22px"><div class="result-card"><div class="badge orange">XIX</div><h3>Công nhân thế kỷ XIX</h3><p class="lead">Đập máy để ngừng sản xuất, phản ứng còn mang tính tự phát và hướng vào máy móc vật lý.</p></div><div class="result-card"><div class="badge green">Nay</div><h3>Tài xế công nghệ</h3><p class="lead">Tắt ứng dụng để làm tê liệt dòng lưu thông dịch vụ số, dùng chính nền tảng làm công cụ gây sức ép.</p></div></div></div></section>
+
       <section class="slide"><div class="slide-inner word-game"><div class="word-head"><div><div class="kicker">11 · Ôn tập tương tác</div><h2>Mini game: Đoán cụm từ</h2><p class="lead">Ôn lại 3 cụm từ khóa. Mỗi lần đoán sai, hệ thống vẽ thêm 1 nét biểu tượng “nền tảng kiểm soát”.</p></div><div class="word-score"><div class="word-stat"><b id="roundText">1/3</b><span>Vòng chơi</span></div><div class="word-stat"><b id="wrongText">0/6</b><span>Lượt sai</span></div></div></div><div class="word-body"><div class="draw-card"><div class="draw-stage"><div class="draw-part p1"></div><div class="draw-part p2"></div><div class="draw-part p3"></div><div class="draw-part p4"></div><div class="draw-part p5"></div><div class="draw-part p6"></div></div></div><div class="guess-card"><div class="word-clue" id="wordClue">Gợi ý</div><h3 id="wordTitle">Đoán cụm từ khóa</h3><div class="word-display" id="wordDisplay"></div><div class="keyboard" id="keyboard"></div><div class="word-actions"><button class="btn" id="nextWordBtn" style="display:none">Cụm tiếp theo →</button><button class="btn secondary" id="resetWordBtn">Chơi lại</button></div><div class="word-message" id="wordMessage">Chọn chữ cái để đoán cụm từ.</div></div></div></div></section>
+
       <section class="slide"><div class="slide-inner"><div class="ending-card"><div class="kicker" style="background:rgba(255,255,255,.12);color:#facc15;border-color:rgba(255,255,255,.18)">Thông điệp cuối</div><h2>Đấu tranh giai cấp không biến mất trong thời đại công nghệ</h2><p>Nó chuyển từ không gian nhà máy sang không gian nền tảng; từ mâu thuẫn với máy móc vật lý sang mâu thuẫn với thuật toán, dữ liệu và cơ chế phân chia lợi ích.</p><div class="final-q">Ai thật sự làm chủ quá trình lao động?</div></div></div></section>
     </main>
     <footer class="controls"><button class="btn secondary" id="prevBtn">← Trang trước</button><div class="counter" id="counter">1 / 13</div><button class="btn" id="nextBtn">Trang sau →</button></footer>
   </div>
+
   <script>
-    const slides=Array.from(document.querySelectorAll('.slide'));const progress=document.getElementById('progress');const counter=document.getElementById('counter');const prevBtn=document.getElementById('prevBtn');const nextBtn=document.getElementById('nextBtn');let current=0;slides.forEach((_,i)=>{const dot=document.createElement('div');dot.className='dot'+(i===0?' active':'');dot.addEventListener('click',()=>showSlide(i));progress.appendChild(dot)});function showSlide(index){if(index<0||index>=slides.length)return;slides.forEach((slide,i)=>{slide.classList.remove('active','prev');if(i<index)slide.classList.add('prev');if(i===index)slide.classList.add('active')});current=index;document.querySelectorAll('.dot').forEach((dot,i)=>dot.classList.toggle('active',i===current));counter.textContent=`${current+1} / ${slides.length}`;prevBtn.disabled=current===0;nextBtn.disabled=current===slides.length-1;prevBtn.style.opacity=current===0?'.45':'1';nextBtn.style.opacity=current===slides.length-1?'.45':'1'}prevBtn.addEventListener('click',()=>showSlide(current-1));nextBtn.addEventListener('click',()=>showSlide(current+1));document.addEventListener('keydown',e=>{const tag=(e.target.tagName||'').toLowerCase();if(tag==='input'||tag==='button')return;if(e.key==='ArrowRight'||e.key===' ')showSlide(current+1);if(e.key==='ArrowLeft')showSlide(current-1)});document.getElementById('deck').addEventListener('click',e=>{const interactive=e.target.closest('input,label,button,.answer,.word-game,iframe,video,a');if(interactive)return;showSlide(current+1)});showSlide(0);
-    const wordRounds=[{phrase:'NGUOI LAM THUE',clue:'Kết luận về bản chất lao động của tài xế công nghệ'},{phrase:'TAT UNG DUNG',clue:'Hành động tập thể của tài xế để phản đối nền tảng'},{phrase:'THUAT TOAN GIA',clue:'Cơ chế nền tảng dùng để quyết định giá cước'}];const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');let wordRound=0,wrongCount=0,guessed=new Set(),wordFinished=false;const roundText=document.getElementById('roundText'),wrongText=document.getElementById('wrongText'),wordClue=document.getElementById('wordClue'),wordTitle=document.getElementById('wordTitle'),wordDisplay=document.getElementById('wordDisplay'),keyboard=document.getElementById('keyboard'),wordMessage=document.getElementById('wordMessage'),nextWordBtn=document.getElementById('nextWordBtn'),resetWordBtn=document.getElementById('resetWordBtn'),drawParts=Array.from(document.querySelectorAll('.draw-part'));function currentWord(){return wordRounds[wordRound]}function renderWord(){const round=currentWord();roundText.textContent=`${wordRound+1}/3`;wrongText.textContent=`${wrongCount}/6`;wordClue.textContent='Gợi ý: '+round.clue;wordTitle.textContent=wordFinished?'Hoàn thành cụm từ':'Đoán cụm từ khóa';wordDisplay.innerHTML='';[...round.phrase].forEach(ch=>{if(ch===' '){const space=document.createElement('div');space.className='letter-space';wordDisplay.appendChild(space)}else{const box=document.createElement('div');box.className='letter-box';box.textContent=guessed.has(ch)||wordFinished?ch:'';wordDisplay.appendChild(box)}});drawParts.forEach((part,index)=>part.classList.toggle('show',index<wrongCount));renderKeyboard()}function renderKeyboard(){keyboard.innerHTML='';alphabet.forEach(letter=>{const btn=document.createElement('button');btn.className='key';btn.textContent=letter;btn.disabled=guessed.has(letter)||wordFinished;const phrase=currentWord().phrase;if(guessed.has(letter))btn.classList.add(phrase.includes(letter)?'good':'bad');btn.addEventListener('click',()=>guessLetter(letter));keyboard.appendChild(btn)})}function guessLetter(letter){if(wordFinished)return;guessed.add(letter);const phrase=currentWord().phrase;if(phrase.includes(letter))wordMessage.textContent=`Đúng! Chữ ${letter} có trong cụm từ.`;else{wrongCount++;wordMessage.textContent=`Sai! Hệ thống vẽ thêm 1 nét kiểm soát. (${wrongCount}/6)`}const solved=[...phrase].every(ch=>ch===' '||guessed.has(ch));if(solved){wordFinished=true;wordMessage.textContent=wordRound===wordRounds.length-1?'Hoàn thành cả 3 cụm từ! Bạn đã ôn lại các ý chính của bài.':'Đúng cụm từ! Bấm “Cụm tiếp theo” để tiếp tục.';nextWordBtn.style.display=wordRound===wordRounds.length-1?'none':'inline-flex'}else if(wrongCount>=6){wordFinished=true;wordMessage.textContent=`Hết lượt sai. Cụm đúng là: ${phrase}. Bấm chơi lại hoặc sang cụm tiếp theo.`;nextWordBtn.style.display=wordRound===wordRounds.length-1?'none':'inline-flex'}renderWord()}function nextWord(){if(wordRound<wordRounds.length-1){wordRound++;wrongCount=0;guessed=new Set();wordFinished=false;nextWordBtn.style.display='none';wordMessage.textContent='Chọn chữ cái để đoán cụm từ mới.';renderWord()}}function resetWordGame(){wordRound=0;wrongCount=0;guessed=new Set();wordFinished=false;nextWordBtn.style.display='none';wordMessage.textContent='Chọn chữ cái để đoán cụm từ.';renderWord()}nextWordBtn.addEventListener('click',nextWord);resetWordBtn.addEventListener('click',resetWordGame);resetWordGame();
+    const slides=Array.from(document.querySelectorAll('.slide'));
+    const progress=document.getElementById('progress');
+    const counter=document.getElementById('counter');
+    const prevBtn=document.getElementById('prevBtn');
+    const nextBtn=document.getElementById('nextBtn');
+    let current=0;
+
+    slides.forEach((_,i)=>{
+      const dot=document.createElement('div');
+      dot.className='dot'+(i===0?' active':'');
+      dot.addEventListener('click',()=>showSlide(i));
+      progress.appendChild(dot);
+    });
+
+    function showSlide(index){
+      if(index<0||index>=slides.length)return;
+      slides.forEach((slide,i)=>{
+        slide.classList.remove('active','prev');
+        if(i<index)slide.classList.add('prev');
+        if(i===index)slide.classList.add('active');
+      });
+      current=index;
+      document.querySelectorAll('.dot').forEach((dot,i)=>dot.classList.toggle('active',i===current));
+      counter.textContent=`${current+1} / ${slides.length}`;
+      prevBtn.disabled=current===0;
+      nextBtn.disabled=current===slides.length-1;
+      prevBtn.style.opacity=current===0?'.45':'1';
+      nextBtn.style.opacity=current===slides.length-1?'.45':'1';
+    }
+
+    prevBtn.addEventListener('click',()=>showSlide(current-1));
+    nextBtn.addEventListener('click',()=>showSlide(current+1));
+
+    document.addEventListener('keydown',e=>{
+      const tag=(e.target.tagName||'').toLowerCase();
+      if(tag==='input'||tag==='button')return;
+      if(e.key==='ArrowRight'||e.key===' ')showSlide(current+1);
+      if(e.key==='ArrowLeft')showSlide(current-1);
+    });
+
+    document.getElementById('deck').addEventListener('click',e=>{
+      const interactive=e.target.closest('input,label,button,.answer,.word-game,iframe,video,a,.dot');
+      if(interactive)return;
+      const rect=e.currentTarget.getBoundingClientRect();
+      const x=e.clientX-rect.left;
+      if(x<rect.width/2) showSlide(current-1);
+      else showSlide(current+1);
+    });
+
+    showSlide(0);
+
+    const wordRounds=[
+      {phrase:'NGUOI LAM THUE',clue:'Kết luận về bản chất lao động của tài xế công nghệ'},
+      {phrase:'TAT UNG DUNG',clue:'Hành động tập thể của tài xế để phản đối nền tảng'},
+      {phrase:'THUAT TOAN GIA',clue:'Cơ chế nền tảng dùng để quyết định giá cước'}
+    ];
+    const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    let wordRound=0,wrongCount=0,guessed=new Set(),wordFinished=false;
+    const roundText=document.getElementById('roundText'),wrongText=document.getElementById('wrongText'),wordClue=document.getElementById('wordClue'),wordTitle=document.getElementById('wordTitle'),wordDisplay=document.getElementById('wordDisplay'),keyboard=document.getElementById('keyboard'),wordMessage=document.getElementById('wordMessage'),nextWordBtn=document.getElementById('nextWordBtn'),resetWordBtn=document.getElementById('resetWordBtn'),drawParts=Array.from(document.querySelectorAll('.draw-part'));
+
+    function currentWord(){return wordRounds[wordRound]}
+    function renderWord(){
+      const round=currentWord();
+      roundText.textContent=`${wordRound+1}/3`;
+      wrongText.textContent=`${wrongCount}/6`;
+      wordClue.textContent='Gợi ý: '+round.clue;
+      wordTitle.textContent=wordFinished?'Hoàn thành cụm từ':'Đoán cụm từ khóa';
+      wordDisplay.innerHTML='';
+      [...round.phrase].forEach(ch=>{
+        if(ch===' '){const space=document.createElement('div');space.className='letter-space';wordDisplay.appendChild(space)}
+        else{const box=document.createElement('div');box.className='letter-box';box.textContent=guessed.has(ch)||wordFinished?ch:'';wordDisplay.appendChild(box)}
+      });
+      drawParts.forEach((part,index)=>part.classList.toggle('show',index<wrongCount));
+      renderKeyboard();
+    }
+    function renderKeyboard(){
+      keyboard.innerHTML='';
+      alphabet.forEach(letter=>{
+        const btn=document.createElement('button');
+        btn.className='key';
+        btn.textContent=letter;
+        btn.disabled=guessed.has(letter)||wordFinished;
+        const phrase=currentWord().phrase;
+        if(guessed.has(letter))btn.classList.add(phrase.includes(letter)?'good':'bad');
+        btn.addEventListener('click',()=>guessLetter(letter));
+        keyboard.appendChild(btn);
+      });
+    }
+    function guessLetter(letter){
+      if(wordFinished)return;
+      guessed.add(letter);
+      const phrase=currentWord().phrase;
+      if(phrase.includes(letter)) wordMessage.textContent=`Đúng! Chữ ${letter} có trong cụm từ.`;
+      else{wrongCount++;wordMessage.textContent=`Sai! Hệ thống vẽ thêm 1 nét kiểm soát. (${wrongCount}/6)`;}
+      const solved=[...phrase].every(ch=>ch===' '||guessed.has(ch));
+      if(solved){
+        wordFinished=true;
+        wordMessage.textContent=wordRound===wordRounds.length-1?'Hoàn thành cả 3 cụm từ! Bạn đã ôn lại các ý chính của bài.':'Đúng cụm từ! Bấm “Cụm tiếp theo” để tiếp tục.';
+        nextWordBtn.style.display=wordRound===wordRounds.length-1?'none':'inline-flex';
+      }else if(wrongCount>=6){
+        wordFinished=true;
+        wordMessage.textContent=`Hết lượt sai. Cụm đúng là: ${phrase}. Bấm chơi lại hoặc sang cụm tiếp theo.`;
+        nextWordBtn.style.display=wordRound===wordRounds.length-1?'none':'inline-flex';
+      }
+      renderWord();
+    }
+    function nextWord(){
+      if(wordRound<wordRounds.length-1){
+        wordRound++;wrongCount=0;guessed=new Set();wordFinished=false;
+        nextWordBtn.style.display='none';
+        wordMessage.textContent='Chọn chữ cái để đoán cụm từ mới.';
+        renderWord();
+      }
+    }
+    function resetWordGame(){
+      wordRound=0;wrongCount=0;guessed=new Set();wordFinished=false;
+      nextWordBtn.style.display='none';
+      wordMessage.textContent='Chọn chữ cái để đoán cụm từ.';
+      renderWord();
+    }
+    nextWordBtn.addEventListener('click',nextWord);
+    resetWordBtn.addEventListener('click',resetWordGame);
+    resetWordGame();
   </script>
 </body>
 </html>
