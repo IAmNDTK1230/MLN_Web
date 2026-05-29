@@ -1,1719 +1,277 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới?</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --ink:#14213d;
-      --muted:#64748b;
-      --blue:#2563eb;
-      --cyan:#06b6d4;
-      --orange:#f97316;
-      --red:#e11d48;
-      --green:#10b981;
-      --purple:#7c3aed;
-      --yellow:#facc15;
-      --line:rgba(20,33,61,.12);
-      --shadow:0 24px 70px rgba(20,33,61,.14);
-    }
-
-    *{box-sizing:border-box}
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      margin:0;
-      font-family:"Be Vietnam Pro",Arial,sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 8% 8%,rgba(37,99,235,.18),transparent 28%),
-        radial-gradient(circle at 92% 18%,rgba(249,115,22,.18),transparent 30%),
-        radial-gradient(circle at 74% 88%,rgba(124,58,237,.12),transparent 34%),
-        linear-gradient(135deg,#fff7ed,#eef6ff 48%,#f8fafc);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.52) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.52) 1px,transparent 1px);
-      background-size:54px 54px;
-      mask-image:linear-gradient(to bottom,transparent,black 14%,black 86%,transparent);
-      z-index:-1;
-    }
-
-    .wrap{
-      max-width:1180px;
-      margin:0 auto;
-      padding:0 20px;
-    }
-
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:50;
-      padding:12px 0;
-      backdrop-filter:blur(18px);
-      background:rgba(255,255,255,.74);
-      border-bottom:1px solid rgba(255,255,255,.72);
-    }
-
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      letter-spacing:-.4px;
-      white-space:nowrap;
-      cursor:pointer;
-    }
-
-    .brand-mark{
-      width:38px;
-      height:38px;
-      border-radius:15px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      color:#fff;
-      box-shadow:0 12px 28px rgba(37,99,235,.22);
-    }
-
-    .nav-links{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .page-tab{
-      border:0;
-      border-radius:999px;
-      padding:9px 13px;
-      font-family:inherit;
-      font-weight:900;
-      cursor:pointer;
-      color:#475569;
-      background:transparent;
-      transition:.18s;
-    }
-
-    .page-tab:hover{
-      background:#fff;
-      color:var(--blue);
-    }
-
-    .page-tab.active{
-      background:#0f172a;
-      color:#fff;
-      box-shadow:0 12px 28px rgba(15,23,42,.16);
-    }
-
-    .hero{
-      padding:64px 0 42px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:32px;
-      align-items:center;
-    }
-
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      border-radius:999px;
-      background:rgba(255,255,255,.78);
-      border:1px solid var(--line);
-      color:var(--orange);
-      font-size:13px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      margin-bottom:16px;
-    }
-
-    h1,h2,h3,p{margin:0}
-
-    h1{
-      font-size:clamp(44px,7vw,88px);
-      line-height:.98;
-      letter-spacing:-3.5px;
-      font-weight:900;
-    }
-
-    h2{
-      font-size:clamp(32px,4.6vw,58px);
-      line-height:1.05;
-      letter-spacing:-2px;
-      font-weight:900;
-    }
-
-    h3{
-      font-size:clamp(20px,2vw,26px);
-      line-height:1.18;
-      font-weight:850;
-      margin-bottom:8px;
-    }
-
-    p{
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.62;
-    }
-
-    .lead{
-      margin-top:18px;
-      font-size:clamp(17px,1.7vw,21px);
-      color:#334155;
-      max-width:850px;
-    }
-
-    .gradient-text{
-      background:linear-gradient(90deg,var(--blue),var(--orange),var(--red));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:26px;
-    }
-
-    .btn{
-      border:0;
-      cursor:pointer;
-      border-radius:999px;
-      padding:13px 18px;
-      font-family:inherit;
-      font-weight:900;
-      background:#0f172a;
-      color:#fff;
-      box-shadow:0 14px 36px rgba(15,23,42,.18);
-      transition:.18s;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-    }
-
-    .btn.secondary{
-      background:rgba(255,255,255,.8);
-      color:#0f172a;
-      border:1px solid rgba(255,255,255,.9);
-      box-shadow:none;
-    }
-
-    .phone-card{
-      position:relative;
-      min-height:460px;
-      border-radius:42px;
-      padding:26px;
-      background:linear-gradient(160deg,rgba(255,255,255,.92),rgba(255,255,255,.6));
-      border:1px solid rgba(255,255,255,.9);
-      box-shadow:var(--shadow);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-    }
-
-    .phone-card::before{
-      content:"30%";
-      position:absolute;
-      right:24px;
-      top:24px;
-      padding:12px 16px;
-      border-radius:22px;
-      background:var(--red);
-      color:#fff;
-      font-size:38px;
-      font-weight:900;
-      transform:rotate(6deg);
-      box-shadow:0 14px 34px rgba(225,29,72,.28);
-    }
-
-    .phone{
-      width:min(310px,88%);
-      aspect-ratio:9/16;
-      border-radius:42px;
-      background:#0f172a;
-      border:10px solid #111827;
-      padding:16px;
-      color:#fff;
-      box-shadow:0 32px 72px rgba(15,23,42,.34);
-      transform:rotate(-4deg);
-    }
-
-    .notch{
-      width:82px;
-      height:8px;
-      border-radius:99px;
-      background:#334155;
-      margin:0 auto 16px;
-    }
-
-    .map{
-      height:46%;
-      border-radius:26px;
-      background:linear-gradient(135deg,#172554,#0891b2);
-      position:relative;
-      overflow:hidden;
-      margin-bottom:14px;
-    }
-
-    .map::before,.map::after{
-      content:"";
-      position:absolute;
-      height:9px;
-      border-radius:99px;
-      background:rgba(255,255,255,.32);
-    }
-
-    .map::before{
-      width:260px;
-      left:-42px;
-      top:72px;
-      transform:rotate(-18deg);
-    }
-
-    .map::after{
-      width:220px;
-      right:-56px;
-      bottom:58px;
-      transform:rotate(22deg);
-    }
-
-    .pin{
-      position:absolute;
-      left:50%;
-      top:48%;
-      transform:translate(-50%,-50%);
-      width:58px;
-      height:58px;
-      border-radius:50%;
-      background:var(--yellow);
-      color:#111;
-      display:grid;
-      place-items:center;
-      font-weight:900;
-      box-shadow:0 0 0 14px rgba(250,204,21,.22);
-    }
-
-    .screen-card{
-      border-radius:20px;
-      background:#1e293b;
-      border:1px solid rgba(255,255,255,.08);
-      padding:12px;
-      margin-bottom:10px;
-    }
-
-    .screen-card b{
-      display:block;
-    }
-
-    .screen-card span{
-      color:#cbd5e1;
-      font-size:12.5px;
-      line-height:1.42;
-      display:block;
-      margin-top:3px;
-    }
-
-    main{
-      min-height:calc(100vh - 70px);
-    }
-
-    .tab-content{
-      display:none;
-      padding:62px 0;
-      min-height:calc(100vh - 72px);
-      animation:tabFade .24s ease;
-    }
-
-    .tab-content.active{
-      display:block;
-    }
-
-    @keyframes tabFade{
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:24px;
-      margin-bottom:22px;
-    }
-
-    .section-head p{
-      max-width:470px;
-      font-weight:600;
-    }
-
-    .panel{
-      border-radius:34px;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(255,255,255,.88);
-      box-shadow:0 20px 58px rgba(23,32,51,.1);
-      overflow:hidden;
-      margin-bottom:14px;
-    }
-
-    .panel button{
-      width:100%;
-      border:0;
-      background:transparent;
-      padding:22px 24px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      cursor:pointer;
-      font-family:inherit;
-      color:var(--ink);
-      text-align:left;
-      font-weight:900;
-      font-size:20px;
-    }
-
-    .panel button span{
-      width:38px;
-      height:38px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      background:#eff6ff;
-      color:var(--blue);
-      flex:0 0 auto;
-      transition:.2s;
-    }
-
-    .panel.active button span{
-      transform:rotate(45deg);
-      background:#fff1f2;
-      color:var(--red);
-    }
-
-    .panel-content{
-      display:none;
-      padding:0 24px 24px;
-    }
-
-    .panel.active .panel-content{
-      display:block;
-    }
-
-    .panel-content ul{
-      margin:12px 0 0;
-      padding-left:20px;
-      color:var(--muted);
-      line-height:1.65;
-    }
-
-    .mini-tabs{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin:4px 0 16px;
-    }
-
-    .mini-tab{
-      border:0;
-      border-radius:999px;
-      padding:10px 14px;
-      font-family:inherit;
-      font-weight:900;
-      cursor:pointer;
-      background:#fff;
-      color:#475569;
-      border:1px solid var(--line);
-    }
-
-    .mini-tab.active{
-      background:#0f172a;
-      color:#fff;
-    }
-
-    .mini-panel{
-      display:none;
-    }
-
-    .mini-panel.active{
-      display:block;
-    }
-
-    .concept-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin:18px 0;
-    }
-
-    .concept-card{
-      border-radius:26px;
-      background:#fff;
-      border:1px solid var(--line);
-      padding:18px;
-      box-shadow:0 12px 32px rgba(23,32,51,.06);
-    }
-
-    .concept-card b{
-      display:block;
-      color:#0f172a;
-      margin-bottom:6px;
-    }
-
-    .timeline{
-      display:grid;
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .time-item{
-      display:grid;
-      grid-template-columns:86px 1fr;
-      gap:12px;
-      align-items:start;
-      padding:14px;
-      border-radius:22px;
-      background:#fff;
-      border:1px solid var(--line);
-    }
-
-    .time-year{
-      border-radius:999px;
-      background:#0f172a;
-      color:#fff;
-      padding:8px 10px;
-      font-weight:900;
-      text-align:center;
-      font-size:13px;
-    }
-
-    .story-layout{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:22px;
-      align-items:center;
-    }
-
-    .case-list{
-      display:grid;
-      gap:12px;
-      margin-top:18px;
-    }
-
-    .case-item{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:13px;
-      border-radius:22px;
-      background:rgba(255,255,255,.72);
-      border:1px solid var(--line);
-    }
-
-    .case-dot{
-      width:32px;
-      height:32px;
-      border-radius:13px;
-      display:grid;
-      place-items:center;
-      background:var(--orange);
-      color:#fff;
-      font-weight:900;
-      flex:0 0 auto;
-    }
-
-    .case-item strong{
-      display:block;
-      margin-bottom:2px;
-    }
-
-    .mock-visual{
-      position:relative;
-      min-height:430px;
-      border-radius:34px;
-      overflow:hidden;
-      background:linear-gradient(135deg,#eff6ff,#fff7ed 52%,#f5f3ff);
-      border:1px solid rgba(255,255,255,.9);
-      box-shadow:0 20px 58px rgba(23,32,51,.16);
-      padding:24px;
-      display:grid;
-      align-content:center;
-      justify-items:center;
-      gap:16px;
-    }
-
-    .mock-visual::before{
-      content:"";
-      position:absolute;
-      right:-48px;
-      bottom:-60px;
-      width:190px;
-      height:190px;
-      border-radius:50%;
-      background:rgba(249,115,22,.16);
-    }
-
-    .mock-visual::after{
-      content:"";
-      position:absolute;
-      left:-42px;
-      top:-42px;
-      width:170px;
-      height:170px;
-      border-radius:46% 54% 48% 52%;
-      background:rgba(37,99,235,.14);
-    }
-
-    .mock-phone{
-      width:min(315px,92%);
-      border-radius:30px;
-      background:#fff;
-      border:1px solid var(--line);
-      box-shadow:0 22px 56px rgba(23,32,51,.14);
-      padding:18px;
-      position:relative;
-      z-index:1;
-    }
-
-    .phone-top{
-      width:74px;
-      height:8px;
-      border-radius:99px;
-      background:#dbeafe;
-      margin:0 auto 16px;
-    }
-
-    .income-title{
-      color:#64748b;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .income-number{
-      font-size:36px;
-      font-weight:900;
-      color:#0f172a;
-      margin:6px 0 14px;
-    }
-
-    .income-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 0;
-      border-top:1px solid var(--line);
-      font-size:14px;
-      color:#475569;
-    }
-
-    .income-row b{
-      color:#0f172a;
-    }
-
-    .income-row.danger b{
-      color:var(--red);
-    }
-
-    .income-alert{
-      margin-top:12px;
-      border-radius:18px;
-      background:#fff1f2;
-      color:#be123c;
-      padding:11px 12px;
-      font-weight:850;
-      font-size:13px;
-    }
-
-    .rider-group{
-      display:flex;
-      gap:12px;
-      position:relative;
-      z-index:1;
-    }
-
-    .rider{
-      width:62px;
-      height:62px;
-      border-radius:24px;
-      background:#fff;
-      display:grid;
-      place-items:center;
-      font-size:30px;
-      box-shadow:0 14px 34px rgba(23,32,51,.12);
-      border:1px solid rgba(255,255,255,.86);
-    }
-
-    .video-shell{
-      border-radius:34px;
-      padding:12px;
-      background:#0f172a;
-      box-shadow:0 26px 76px rgba(15,23,42,.24);
-    }
-
-    .video-box{
-      position:relative;
-      width:100%;
-      height:min(58vh,520px);
-      border-radius:26px;
-      overflow:hidden;
-      background:linear-gradient(135deg,#0f172a,#1e3a8a 48%,#f97316);
-    }
-
-    .video-box iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
-
-    .analysis-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-top:22px;
-    }
-
-    .mini-cell{
-      border-radius:26px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(255,255,255,.88);
-      padding:18px;
-      box-shadow:0 16px 44px rgba(23,32,51,.08);
-    }
-
-    .mini-cell b{
-      display:block;
-      color:#0f172a;
-      margin-bottom:6px;
-    }
-
-    .mini-cell span{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    .compare-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:18px;
-    }
-
-    .compare-card{
-      border-radius:30px;
-      background:rgba(255,255,255,.76);
-      border:1px solid rgba(255,255,255,.88);
-      padding:22px;
-      box-shadow:0 18px 50px rgba(23,32,51,.08);
-    }
-
-    .compare-card ul{
-      margin:12px 0 0;
-      padding-left:20px;
-      color:var(--muted);
-      line-height:1.65;
-    }
-
-    .quote{
-      margin-top:18px;
-      border-radius:28px;
-      padding:20px;
-      color:#fff;
-      background:linear-gradient(135deg,#0f172a,#1e3a8a);
-      box-shadow:0 22px 62px rgba(15,23,42,.16);
-      font-size:clamp(18px,1.8vw,24px);
-      font-weight:800;
-      line-height:1.45;
-    }
-
-    .tabs{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
-    .tab-btn{
-      border:0;
-      border-radius:999px;
-      padding:11px 14px;
-      font-family:inherit;
-      font-weight:900;
-      cursor:pointer;
-      color:#334155;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(255,255,255,.88);
-    }
-
-    .tab-btn.active{
-      background:#0f172a;
-      color:#fff;
-    }
-
-    .tab-panel{
-      display:none;
-      border-radius:34px;
-      background:rgba(255,255,255,.76);
-      border:1px solid rgba(255,255,255,.88);
-      padding:24px;
-      box-shadow:0 18px 52px rgba(23,32,51,.1);
-    }
-
-    .tab-panel.active{
-      display:block;
-    }
-
-    .tab-panel ul{
-      margin:12px 0 0;
-      padding-left:20px;
-      color:var(--muted);
-      line-height:1.65;
-    }
-
-    .word-game{
-      border-radius:36px;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(255,255,255,.9);
-      padding:24px;
-      box-shadow:0 18px 54px rgba(23,32,51,.1);
-    }
-
-    .word-top{
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      align-items:flex-start;
-      margin-bottom:18px;
-    }
-
-    .word-score{
-      display:flex;
-      gap:10px;
-    }
-
-    .word-stat{
-      border-radius:18px;
-      background:#fff;
-      border:1px solid var(--line);
-      padding:10px 14px;
-      min-width:115px;
-    }
-
-    .word-stat b{
-      font-size:22px;
-      color:#0f172a;
-    }
-
-    .word-stat span{
-      font-size:12px;
-      display:block;
-      color:var(--muted);
-      font-weight:800;
-    }
-
-    .word-body{
-      display:grid;
-      grid-template-columns:.78fr 1.22fr;
-      gap:18px;
-      align-items:center;
-    }
-
-    .draw-card,.guess-card{
-      border-radius:30px;
-      background:#fff;
-      border:1px solid var(--line);
-      padding:20px;
-      box-shadow:0 12px 36px rgba(23,32,51,.06);
-    }
-
-    .draw-stage{
-      width:min(350px,100%);
-      aspect-ratio:1/1;
-      margin:auto;
-      position:relative;
-      border-radius:28px;
-      background:linear-gradient(135deg,#eff6ff,#fff7ed);
-      overflow:hidden;
-    }
-
-    .draw-part{
-      position:absolute;
-      opacity:0;
-      transform:scale(.92);
-      transition:.25s ease;
-    }
-
-    .draw-part.show{
-      opacity:1;
-      transform:scale(1);
-    }
-
-    .p1{left:12%;right:12%;bottom:16%;height:18px;border-radius:999px;background:#0f172a}
-    .p2{left:22%;bottom:16%;width:18px;height:62%;border-radius:999px;background:#0f172a}
-    .p3{left:22%;top:20%;width:44%;height:18px;border-radius:999px;background:#0f172a}
-    .p4{left:60%;top:20%;width:18px;height:18%;border-radius:999px;background:#0f172a}
-    .p5{left:49%;top:34%;width:94px;height:94px;border-radius:28px;background:var(--blue);box-shadow:0 14px 34px rgba(37,99,235,.22)}
-    .p5::after{content:'APP';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}
-    .p6{left:43%;top:60%;width:150px;height:70px;border-radius:34px;background:var(--orange);box-shadow:0 14px 34px rgba(249,115,22,.22)}
-    .p6::after{content:'LOCK';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900}
-
-    .word-clue{
-      display:inline-flex;
-      border-radius:999px;
-      background:#eff6ff;
-      color:#1d4ed8;
-      font-weight:900;
-      padding:8px 12px;
-      margin-bottom:12px;
-      font-size:13px;
-    }
-
-    .word-display{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin:14px 0;
-    }
-
-    .letter-box{
-      width:40px;
-      height:48px;
-      border-radius:15px;
-      background:#fff;
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      font-size:22px;
-      font-weight:900;
-      color:#0f172a;
-      box-shadow:0 10px 26px rgba(23,32,51,.07);
-    }
-
-    .letter-space{
-      width:14px;
-    }
-
-    .keyboard{
-      display:grid;
-      grid-template-columns:repeat(9,1fr);
-      gap:6px;
-      margin-top:12px;
-    }
-
-    .key{
-      border:0;
-      border-radius:12px;
-      background:#fff;
-      border:1px solid var(--line);
-      padding:8px 0;
-      font-family:inherit;
-      font-weight:900;
-      cursor:pointer;
-      color:#334155;
-    }
-
-    .key:hover{background:#eff6ff}
-    .key:disabled{opacity:.45;cursor:not-allowed}
-    .key.good{background:#dcfce7;color:#166534}
-    .key.bad{background:#ffe4e6;color:#9f1239}
-
-    .word-actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    .word-message{
-      border-radius:18px;
-      background:#0f172a;
-      color:#e2e8f0;
-      padding:10px 12px;
-      font-weight:650;
-      line-height:1.4;
-      text-align:center;
-      margin-top:10px;
-      font-size:14px;
-    }
-
-    .ending{
-      border-radius:42px;
-      padding:clamp(28px,4vw,52px);
-      background:linear-gradient(135deg,#0f172a,#1e1b4b 55%,#7f1d1d);
-      color:#fff;
-      text-align:center;
-      box-shadow:0 28px 82px rgba(15,23,42,.26);
-    }
-
-    .ending p{
-      color:#dbeafe;
-      max-width:900px;
-      margin:16px auto 0;
-    }
-
-    .final-q{
-      display:inline-flex;
-      margin-top:22px;
-      border-radius:999px;
-      padding:12px 18px;
-      background:#fff;
-      color:#0f172a;
-      font-weight:900;
-    }
-
-    @media(max-width:980px){
-      .nav-inner{
-        align-items:flex-start;
-        display:grid;
-      }
-
-      .nav-links{
-        overflow-x:auto;
-        flex-wrap:nowrap;
-        justify-content:flex-start;
-        padding-bottom:4px;
-      }
-
-      .page-tab{
-        white-space:nowrap;
-      }
-
-      .hero-grid,.story-layout,.analysis-grid,.word-body,.concept-grid,.compare-grid{
-        grid-template-columns:1fr;
-      }
-
-      .phone-card{
-        min-height:360px;
-      }
-
-      .phone{
-        max-height:330px;
-        width:235px;
-      }
-
-      .video-box{
-        height:42vh;
-      }
-
-      .word-top{
-        display:grid;
-      }
-
-      .word-score{
-        flex-wrap:wrap;
-      }
-
-      .keyboard{
-        grid-template-columns:repeat(7,1fr);
-      }
-
-      .section-head{
-        display:grid;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLN111 - Tài xế công nghệ</title>
+<style>
+body{
+  font-family: 'Inter', sans-serif;
+  margin:0;
+  padding:0;
+  background: linear-gradient(to bottom right, #f9fafb, #eef2f7);
+  color:#1e293b;
+  overflow-x:hidden;
+}
+.container{
+  max-width: 1200px;
+  margin:0 auto;
+  padding:20px;
+}
+h1,h2,h3{
+  font-weight:900;
+  margin-bottom:16px;
+}
+h2{
+  color:#1e293b;
+}
+.panel{
+  background:rgba(255,255,255,.85);
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:30px;
+  box-shadow:0 12px 24px rgba(0,0,0,.08);
+}
+.theory-block{
+  border-radius:26px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(255,255,255,.9);
+  padding:18px 20px;
+  box-shadow:0 14px 38px rgba(23,32,51,.07);
+  margin-bottom:16px;
+}
+.theory-label{
+  display:inline-flex;
+  border-radius:999px;
+  padding:6px 10px;
+  background:#eff6ff;
+  color:#1d4ed8;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.small-theory{
+  font-size:14px;
+  line-height:1.65;
+  color:#475569;
+}
+.concept-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:16px;
+}
+.concept-card{
+  flex:1 1 calc(33% - 12px);
+  background:#f8fafc;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+.concept-card b{
+  display:block;
+  margin-bottom:6px;
+}
+.form-tag{
+  display:inline-flex;
+  border-radius:999px;
+  padding:6px 10px;
+  background:#fff7ed;
+  color:#c2410c;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.quote{
+  margin-top:20px;
+  background:#e0f2fe;
+  border-radius:12px;
+  padding:14px 20px;
+  font-style:italic;
+  color:#1e3a8a;
+}
+.video-container{
+  position:relative;
+  padding-bottom:56.25%;
+  padding-top:30px;
+  height:0;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+.video-container iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border-radius:16px;
+}
+.game-container{
+  margin-top:30px;
+  background:rgba(255,255,255,.85);
+  padding:20px;
+  border-radius:24px;
+  box-shadow:0 12px 24px rgba(0,0,0,.08);
+  text-align:center;
+}
+.game-container h2{
+  margin-bottom:16px;
+}
+img.slide-img{
+  width:100%;
+  border-radius:16px;
+  margin-top:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+.tab-btns{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+.tab-btns button{
+  flex:1;
+  padding:12px 18px;
+  background:#f3f4f6;
+  border:none;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+.tab-btns button.active{
+  background:#1d4ed8;
+  color:white;
+}
+.tab-content{
+  display:none;
+}
+.tab-content.active{
+  display:block;
+}
+</style>
 </head>
-
 <body>
-  <nav class="nav">
-    <div class="wrap nav-inner">
-      <div class="brand" id="homeBtn">
-        <span class="brand-mark">X</span>
-        <span>Đối tác hay làm thuê?</span>
-      </div>
+<div class="container">
+  <h1>MLN111 – Tài xế công nghệ và đấu tranh giai cấp hiện đại</h1>
 
-      <div class="nav-links">
-        <button class="page-tab active" data-tab="theory">Lý thuyết</button>
-        <button class="page-tab" data-tab="situation">Tình huống</button>
-        <button class="page-tab" data-tab="video">Video</button>
-        <button class="page-tab" data-tab="analysis">Phân tích</button>
-        <button class="page-tab" data-tab="compare">So sánh</button>
-        <button class="page-tab" data-tab="game">Ôn tập</button>
-        <button class="page-tab" data-tab="ending">Kết luận</button>
-      </div>
-    </div>
-  </nav>
+  <div class="tab-btns">
+    <button class="active" data-tab="theory">I. Lý thuyết nền</button>
+    <button data-tab="video">II. Video minh họa</button>
+    <button data-tab="analysis">III. Phân tích video</button>
+    <button data-tab="game">IV. Mini game</button>
+  </div>
 
-  <header class="hero" id="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="kicker">MLN111 · Chủ nghĩa duy vật lịch sử</div>
-        <h1>Khi tài xế đồng loạt <span class="gradient-text">tắt ứng dụng</span></h1>
-        <p class="lead">
-          Một ứng dụng tăng chiết khấu. Tài xế đồng loạt tắt app. Đây chỉ là tranh chấp nghề nghiệp thông thường, hay là một dạng đấu tranh giai cấp trong nền kinh tế số?
+  <!-- Lý thuyết nền -->
+  <div class="tab-content active" id="theory">
+    <div class="panel">
+      <div class="theory-block">
+        <div class="theory-label">Định nghĩa kinh điển của V.I. Lênin</div>
+        <p class="small-theory">
+          Trong tác phẩm <b>“Sáng kiến vĩ đại”</b>, Lênin cho rằng giai cấp là những tập đoàn người to lớn,
+          khác nhau về địa vị trong một hệ thống sản xuất xã hội nhất định trong lịch sử; khác nhau về quan hệ
+          đối với tư liệu sản xuất, vai trò trong tổ chức lao động xã hội, và do đó khác nhau về phương thức
+          hưởng thụ cũng như phần sản phẩm xã hội mà họ được hưởng.
         </p>
-
-        <div class="hero-actions">
-          <button class="btn" data-go="theory">Bắt đầu phân tích →</button>
-          <button class="btn secondary" data-go="video">Xem video tình huống</button>
-        </div>
       </div>
 
-      <div class="phone-card">
-        <div class="phone">
-          <div class="notch"></div>
-          <div class="map"><div class="pin">APP</div></div>
-          <div class="screen-card">
-            <b>Cuốc xe mới</b>
-            <span>Giá cước do hệ thống tự tính</span>
-          </div>
-          <div class="screen-card">
-            <b>Chiết khấu nền tảng</b>
-            <span>Tài xế nhận phần còn lại sau mỗi chuyến</span>
-          </div>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <b>Bản chất của giai cấp</b>
+          <p>Bản chất nằm ở sự phân chia trong quan hệ sản xuất, cốt lõi là quan hệ sở hữu đối với tư liệu sản xuất.</p>
+        </div>
+        <div class="concept-card">
+          <b>Giai cấp tư sản số</b>
+          <p>Nắm giữ các tư liệu sản xuất phi vật chất quan trọng như thuật toán, máy chủ đám mây, hạ tầng phần mềm, cơ sở dữ liệu lớn.</p>
+        </div>
+        <div class="concept-card">
+          <b>Giai cấp vô sản số</b>
+          <p>Lao động không sở hữu nền tảng, buộc phải bán sức lao động qua ứng dụng di động (ví dụ tài xế công nghệ, lao động gig).</p>
         </div>
       </div>
     </div>
-  </header>
 
-  <main>
-    <section class="tab-content active" id="tab-theory">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="kicker">I · Kiến thức nền</div>
-            <h2>Muốn phân tích tình huống này cần hiểu 3 khái niệm</h2>
-          </div>
+    <div class="panel">
+      <div class="theory-block">
+        <div class="theory-label">Định nghĩa đấu tranh giai cấp</div>
+        <p class="small-theory">
+          Theo lý thuyết Mác – Lênin, đấu tranh giai cấp là cuộc đấu tranh giữa các giai cấp có lợi ích
+          căn bản đối lập nhau, không thể điều hòa được.
+        </p>
+      </div>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <span class="form-tag">Hình thức 1</span>
+          <b>Đấu tranh kinh tế</b>
+          <p>Đòi tăng lương, giảm giờ làm, cải thiện điều kiện lao động thông qua bãi công, đình công.</p>
         </div>
-
-        <div class="panel active">
-          <button type="button">
-            1. Giai cấp là gì?
-            <span>＋</span>
-          </button>
-
-          <div class="panel-content">
-            <div class="mini-tabs">
-              <button class="mini-tab active" data-mini="class-def">Định nghĩa</button>
-              <button class="mini-tab" data-mini="class-apply">Câu hỏi áp dụng</button>
-            </div>
-
-            <div class="mini-panel active" id="class-def">
-              <p>
-                Theo quan điểm Mác – Lênin, giai cấp là những tập đoàn người khác nhau về địa vị trong một hệ thống sản xuất xã hội nhất định. Sự khác nhau đó thể hiện ở quan hệ của họ đối với tư liệu sản xuất, vai trò trong tổ chức lao động xã hội và cách thức hưởng thụ phần của cải xã hội.
-              </p>
-            </div>
-
-            <div class="mini-panel" id="class-apply">
-              <div class="concept-grid">
-                <div class="concept-card">
-                  <b>Ai sở hữu tư liệu sản xuất?</b>
-                  <p>Trong kinh tế nền tảng, cần hỏi ai nắm app, dữ liệu, thuật toán và hệ thống phân phối khách hàng.</p>
-                </div>
-
-                <div class="concept-card">
-                  <b>Ai tổ chức lao động?</b>
-                  <p>Tài xế có tự quyết quá trình làm việc hay bị app điều phối, đánh giá và khóa tài khoản?</p>
-                </div>
-
-                <div class="concept-card">
-                  <b>Ai hưởng phần lớn của cải?</b>
-                  <p>Giá trị từ mỗi cuốc xe được chia thế nào giữa tài xế và nền tảng sau khi trừ chiết khấu?</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="concept-card">
+          <span class="form-tag">Hình thức 2</span>
+          <b>Đấu tranh chính trị</b>
+          <p>Giành chính quyền về tay giai cấp vô sản và xóa bỏ chế độ áp bức.</p>
         </div>
-
-        <div class="panel">
-          <button type="button">
-            2. Đấu tranh giai cấp là gì?
-            <span>＋</span>
-          </button>
-
-          <div class="panel-content">
-            <div class="mini-tabs">
-              <button class="mini-tab active" data-mini="struggle-def">Định nghĩa</button>
-              <button class="mini-tab" data-mini="struggle-apply">Câu hỏi áp dụng</button>
-            </div>
-
-            <div class="mini-panel active" id="struggle-def">
-              <p>
-                Đấu tranh giai cấp là sự căng thẳng, đối kháng hoặc xung đột giữa các giai cấp, tầng lớp xã hội có lợi ích kinh tế – xã hội khác nhau. Nó xuất hiện khi lợi ích của các nhóm người trong xã hội mâu thuẫn với nhau.
-              </p>
-            </div>
-
-            <div class="mini-panel" id="struggle-apply">
-              <div class="concept-grid">
-                <div class="concept-card">
-                  <b>Nền tảng muốn gì?</b>
-                  <p>Tăng chiết khấu, kiểm soát giá cước và tối đa hóa lợi nhuận từ hệ thống.</p>
-                </div>
-
-                <div class="concept-card">
-                  <b>Tài xế muốn gì?</b>
-                  <p>Giữ thu nhập, điều kiện lao động ổn định và quyền chủ động trong công việc.</p>
-                </div>
-
-                <div class="concept-card">
-                  <b>Mâu thuẫn nằm ở đâu?</b>
-                  <p>Hai bên cùng tham gia tạo ra dịch vụ, nhưng quyền kiểm soát và phân chia lợi ích không ngang nhau.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <button type="button">
-            3. Phong trào Luddites thế kỷ XIX
-            <span>＋</span>
-          </button>
-          <div class="panel-content">
-            <p>
-              Phong trào Luddites ở Anh diễn ra mạnh khoảng 1811–1816, gắn với thợ dệt, thợ kéo sợi và lao động thủ công. Họ phản đối việc chủ xưởng dùng máy móc mới để thay thế lao động lành nghề, giảm tiền công và làm nhiều người mất việc.
-            </p>
-
-            <div class="timeline">
-              <div class="time-item">
-                <div class="time-year">1811</div>
-                <p>Máy móc mới được đưa vào các xưởng dệt, làm thay đổi quan hệ lao động.</p>
-              </div>
-              <div class="time-item">
-                <div class="time-year">1811–1816</div>
-                <p>Công nhân bí mật phá máy dệt, máy kéo sợi tại nhiều vùng ở Anh như Nottinghamshire, Yorkshire, Lancashire.</p>
-              </div>
-              <div class="time-item">
-                <div class="time-year">Sau đó</div>
-                <p>Chính quyền đàn áp mạnh, nhiều người bị bắt, xử tử hoặc lưu đày; phong trào dần suy yếu.</p>
-              </div>
-            </div>
-
-            <div class="quote">
-              Điểm quan trọng: họ không đơn giản là “ghét máy móc”, mà phản đối cách máy móc bị dùng để bóc lột lao động và phá vỡ sinh kế.
-            </div>
-          </div>
+        <div class="concept-card">
+          <span class="form-tag">Hình thức 3</span>
+          <b>Đấu tranh tư tưởng</b>
+          <p>Giải phóng tư tưởng giai cấp lao động khỏi hệ tư tưởng tư sản, truyền bá chủ nghĩa Mác – Lênin.</p>
         </div>
       </div>
-    </section>
 
-    <section class="tab-content" id="tab-situation">
-      <div class="wrap story-layout">
-        <div>
-          <div class="kicker">II · Tình huống</div>
-          <h2>Nền tảng gọi xe X gọi tài xế là “đối tác”</h2>
-          <p class="lead">
-            Bề ngoài, tài xế có xe riêng, tự chọn giờ làm và không bị quản lý trực tiếp như công nhân trong nhà máy. Nhưng trong thực tế, app mới là nơi quyết định nhiều điều kiện lao động quan trọng.
-          </p>
-
-          <div class="case-list">
-            <div class="case-item">
-              <div class="case-dot">1</div>
-              <div>
-                <strong>Không tự định giá</strong>
-                <p>Giá cước do thuật toán và chính sách nền tảng quyết định.</p>
-              </div>
-            </div>
-
-            <div class="case-item">
-              <div class="case-dot">2</div>
-              <div>
-                <strong>Bị điều phối bằng app</strong>
-                <p>Ứng dụng kiểm soát phân phối cuốc, điểm đánh giá và tỷ lệ hủy.</p>
-              </div>
-            </div>
-
-            <div class="case-item">
-              <div class="case-dot">3</div>
-              <div>
-                <strong>Phụ thuộc tài khoản</strong>
-                <p>Bị khóa tài khoản nghĩa là mất khả năng lao động trên nền tảng.</p>
-              </div>
-            </div>
-
-            <div class="case-item">
-              <div class="case-dot">4</div>
-              <div>
-                <strong>Bị trích chiết khấu</strong>
-                <p>Một phần doanh thu, ví dụ 30%, thuộc về nền tảng.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mock-visual">
-          <div class="mock-phone">
-            <div class="phone-top"></div>
-            <div class="income-title">Thu nhập hôm nay</div>
-            <div class="income-number">152.000đ</div>
-            <div class="income-row"><span>Cước phí</span><b>220.000đ</b></div>
-            <div class="income-row danger"><span>Chiết khấu app</span><b>-66.000đ</b></div>
-            <div class="income-alert">Hoa hồng nền tảng tăng lên 30%</div>
-          </div>
-          <div class="rider-group">
-            <div class="rider">🛵</div>
-            <div class="rider">📱</div>
-            <div class="rider">👥</div>
-          </div>
-        </div>
+      <div class="quote">
+        Trong kỷ nguyên số, mâu thuẫn giai cấp thể hiện qua việc chủ nền tảng dùng thuật toán để tối đa hóa thặng dư,
+        trong khi tài xế bị tăng chiết khấu nhưng thiếu các phúc lợi xã hội căn bản.
       </div>
-    </section>
-
-    <section class="tab-content" id="tab-video">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="kicker">III · Video tình huống</div>
-            <h2>Từ cuốc xe đến hành động tắt app</h2>
-          </div>
-          <p>Video minh họa tình huống: tài xế chạy qua app, bị tăng chiết khấu 30%, rồi cùng tắt ứng dụng để phản đối.</p>
-        </div>
-
-        <div class="video-shell">
-          <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/m2BqDM0cKXk" title="Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tab-content" id="tab-analysis">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="kicker">IV · Phân tích</div>
-            <h2>Tài xế là người làm chủ hay làm thuê kiểu mới?</h2>
-          </div>
-          <p>Dựa trên tiêu chí của Lênin, cần nhìn vào bản chất kiểm soát lao động, không chỉ nhìn tên gọi “đối tác”.</p>
-        </div>
-
-        <div class="compare-grid">
-          <div class="compare-card">
-            <h3>Có vẻ là “người làm chủ”</h3>
-            <ul>
-              <li>Có xe máy hoặc ô tô riêng.</li>
-              <li>Có thể tự chọn thời gian làm việc.</li>
-              <li>Được công ty gọi là “đối tác”.</li>
-            </ul>
-          </div>
-
-          <div class="compare-card">
-            <h3>Nhưng bản chất là phụ thuộc</h3>
-            <ul>
-              <li>Không tự quyết định giá cước.</li>
-              <li>Không sở hữu nền tảng số.</li>
-              <li>Bị thuật toán điều phối và đánh giá.</li>
-              <li>Bị trích chiết khấu từ doanh thu.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="analysis-grid">
-          <div class="mini-cell">
-            <b>Chiếc xe</b>
-            <span>Là tư liệu lao động cá nhân, nhưng chưa đủ để làm chủ toàn bộ quá trình sản xuất dịch vụ.</span>
-          </div>
-          <div class="mini-cell">
-            <b>Nền tảng số</b>
-            <span>Là tư liệu sản xuất quyết định: nắm app, dữ liệu, thuật toán và khách hàng.</span>
-          </div>
-          <div class="mini-cell">
-            <b>Thu nhập</b>
-            <span>Phụ thuộc vào thuật toán phân phối cuốc và chính sách chiết khấu của app.</span>
-          </div>
-          <div class="mini-cell">
-            <b>Bản chất</b>
-            <span>Là lao động linh hoạt nhưng vẫn mang tính chất thuê mướn trong chủ nghĩa tư bản nền tảng.</span>
-          </div>
-        </div>
-
-        <div class="quote">
-          Theo tiêu chí của Lênin: tài xế công nghệ là người làm thuê kiểu mới trong nền kinh tế nền tảng số.
-        </div>
-      </div>
-    </section>
-
-    <section class="tab-content" id="tab-compare">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="kicker">V · Tắt app và so sánh lịch sử</div>
-            <h2>Tắt ứng dụng tập thể có phải đấu tranh giai cấp hiện đại?</h2>
-          </div>
-        </div>
-
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="tab1">Tính tập thể</button>
-          <button class="tab-btn" data-tab="tab2">Khác thế kỷ XIX</button>
-          <button class="tab-btn" data-tab="tab3">Điểm mới thời đại số</button>
-        </div>
-
-        <div class="tab-panel active" id="tab1">
-          <h3>Tắt app tập thể là hành động có tính đấu tranh</h3>
-          <p>
-            Khi tài xế đồng loạt tắt ứng dụng, từ chối nhận cuốc và làm dịch vụ bị đình trệ, họ đang rút sức lao động khỏi nền tảng để bảo vệ lợi ích kinh tế của mình. Đây không còn là phản ứng cá nhân mà là hành động tập thể.
-          </p>
-          <ul>
-            <li>Nền tảng muốn tăng chiết khấu để tối đa hóa lợi nhuận.</li>
-            <li>Tài xế muốn giữ thu nhập và điều kiện lao động ổn định.</li>
-            <li>Hai lợi ích đối lập tạo ra mâu thuẫn xã hội.</li>
-          </ul>
-        </div>
-
-        <div class="tab-panel" id="tab2">
-          <h3>Khác với đập phá máy móc thế kỷ XIX</h3>
-          <p>
-            Công nhân thế kỷ XIX từng phá máy vì cho rằng máy móc làm họ mất việc, giảm tiền công và phá vỡ sinh kế. Tài xế công nghệ ngày nay không phá điện thoại, không chống app như một công cụ kỹ thuật, mà phản đối cách nền tảng phân phối lợi ích.
-          </p>
-          <ul>
-            <li>Thế kỷ XIX: hướng phản kháng vào máy móc vật lý.</li>
-            <li>Hiện nay: phản kháng cơ chế kiểm soát thuật toán và chiết khấu.</li>
-            <li>Ngày xưa “đập máy”, ngày nay “tắt app”.</li>
-          </ul>
-        </div>
-
-        <div class="tab-panel" id="tab3">
-          <h3>Điểm mới của đấu tranh trong nền kinh tế số</h3>
-          <p>
-            Trong nền kinh tế nền tảng, quyền lực không chỉ nằm ở nhà máy hay máy móc vật lý, mà nằm ở app, dữ liệu, thuật toán, điểm đánh giá và quyền khóa tài khoản. Vì vậy, hình thức đấu tranh cũng chuyển sang không gian số.
-          </p>
-          <ul>
-            <li>Không gian đấu tranh: từ nhà máy sang nền tảng số.</li>
-            <li>Công cụ gây sức ép: từ đình công tại xưởng sang tắt ứng dụng.</li>
-            <li>Đối tượng phản kháng: quyền kiểm soát dữ liệu, thuật toán và phân chia lợi ích.</li>
-          </ul>
-        </div>
-
-        <div class="quote">
-          Ngày xưa: “đập máy để ngừng sản xuất”. Ngày nay: “tắt ứng dụng để làm tê liệt dòng lưu thông dịch vụ số”.
-        </div>
-      </div>
-    </section>
-
-    <section class="tab-content" id="tab-game">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="kicker">VI · Ôn tập tương tác</div>
-            <h2>Bạn đã hiểu vấn đề chưa?</h2>
-          </div>
-          <p>Cách chơi: chọn từng chữ cái để đoán 3 cụm từ khóa của bài. Mỗi lần đoán sai sẽ xuất hiện thêm một nét vẽ. Đoán đúng cụm từ để chuyển sang vòng tiếp theo.</p>
-        </div>
-
-        <div class="word-game">
-          <div class="word-top">
-            <div>
-              <h3 id="wordTitle">Đoán cụm từ khóa</h3>
-              <div class="word-clue" id="wordClue">Gợi ý</div>
-            </div>
-            <div class="word-score">
-              <div class="word-stat">
-                <b id="roundText">1/3</b>
-                <span>Vòng chơi</span>
-              </div>
-              <div class="word-stat">
-                <b id="wrongText">0/6</b>
-                <span>Lượt sai</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="word-body">
-            <div class="draw-card">
-              <div class="draw-stage">
-                <div class="draw-part p1"></div>
-                <div class="draw-part p2"></div>
-                <div class="draw-part p3"></div>
-                <div class="draw-part p4"></div>
-                <div class="draw-part p5"></div>
-                <div class="draw-part p6"></div>
-              </div>
-            </div>
-
-            <div class="guess-card">
-              <div class="word-display" id="wordDisplay"></div>
-              <div class="keyboard" id="keyboard"></div>
-              <div class="word-actions">
-                <button class="btn" id="nextWordBtn" style="display:none">Cụm tiếp theo →</button>
-                <button class="btn secondary" id="resetWordBtn">Chơi lại</button>
-              </div>
-              <div class="word-message" id="wordMessage">Chọn chữ cái để đoán cụm từ.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tab-content" id="tab-ending">
-      <div class="wrap">
-        <div class="ending">
-          <div class="kicker" style="background:rgba(255,255,255,.12);color:#facc15;border-color:rgba(255,255,255,.18)">VII · Thông điệp cuối</div>
-          <h2>Công nghệ có làm mất đi đấu tranh giai cấp?</h2>
-          <p>
-            Hay nó chỉ làm đấu tranh giai cấp mang một hình thức mới? Trong nền kinh tế nền tảng, mâu thuẫn không chỉ nằm ở máy móc, mà còn nằm ở thuật toán, dữ liệu và cơ chế phân chia lợi ích.
-          </p>
-          <div class="final-q">Ai thật sự làm chủ quá trình lao động?</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const hero = document.getElementById('hero');
-    const pageTabs = document.querySelectorAll('.page-tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const goButtons = document.querySelectorAll('[data-go]');
-    const homeBtn = document.getElementById('homeBtn');
-
-    function openMainTab(tabName){
-      hero.style.display = 'none';
-
-      pageTabs.forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.tab === tabName);
-      });
-
-      tabContents.forEach(content => {
-        content.classList.toggle('active', content.id === `tab-${tabName}`);
-      });
-
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
-
-    pageTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        openMainTab(tab.dataset.tab);
-      });
-    });
-
-    goButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        openMainTab(button.dataset.go);
-      });
-    });
-
-    homeBtn.addEventListener('click', () => {
-      hero.style.display = 'block';
-      pageTabs.forEach(tab => tab.classList.remove('active'));
-      pageTabs[0].classList.add('active');
-      tabContents.forEach(content => content.classList.remove('active'));
-      document.getElementById('tab-theory').classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    });
-
-    const panels = document.querySelectorAll('.panel');
-
-    panels.forEach(panel => {
-      const button = panel.querySelector('button');
-      button.addEventListener('click', () => {
-        panel.classList.toggle('active');
-      });
-    });
-
-    const miniTabs = document.querySelectorAll('.mini-tab');
-
-    miniTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const parent = tab.closest('.panel-content');
-        const target = parent.querySelector(`#${tab.dataset.mini}`);
-
-        parent.querySelectorAll('.mini-tab').forEach(item => {
-          item.classList.remove('active');
-        });
-
-        parent.querySelectorAll('.mini-panel').forEach(panel => {
-          panel.classList.remove('active');
-        });
-
-        tab.classList.add('active');
-        target.classList.add('active');
-      });
-    });
-
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active'));
-        tabPanels.forEach(p => p.classList.remove('active'));
-
-        button.classList.add('active');
-        document.getElementById(button.dataset.tab).classList.add('active');
-      });
-    });
-
-    const wordRounds = [
-      { phrase:'NGUOI LAM THUE', clue:'Kết luận về bản chất lao động của tài xế công nghệ' },
-      { phrase:'TAT UNG DUNG', clue:'Hành động tập thể của tài xế để phản đối nền tảng' },
-      { phrase:'THUAT TOAN GIA', clue:'Cơ chế nền tảng dùng để quyết định giá cước' }
-    ];
-
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    let wordRound = 0;
-    let wrongCount = 0;
-    let guessed = new Set();
-    let wordFinished = false;
-
-    const roundText = document.getElementById('roundText');
-    const wrongText = document.getElementById('wrongText');
-    const wordClue = document.getElementById('wordClue');
-    const wordTitle = document.getElementById('wordTitle');
-    const wordDisplay = document.getElementById('wordDisplay');
-    const keyboard = document.getElementById('keyboard');
-    const wordMessage = document.getElementById('wordMessage');
-    const nextWordBtn = document.getElementById('nextWordBtn');
-    const resetWordBtn = document.getElementById('resetWordBtn');
-    const drawParts = Array.from(document.querySelectorAll('.draw-part'));
-
-    function currentWord(){
-      return wordRounds[wordRound];
-    }
-
-    function renderWord(){
-      const round = currentWord();
-
-      roundText.textContent = `${wordRound + 1}/3`;
-      wrongText.textContent = `${wrongCount}/6`;
-      wordClue.textContent = 'Gợi ý: ' + round.clue;
-      wordTitle.textContent = wordFinished ? 'Hoàn thành cụm từ' : 'Đoán cụm từ khóa';
-
-      wordDisplay.innerHTML = '';
-
-      [...round.phrase].forEach(ch => {
-        if(ch === ' '){
-          const space = document.createElement('div');
-          space.className = 'letter-space';
-          wordDisplay.appendChild(space);
-        }else{
-          const box = document.createElement('div');
-          box.className = 'letter-box';
-          box.textContent = guessed.has(ch) || wordFinished ? ch : '';
-          wordDisplay.appendChild(box);
-        }
-      });
-
-      drawParts.forEach((part,index) => {
-        part.classList.toggle('show', index < wrongCount);
-      });
-
-      renderKeyboard();
-    }
-
-    function renderKeyboard(){
-      keyboard.innerHTML = '';
-
-      alphabet.forEach(letter => {
-        const btn = document.createElement('button');
-
-        btn.className = 'key';
-        btn.textContent = letter;
-        btn.disabled = guessed.has(letter) || wordFinished;
-
-        const phrase = currentWord().phrase;
-
-        if(guessed.has(letter)){
-          btn.classList.add(phrase.includes(letter) ? 'good' : 'bad');
-        }
-
-        btn.addEventListener('click', () => guessLetter(letter));
-        keyboard.appendChild(btn);
-      });
-    }
-
-    function guessLetter(letter){
-      if(wordFinished) return;
-
-      guessed.add(letter);
-
-      const phrase = currentWord().phrase;
-
-      if(phrase.includes(letter)){
-        wordMessage.textContent = `Đúng! Chữ ${letter} có trong cụm từ.`;
-      }else{
-        wrongCount++;
-        wordMessage.textContent = `Sai! Hệ thống vẽ thêm 1 nét kiểm soát. (${wrongCount}/6)`;
-      }
-
-      const solved = [...phrase].every(ch => ch === ' ' || guessed.has(ch));
-
-      if(solved){
-        wordFinished = true;
-        wordMessage.textContent =
-          wordRound === wordRounds.length - 1
-          ? 'Hoàn thành cả 3 cụm từ! Bạn đã ôn lại các ý chính của bài.'
-          : 'Đúng cụm từ! Bấm “Cụm tiếp theo” để tiếp tục.';
-
-        nextWordBtn.style.display = wordRound === wordRounds.length - 1 ? 'none' : 'inline-flex';
-      }else if(wrongCount >= 6){
-        wordFinished = true;
-        wordMessage.textContent = `Hết lượt sai. Cụm đúng là: ${phrase}. Bấm chơi lại hoặc sang cụm tiếp theo.`;
-        nextWordBtn.style.display = wordRound === wordRounds.length - 1 ? 'none' : 'inline-flex';
-      }
-
-      renderWord();
-    }
-
-    function nextWord(){
-      if(wordRound < wordRounds.length - 1){
-        wordRound++;
-        wrongCount = 0;
-        guessed = new Set();
-        wordFinished = false;
-        nextWordBtn.style.display = 'none';
-        wordMessage.textContent = 'Chọn chữ cái để đoán cụm từ mới.';
-        renderWord();
-      }
-    }
-
-    function resetWordGame(){
-      wordRound = 0;
-      wrongCount = 0;
-      guessed = new Set();
-      wordFinished = false;
-      nextWordBtn.style.display = 'none';
-      wordMessage.textContent = 'Chọn chữ cái để đoán cụm từ.';
-      renderWord();
-    }
-
-    nextWordBtn.addEventListener('click', nextWord);
-    resetWordBtn.addEventListener('click', resetWordGame);
-
-    resetWordGame();
-  </script>
+    </div>
+  </div>
+
+  <!-- Video -->
+  <div class="tab-content" id="video">
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/m2BqDM0cKXk" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Phân tích video -->
+  <div class="tab-content" id="analysis">
+    <div class="panel">
+      <p>
+        Trong triết học Mác – Lênin, để xác định giai cấp hay tầng lớp xã hội, Lênin nhấn mạnh xét địa vị trong hệ thống sản xuất,
+        quan hệ với tư liệu sản xuất và cách hưởng thụ phần của cải xã hội. 
+      </p>
+      <p>
+        Tài xế công nghệ là “người làm thuê kiểu mới”: không quyết định giá cước, bị kiểm soát bởi thuật toán nền tảng,
+        thu nhập phụ thuộc nền tảng, giá trị thặng dư chủ yếu nền tảng thu về.
+      </p>
+      <p>
+        Hành động “tắt ứng dụng tập thể” là đấu tranh giai cấp hiện đại: phản ánh mâu thuẫn lợi ích lao động – tư bản công nghệ.
+      </p>
+    </div>
+    <img src="cuộc_đấu_tranh_trong_kinh_tế_nền_tảng.png" class="slide-img">
+  </div>
+
+  <!-- Mini game -->
+  <div class="tab-content" id="game">
+    <div class="game-container">
+      <h2>Mini game: Đoán 3 cụm từ khóa</h2>
+      <p>Đoán 3 cụm từ khóa sau khi xem video và phân tích. Mỗi lần sai, hệ thống sẽ vẽ thêm một nét “nền tảng kiểm soát”.</p>
+      <!-- Game code sẽ chèn ở đây -->
+    </div>
+  </div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btns button');
+const contents = document.querySelectorAll('.tab-content');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', ()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+
+    contents.forEach(c=>c.classList.remove('active'));
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
