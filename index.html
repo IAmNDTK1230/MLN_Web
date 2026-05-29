@@ -390,6 +390,44 @@
       font-weight:600;
     }
 
+    .quick-def-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin:22px 0 18px;
+    }
+
+    .quick-def{
+      border-radius:28px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.88);
+      padding:18px;
+      box-shadow:0 16px 44px rgba(23,32,51,.08);
+    }
+
+    .quick-def .mini-label{
+      display:inline-flex;
+      border-radius:999px;
+      padding:6px 10px;
+      background:#eff6ff;
+      color:#1d4ed8;
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .quick-def b{
+      display:block;
+      color:#0f172a;
+      margin-bottom:8px;
+      font-size:18px;
+    }
+
+    .quick-def p{
+      font-size:14.5px;
+      line-height:1.55;
+    }
+
     .panel{
       border-radius:34px;
       background:rgba(255,255,255,.72);
@@ -992,7 +1030,7 @@
         white-space:nowrap;
       }
 
-      .hero-grid,.story-layout,.analysis-grid,.word-body,.concept-grid,.compare-grid{
+      .hero-grid,.story-layout,.analysis-grid,.word-body,.concept-grid,.compare-grid,.quick-def-grid{
         grid-template-columns:1fr;
       }
 
@@ -1088,7 +1126,26 @@
             <div class="kicker">I · Kiến thức nền</div>
             <h2>Muốn phân tích tình huống này cần hiểu 3 khái niệm</h2>
           </div>
-          <p>Không chỉ học định nghĩa, phần này giúp nối lý thuyết Mác – Lênin với câu chuyện tài xế công nghệ.</p>
+        </div>
+
+        <div class="quick-def-grid">
+          <div class="quick-def">
+            <span class="mini-label">Định nghĩa ngắn</span>
+            <b>Giai cấp</b>
+            <p>Là những tập đoàn người khác nhau về địa vị trong hệ thống sản xuất xã hội, quan hệ với tư liệu sản xuất, vai trò tổ chức lao động và phần của cải được hưởng.</p>
+          </div>
+
+          <div class="quick-def">
+            <span class="mini-label">Định nghĩa ngắn</span>
+            <b>Đấu tranh giai cấp</b>
+            <p>Là sự căng thẳng hoặc đối kháng giữa các nhóm xã hội do mâu thuẫn về lợi ích kinh tế, xã hội và địa vị trong sản xuất.</p>
+          </div>
+
+          <div class="quick-def">
+            <span class="mini-label">Ví dụ lịch sử</span>
+            <b>Luddites thế kỷ XIX</b>
+            <p>Là phong trào công nhân Anh phản đối việc máy móc bị chủ xưởng dùng để thay lao động, giảm tiền công và phá vỡ sinh kế.</p>
+          </div>
         </div>
 
         <div class="panel active">
@@ -1310,7 +1367,6 @@
             <div class="kicker">V · Tắt app và so sánh lịch sử</div>
             <h2>Tắt ứng dụng tập thể có phải đấu tranh giai cấp hiện đại?</h2>
           </div>
-          <p>Phần này nối tình huống tài xế công nghệ với phong trào Luddites thế kỷ XIX.</p>
         </div>
 
         <div class="tabs">
@@ -1368,7 +1424,7 @@
             <div class="kicker">VI · Ôn tập tương tác</div>
             <h2>Bạn đã hiểu vấn đề chưa?</h2>
           </div>
-          <p>Đoán 3 cụm từ khóa sau khi đã xem video và phân tích. Mỗi lần sai, hệ thống sẽ vẽ thêm một nét “nền tảng kiểm soát”.</p>
+          <p>Cách chơi: chọn từng chữ cái để đoán 3 cụm từ khóa của bài. Mỗi lần đoán sai sẽ xuất hiện thêm một nét vẽ. Đoán đúng cụm từ để chuyển sang vòng tiếp theo.</p>
         </div>
 
         <div class="word-game">
