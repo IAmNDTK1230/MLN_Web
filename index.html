@@ -22,7 +22,6 @@
       --yellow:#facc15;
       --line:rgba(20,33,61,.12);
       --shadow:0 24px 70px rgba(20,33,61,.14);
-      --glass:rgba(255,255,255,.74);
     }
 
     *{box-sizing:border-box}
@@ -390,44 +389,6 @@
       font-weight:600;
     }
 
-    .quick-def-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin:22px 0 18px;
-    }
-
-    .quick-def{
-      border-radius:28px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(255,255,255,.88);
-      padding:18px;
-      box-shadow:0 16px 44px rgba(23,32,51,.08);
-    }
-
-    .quick-def .mini-label{
-      display:inline-flex;
-      border-radius:999px;
-      padding:6px 10px;
-      background:#eff6ff;
-      color:#1d4ed8;
-      font-size:12px;
-      font-weight:900;
-      margin-bottom:10px;
-    }
-
-    .quick-def b{
-      display:block;
-      color:#0f172a;
-      margin-bottom:8px;
-      font-size:18px;
-    }
-
-    .quick-def p{
-      font-size:14.5px;
-      line-height:1.55;
-    }
-
     .panel{
       border-radius:34px;
       background:rgba(255,255,255,.72);
@@ -486,6 +447,38 @@
       padding-left:20px;
       color:var(--muted);
       line-height:1.65;
+    }
+
+    .mini-tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:4px 0 16px;
+    }
+
+    .mini-tab{
+      border:0;
+      border-radius:999px;
+      padding:10px 14px;
+      font-family:inherit;
+      font-weight:900;
+      cursor:pointer;
+      background:#fff;
+      color:#475569;
+      border:1px solid var(--line);
+    }
+
+    .mini-tab.active{
+      background:#0f172a;
+      color:#fff;
+    }
+
+    .mini-panel{
+      display:none;
+    }
+
+    .mini-panel.active{
+      display:block;
     }
 
     .concept-grid{
@@ -1030,7 +1023,7 @@
         white-space:nowrap;
       }
 
-      .hero-grid,.story-layout,.analysis-grid,.word-body,.concept-grid,.compare-grid,.quick-def-grid{
+      .hero-grid,.story-layout,.analysis-grid,.word-body,.concept-grid,.compare-grid{
         grid-template-columns:1fr;
       }
 
@@ -1128,49 +1121,42 @@
           </div>
         </div>
 
-        <div class="quick-def-grid">
-          <div class="quick-def">
-            <span class="mini-label">Định nghĩa ngắn</span>
-            <b>Giai cấp</b>
-            <p>Là những tập đoàn người khác nhau về địa vị trong hệ thống sản xuất xã hội, quan hệ với tư liệu sản xuất, vai trò tổ chức lao động và phần của cải được hưởng.</p>
-          </div>
-
-          <div class="quick-def">
-            <span class="mini-label">Định nghĩa ngắn</span>
-            <b>Đấu tranh giai cấp</b>
-            <p>Là sự căng thẳng hoặc đối kháng giữa các nhóm xã hội do mâu thuẫn về lợi ích kinh tế, xã hội và địa vị trong sản xuất.</p>
-          </div>
-
-          <div class="quick-def">
-            <span class="mini-label">Ví dụ lịch sử</span>
-            <b>Luddites thế kỷ XIX</b>
-            <p>Là phong trào công nhân Anh phản đối việc máy móc bị chủ xưởng dùng để thay lao động, giảm tiền công và phá vỡ sinh kế.</p>
-          </div>
-        </div>
-
         <div class="panel active">
           <button type="button">
             1. Giai cấp là gì?
             <span>＋</span>
           </button>
+
           <div class="panel-content">
-            <div class="concept-grid">
-              <div class="concept-card">
-                <b>Ai sở hữu tư liệu sản xuất?</b>
-                <p>Trong nền tảng số, không chỉ có xe mà còn có app, dữ liệu và thuật toán.</p>
-              </div>
-              <div class="concept-card">
-                <b>Ai tổ chức lao động?</b>
-                <p>Người lao động có tự quyết hay bị hệ thống điều phối, đánh giá, khóa tài khoản?</p>
-              </div>
-              <div class="concept-card">
-                <b>Ai hưởng phần lớn của cải?</b>
-                <p>Phần giá trị tạo ra được chia thế nào giữa người chạy xe và nền tảng?</p>
+            <div class="mini-tabs">
+              <button class="mini-tab active" data-mini="class-def">Định nghĩa</button>
+              <button class="mini-tab" data-mini="class-apply">Câu hỏi áp dụng</button>
+            </div>
+
+            <div class="mini-panel active" id="class-def">
+              <p>
+                Theo quan điểm Mác – Lênin, giai cấp là những tập đoàn người khác nhau về địa vị trong một hệ thống sản xuất xã hội nhất định. Sự khác nhau đó thể hiện ở quan hệ của họ đối với tư liệu sản xuất, vai trò trong tổ chức lao động xã hội và cách thức hưởng thụ phần của cải xã hội.
+              </p>
+            </div>
+
+            <div class="mini-panel" id="class-apply">
+              <div class="concept-grid">
+                <div class="concept-card">
+                  <b>Ai sở hữu tư liệu sản xuất?</b>
+                  <p>Trong kinh tế nền tảng, cần hỏi ai nắm app, dữ liệu, thuật toán và hệ thống phân phối khách hàng.</p>
+                </div>
+
+                <div class="concept-card">
+                  <b>Ai tổ chức lao động?</b>
+                  <p>Tài xế có tự quyết quá trình làm việc hay bị app điều phối, đánh giá và khóa tài khoản?</p>
+                </div>
+
+                <div class="concept-card">
+                  <b>Ai hưởng phần lớn của cải?</b>
+                  <p>Giá trị từ mỗi cuốc xe được chia thế nào giữa tài xế và nền tảng sau khi trừ chiết khấu?</p>
+                </div>
               </div>
             </div>
-            <p>
-              Theo quan điểm Mác – Lênin, giai cấp là những tập đoàn người khác nhau về địa vị trong một hệ thống sản xuất xã hội nhất định. Sự khác nhau đó thể hiện ở quan hệ với tư liệu sản xuất, vai trò trong tổ chức lao động xã hội và cách họ hưởng phần của cải xã hội.
-            </p>
           </div>
         </div>
 
@@ -1179,15 +1165,37 @@
             2. Đấu tranh giai cấp là gì?
             <span>＋</span>
           </button>
+
           <div class="panel-content">
-            <p>
-              Đấu tranh giai cấp là sự căng thẳng, đối kháng hoặc xung đột giữa các nhóm xã hội có lợi ích kinh tế – xã hội khác nhau. Trong tình huống nền tảng gọi xe, mâu thuẫn nằm ở lợi ích giữa tài xế và app.
-            </p>
-            <ul>
-              <li>Nền tảng muốn tăng chiết khấu để tối đa hóa lợi nhuận.</li>
-              <li>Tài xế muốn giữ thu nhập và điều kiện lao động ổn định.</li>
-              <li>Khi lợi ích đối lập, hành động tập thể có thể xuất hiện.</li>
-            </ul>
+            <div class="mini-tabs">
+              <button class="mini-tab active" data-mini="struggle-def">Định nghĩa</button>
+              <button class="mini-tab" data-mini="struggle-apply">Câu hỏi áp dụng</button>
+            </div>
+
+            <div class="mini-panel active" id="struggle-def">
+              <p>
+                Đấu tranh giai cấp là sự căng thẳng, đối kháng hoặc xung đột giữa các giai cấp, tầng lớp xã hội có lợi ích kinh tế – xã hội khác nhau. Nó xuất hiện khi lợi ích của các nhóm người trong xã hội mâu thuẫn với nhau.
+              </p>
+            </div>
+
+            <div class="mini-panel" id="struggle-apply">
+              <div class="concept-grid">
+                <div class="concept-card">
+                  <b>Nền tảng muốn gì?</b>
+                  <p>Tăng chiết khấu, kiểm soát giá cước và tối đa hóa lợi nhuận từ hệ thống.</p>
+                </div>
+
+                <div class="concept-card">
+                  <b>Tài xế muốn gì?</b>
+                  <p>Giữ thu nhập, điều kiện lao động ổn định và quyền chủ động trong công việc.</p>
+                </div>
+
+                <div class="concept-card">
+                  <b>Mâu thuẫn nằm ở đâu?</b>
+                  <p>Hai bên cùng tham gia tạo ra dịch vụ, nhưng quyền kiểm soát và phân chia lợi ích không ngang nhau.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1533,6 +1541,26 @@
       const button = panel.querySelector('button');
       button.addEventListener('click', () => {
         panel.classList.toggle('active');
+      });
+    });
+
+    const miniTabs = document.querySelectorAll('.mini-tab');
+
+    miniTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const parent = tab.closest('.panel-content');
+        const target = parent.querySelector(`#${tab.dataset.mini}`);
+
+        parent.querySelectorAll('.mini-tab').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        parent.querySelectorAll('.mini-panel').forEach(panel => {
+          panel.classList.remove('active');
+        });
+
+        tab.classList.add('active');
+        target.classList.add('active');
       });
     });
 
