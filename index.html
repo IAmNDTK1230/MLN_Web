@@ -611,120 +611,27 @@
       margin-bottom:2px;
     }
 
-    .mock-visual{
-      position:relative;
-      min-height:430px;
+    .situation-photo-card{
       border-radius:34px;
       overflow:hidden;
-      background:linear-gradient(135deg,#eff6ff,#fff7ed 52%,#f5f3ff);
+      background:rgba(255,255,255,.82);
       border:1px solid rgba(255,255,255,.9);
       box-shadow:0 20px 58px rgba(23,32,51,.16);
-      padding:24px;
-      display:grid;
-      align-content:center;
-      justify-items:center;
-      gap:16px;
     }
 
-    .mock-visual::before{
-      content:"";
-      position:absolute;
-      right:-48px;
-      bottom:-60px;
-      width:190px;
-      height:190px;
-      border-radius:50%;
-      background:rgba(249,115,22,.16);
+    .situation-photo-card img{
+      display:block;
+      width:100%;
+      height:430px;
+      object-fit:cover;
     }
 
-    .mock-visual::after{
-      content:"";
-      position:absolute;
-      left:-42px;
-      top:-42px;
-      width:170px;
-      height:170px;
-      border-radius:46% 54% 48% 52%;
-      background:rgba(37,99,235,.14);
-    }
-
-    .mock-phone{
-      width:min(315px,92%);
-      border-radius:30px;
-      background:#fff;
-      border:1px solid var(--line);
-      box-shadow:0 22px 56px rgba(23,32,51,.14);
-      padding:18px;
-      position:relative;
-      z-index:1;
-    }
-
-    .phone-top{
-      width:74px;
-      height:8px;
-      border-radius:99px;
-      background:#dbeafe;
-      margin:0 auto 16px;
-    }
-
-    .income-title{
-      color:#64748b;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .income-number{
-      font-size:36px;
-      font-weight:900;
-      color:#0f172a;
-      margin:6px 0 14px;
-    }
-
-    .income-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 0;
-      border-top:1px solid var(--line);
+    .photo-note{
+      padding:15px 18px;
       font-size:14px;
+      line-height:1.55;
       color:#475569;
-    }
-
-    .income-row b{
-      color:#0f172a;
-    }
-
-    .income-row.danger b{
-      color:var(--red);
-    }
-
-    .income-alert{
-      margin-top:12px;
-      border-radius:18px;
-      background:#fff1f2;
-      color:#be123c;
-      padding:11px 12px;
-      font-weight:850;
-      font-size:13px;
-    }
-
-    .rider-group{
-      display:flex;
-      gap:12px;
-      position:relative;
-      z-index:1;
-    }
-
-    .rider{
-      width:62px;
-      height:62px;
-      border-radius:24px;
-      background:#fff;
-      display:grid;
-      place-items:center;
-      font-size:30px;
-      box-shadow:0 14px 34px rgba(23,32,51,.12);
-      border:1px solid rgba(255,255,255,.86);
+      background:rgba(255,255,255,.94);
     }
 
     .video-shell{
@@ -1082,6 +989,10 @@
         height:42vh;
       }
 
+      .situation-photo-card img{
+        height:260px;
+      }
+
       .word-top{
         display:grid;
       }
@@ -1387,60 +1298,64 @@
       <div class="wrap story-layout">
         <div>
           <div class="kicker">II · Tình huống</div>
-          <h2>Nền tảng gọi xe X gọi tài xế là “đối tác”</h2>
+          <h2>Liệu tài xế xe ôm công nghệ được xem là “người làm chủ” hay “người làm thuê kiểu mới”?</h2>
+
           <p class="lead">
-            Bề ngoài, tài xế có xe riêng, tự chọn giờ làm và không bị quản lý trực tiếp như công nhân trong nhà máy.
-            Nhưng trong thực tế, app mới là nơi quyết định nhiều điều kiện lao động quan trọng.
+            Tài xế công nghệ có vẻ độc lập vì họ sở hữu phương tiện và tự chọn thời gian làm việc.
+            Tuy nhiên, quá trình lao động của họ lại chịu sự chi phối mạnh từ nền tảng công nghệ.
           </p>
 
           <div class="case-list">
             <div class="case-item">
               <div class="case-dot">1</div>
               <div>
-                <strong>Không tự định giá</strong>
-                <p>Giá cước do thuật toán và chính sách nền tảng quyết định.</p>
+                <strong>Tài xế sở hữu phương tiện làm việc</strong>
+                <p>Họ thường dùng xe máy hoặc ô tô cá nhân để tham gia chạy dịch vụ.</p>
               </div>
             </div>
 
             <div class="case-item">
               <div class="case-dot">2</div>
               <div>
-                <strong>Bị điều phối bằng app</strong>
-                <p>Ứng dụng kiểm soát phân phối cuốc, điểm đánh giá và tỷ lệ hủy.</p>
+                <strong>Tài xế được quyết định giờ giấc làm việc</strong>
+                <p>Họ có thể bật hoặc tắt ứng dụng, chọn thời điểm tham gia lao động.</p>
               </div>
             </div>
 
             <div class="case-item">
               <div class="case-dot">3</div>
               <div>
-                <strong>Phụ thuộc tài khoản</strong>
-                <p>Bị khóa tài khoản nghĩa là mất khả năng lao động trên nền tảng.</p>
+                <strong>Công ty quy định mức chiết khấu</strong>
+                <p>Một phần doanh thu từ mỗi cuốc xe bị nền tảng trích lại theo chính sách của công ty.</p>
               </div>
             </div>
 
             <div class="case-item">
               <div class="case-dot">4</div>
               <div>
-                <strong>Bị trích chiết khấu</strong>
-                <p>Một phần doanh thu, ví dụ 30%, thuộc về nền tảng.</p>
+                <strong>Nền tảng công ty phân phối cuốc xe</strong>
+                <p>Tài xế không tự kiểm soát hoàn toàn nguồn khách, mà phụ thuộc vào thuật toán phân phối của ứng dụng.</p>
+              </div>
+            </div>
+
+            <div class="case-item">
+              <div class="case-dot">5</div>
+              <div>
+                <strong>Nền tảng quy định mức thưởng và điều lệ</strong>
+                <p>Mức thưởng, điều kiện hoạt động và đánh giá tài xế phụ thuộc vào chính sách app và phản hồi của khách hàng.</p>
               </div>
             </div>
           </div>
+
+          <div class="quote">
+            Khi mức chiết khấu bị tăng lên, rất nhiều tài xế công nghệ đồng loạt đình công do không nhận được mức lợi nhuận như trước nhằm phản đối quyết định của công ty.
+          </div>
         </div>
 
-        <div class="mock-visual">
-          <div class="mock-phone">
-            <div class="phone-top"></div>
-            <div class="income-title">Thu nhập hôm nay</div>
-            <div class="income-number">152.000đ</div>
-            <div class="income-row"><span>Cước phí</span><b>220.000đ</b></div>
-            <div class="income-row danger"><span>Chiết khấu app</span><b>-66.000đ</b></div>
-            <div class="income-alert">Hoa hồng nền tảng tăng lên 30%</div>
-          </div>
-          <div class="rider-group">
-            <div class="rider">🛵</div>
-            <div class="rider">📱</div>
-            <div class="rider">👥</div>
+        <div class="situation-photo-card">
+          <img src="./images/tai-xe-cong.png" alt="Tài xế công nghệ trong tình huống lao động nền tảng">
+          <div class="photo-note">
+            Tình huống trung tâm: tài xế có phương tiện riêng nhưng phụ thuộc vào nền tảng trong việc nhận cuốc, hưởng thu nhập và chịu chiết khấu.
           </div>
         </div>
       </div>
@@ -1453,12 +1368,12 @@
             <div class="kicker">III · Video tình huống</div>
             <h2>Từ cuốc xe đến hành động tắt app</h2>
           </div>
-          <p>Video minh họa tình huống: tài xế chạy qua app, bị tăng chiết khấu 30%, rồi cùng tắt ứng dụng để phản đối.</p>
+          <p>Video minh họa tình huống: tài xế chạy qua app, bị tăng chiết khấu, rồi cùng tắt ứng dụng để phản đối.</p>
         </div>
 
         <div class="video-shell">
           <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/m2BqDM0cKXk" title="Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/dx1c-FbZOs0" title="Tài xế công nghệ: Đối tác hay người làm thuê kiểu mới" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
       </div>
