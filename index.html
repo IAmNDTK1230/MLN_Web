@@ -390,6 +390,39 @@
       font-weight:600;
     }
 
+    .theory-page-tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:0 0 18px;
+    }
+
+    .theory-page-btn{
+      border:0;
+      border-radius:999px;
+      padding:11px 16px;
+      font-family:inherit;
+      font-weight:900;
+      cursor:pointer;
+      color:#334155;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:0 12px 30px rgba(23,32,51,.06);
+    }
+
+    .theory-page-btn.active{
+      background:#0f172a;
+      color:#fff;
+    }
+
+    .theory-page{
+      display:none;
+    }
+
+    .theory-page.active{
+      display:block;
+    }
+
     .panel{
       border-radius:34px;
       background:rgba(255,255,255,.72);
@@ -428,7 +461,8 @@
       transition:.2s;
     }
 
-    .panel.active button span{
+    .panel.active > button span,
+    .nested-panel.active > button span{
       transform:rotate(45deg);
       background:#fff1f2;
       color:var(--red);
@@ -439,7 +473,8 @@
       padding:0 24px 24px;
     }
 
-    .panel.active .panel-content{
+    .panel.active > .panel-content,
+    .nested-panel.active > .panel-content{
       display:block;
     }
 
@@ -448,6 +483,18 @@
       padding-left:20px;
       color:var(--muted);
       line-height:1.65;
+    }
+
+    .nested-panel{
+      box-shadow:none;
+      margin-top:12px;
+      border-radius:26px;
+      background:rgba(255,255,255,.58);
+    }
+
+    .nested-panel > button{
+      font-size:17px;
+      padding:18px 20px;
     }
 
     .theory-block{
@@ -474,17 +521,6 @@
       font-size:14.5px;
       line-height:1.65;
       color:#475569;
-    }
-
-    .form-tag{
-      display:inline-flex;
-      border-radius:999px;
-      padding:6px 10px;
-      background:#fff7ed;
-      color:#c2410c;
-      font-size:12px;
-      font-weight:900;
-      margin-bottom:10px;
     }
 
     .concept-grid{
@@ -1061,6 +1097,10 @@
       .section-head{
         display:grid;
       }
+
+      .time-item{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
@@ -1123,133 +1163,220 @@
         <div class="section-head">
           <div>
             <div class="kicker">I · Kiến thức nền</div>
-            <h2>Muốn phân tích tình huống này cần hiểu 3 khái niệm</h2>
+            <h2>Giai cấp, đấu tranh giai cấp và dân tộc</h2>
           </div>
         </div>
 
-        <div class="panel active">
-          <button type="button">
-            1. Giai cấp là gì?
-            <span>＋</span>
-          </button>
+        <div class="theory-page-tabs">
+          <button class="theory-page-btn active" data-theory-page="theory-page-1">Phần 1 · Giai cấp</button>
+          <button class="theory-page-btn" data-theory-page="theory-page-2">Phần 2 · Đấu tranh giai cấp & dân tộc</button>
+        </div>
 
-          <div class="panel-content">
-            <div class="theory-block">
-              <div class="theory-label">Định nghĩa kinh điển của V.I. Lênin</div>
-              <p class="small-theory">
-                Trong tác phẩm <b>“Sáng kiến vĩ đại”</b>, Lênin cho rằng giai cấp là những tập đoàn người to lớn,
-                khác nhau về địa vị trong một hệ thống sản xuất xã hội nhất định trong lịch sử; khác nhau về quan hệ
-                đối với tư liệu sản xuất, vai trò trong tổ chức lao động xã hội, và do đó khác nhau về phương thức
-                hưởng thụ cũng như phần sản phẩm xã hội mà họ được hưởng.
-              </p>
-            </div>
+        <div class="theory-page active" id="theory-page-1">
+          <div class="panel active">
+            <button type="button">
+              1. Giai cấp là gì?
+              <span>＋</span>
+            </button>
 
-            <div class="concept-grid">
-              <div class="concept-card">
-                <b>Bản chất của giai cấp</b>
-                <p>
-                  Bản chất của giai cấp nằm ở sự phân chia trong quan hệ sản xuất, trong đó cốt lõi là
-                  quan hệ sở hữu đối với tư liệu sản xuất.
+            <div class="panel-content">
+              <div class="theory-block">
+                <div class="theory-label">Khái niệm</div>
+                <p class="small-theory">
+                  Giai cấp là những tập đoàn người có địa vị kinh tế - xã hội khác nhau trong một hệ thống sản xuất xã hội nhất định trong lịch sử. Giai cấp là những tập đoàn người mà tập đoàn này có thể chiếm đoạt lao động của tập đoàn khác, do các tập đoàn đó có địa vị khác nhau trong một chế độ kinh tế - xã hội nhất định.
                 </p>
               </div>
 
-              <div class="concept-card">
-                <b>Giai cấp tư sản số</b>
-                <p>
-                  Nắm giữ các tư liệu sản xuất phi vật chất quan trọng như thuật toán, máy chủ đám mây,
-                  hạ tầng phần mềm và cơ sở dữ liệu lớn.
-                </p>
+              <div class="panel nested-panel active">
+                <button type="button">
+                  1.1. Giai cấp thống trị và giai cấp bị thống trị
+                  <span>＋</span>
+                </button>
+
+                <div class="panel-content">
+                  <div class="compare-grid">
+                    <div class="compare-card">
+                      <h3>Giai cấp thống trị</h3>
+                      <p>
+                        Là giai cấp nắm trong tay quyền sở hữu về tư liệu sản xuất. Dựa trên ưu thế đó, giai cấp thống trị có khả năng chèn ép, áp bức các giai cấp còn lại và chi phối xã hội.
+                      </p>
+                      <p>
+                        Ví dụ: những người có nhiều ruộng đất cho người khác thuê được gọi là giai cấp địa chủ.
+                      </p>
+                    </div>
+
+                    <div class="compare-card">
+                      <h3>Giai cấp bị thống trị</h3>
+                      <p>
+                        Là những người không sở hữu hoặc sở hữu rất ít tư liệu sản xuất, phải lao động phụ thuộc vào giai cấp thống trị, thường bị chèn ép và bóc lột.
+                      </p>
+                      <p>
+                        Ví dụ: những người làm thuê hoặc canh tác ruộng đất cho người khác được gọi là nông dân.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="concept-card">
-                <b>Giai cấp vô sản số</b>
-                <p>
-                  Gồm những lao động không sở hữu nền tảng, buộc phải bán sức lao động thông qua ứng dụng
-                  để nhận phí dịch vụ, như tài xế công nghệ hoặc lao động gig.
-                </p>
+              <div class="panel nested-panel">
+                <button type="button">
+                  1.2. Giai cấp trong chế độ chiếm hữu nô lệ
+                  <span>＋</span>
+                </button>
+
+                <div class="panel-content">
+                  <div class="compare-grid">
+                    <div class="compare-card">
+                      <h3>Chủ nô và nô lệ ở phương Tây</h3>
+                      <p>
+                        Nô lệ bị coi là tài sản thuộc về chủ nô. Chủ nô có quyền bóc lột sức lao động, mua bán, thậm chí quyết định sinh mạng của nô lệ.
+                      </p>
+                    </div>
+
+                    <div class="compare-card">
+                      <h3>Nô lệ ở phương Đông</h3>
+                      <p>
+                        Nô lệ không phải lực lượng sản xuất chính mà chủ yếu làm công việc gia đình. Do đó, mâu thuẫn giữa chủ nô và nô lệ không sâu sắc như ở phương Tây.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel nested-panel">
+                <button type="button">
+                  1.3. Giai cấp trong chế độ phong kiến
+                  <span>＋</span>
+                </button>
+
+                <div class="panel-content">
+                  <div class="compare-grid">
+                    <div class="compare-card">
+                      <h3>Phương Đông</h3>
+                      <p>
+                        Địa chủ sở hữu ruộng đất, nông dân lĩnh canh nhận ruộng để canh tác và phải nộp địa tô. Địa chủ không trực tiếp nắm toàn bộ quyền lực chính trị như lãnh chúa phương Tây.
+                      </p>
+                    </div>
+
+                    <div class="compare-card">
+                      <h3>Phương Tây</h3>
+                      <p>
+                        Lãnh chúa có quyền lực rất lớn về ruộng đất, đặt ra nhiều loại tô thuế. Nông nô sống phụ thuộc, nghèo khổ, phải nộp tô thuế nặng nề và làm nhiều công việc phục vụ lãnh chúa.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel nested-panel">
+                <button type="button">
+                  1.4. Giai cấp trong chế độ tư bản chủ nghĩa
+                  <span>＋</span>
+                </button>
+
+                <div class="panel-content">
+                  <div class="compare-grid">
+                    <div class="compare-card">
+                      <h3>Giai cấp tư sản</h3>
+                      <p>
+                        Là giai cấp sở hữu tư liệu sản xuất, thường gồm chủ xưởng, chủ đồn điền, thương nhân giàu có và những người nắm nhiều quyền lực kinh tế. Nhờ sở hữu tư liệu sản xuất, họ có khả năng chi phối và áp bức các giai cấp khác.
+                      </p>
+                    </div>
+
+                    <div class="compare-card">
+                      <h3>Giai cấp vô sản</h3>
+                      <p>
+                        Là những người không sở hữu tư liệu sản xuất chủ yếu, phải bán sức lao động để sống. Trong đó, giai cấp công nhân là lực lượng tiêu biểu, thường làm việc nặng nhọc nhưng tiền lương thấp.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="quote">
+                    Liên hệ với tài xế công nghệ: tài xế có phương tiện cá nhân như xe máy, ô tô, nhưng không sở hữu nền tảng số, thuật toán, dữ liệu khách hàng và cơ chế phân phối cuốc xe.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="panel">
-          <button type="button">
-            2. Đấu tranh giai cấp là gì?
-            <span>＋</span>
-          </button>
+        <div class="theory-page" id="theory-page-2">
+          <div class="panel active">
+            <button type="button">
+              2. Đấu tranh giai cấp là gì?
+              <span>＋</span>
+            </button>
 
-          <div class="panel-content">
-            <div class="theory-block">
-              <div class="theory-label">Định nghĩa</div>
-              <p class="small-theory">
-                Theo lý thuyết Mác – Lênin, đấu tranh giai cấp là cuộc đấu tranh giữa các giai cấp có lợi ích
-                căn bản đối lập nhau, không thể điều hòa được. Đây là động lực phát triển trực tiếp của các xã hội
-                có giai cấp đối kháng.
-              </p>
-            </div>
-
-            <div class="concept-grid">
-              <div class="concept-card">
-                <span class="form-tag">Hình thức 1</span>
-                <b>Đấu tranh kinh tế</b>
-                <p>
-                  Đòi tăng lương, giảm giờ làm, cải thiện điều kiện lao động thông qua bãi công, đình công.
+            <div class="panel-content">
+              <div class="theory-block">
+                <div class="theory-label">Định nghĩa của V.I. Lênin</div>
+                <p class="small-theory">
+                  V.I. Lênin định nghĩa đấu tranh giai cấp là “cuộc đấu tranh của quần chúng bị tước quyền, bị áp bức, và lao động, chống bọn có đặc quyền, đặc lợi, bọn áp bức và ăn bám; cuộc đấu tranh của những người công nhân làm thuê hay những người vô sản chống những người hữu sản hay giai cấp tư sản”.
                 </p>
               </div>
 
-              <div class="concept-card">
-                <span class="form-tag">Hình thức 2</span>
-                <b>Đấu tranh chính trị</b>
-                <p>
-                  Hình thức cao nhất, nhằm giành chính quyền về tay giai cấp vô sản và xóa bỏ chế độ áp bức.
-                </p>
+              <div class="concept-grid">
+                <div class="concept-card">
+                  <b>Thực chất</b>
+                  <p>
+                    Là cuộc đấu tranh giải quyết mâu thuẫn về lợi ích giữa quần chúng bị áp bức, người vô sản, người đi làm thuê với giai cấp thống trị, đặc quyền, đặc lợi và bóc lột.
+                  </p>
+                </div>
+
+                <div class="concept-card">
+                  <b>Nguyên nhân khách quan</b>
+                  <p>
+                    Xuất phát từ sự phát triển xã hội hóa ngày càng sâu rộng của lực lượng sản xuất, trong khi tư liệu sản xuất lại bị chiếm hữu tư nhân.
+                  </p>
+                </div>
+
+                <div class="concept-card">
+                  <b>Biểu hiện xã hội</b>
+                  <p>
+                    Là mâu thuẫn giữa giai cấp cách mạng, tiến bộ, đại diện cho phương thức sản xuất mới với giai cấp thống trị, bóc lột, gắn với quan hệ sản xuất lỗi thời.
+                  </p>
+                </div>
               </div>
 
-              <div class="concept-card">
-                <span class="form-tag">Hình thức 3</span>
-                <b>Đấu tranh tư tưởng</b>
-                <p>
-                  Giải phóng tư tưởng giai cấp lao động khỏi hệ tư tưởng tư sản, truyền bá chủ nghĩa Mác – Lênin.
-                </p>
+              <div class="quote">
+                Liên hệ với tình huống: khi nền tảng tăng chiết khấu để tối đa hóa lợi nhuận, còn tài xế tắt app để bảo vệ thu nhập, đó là biểu hiện của mâu thuẫn lợi ích trong kinh tế nền tảng.
               </div>
-            </div>
-
-            <div class="quote">
-              Trong kỷ nguyên số, mâu thuẫn giai cấp thể hiện qua việc chủ nền tảng dùng thuật toán điều phối
-              để tối đa hóa thặng dư, trong khi tài xế bị tăng chiết khấu nhưng thiếu các phúc lợi xã hội căn bản
-              như bảo hiểm, công đoàn chính thức và quyền thương lượng tập thể.
             </div>
           </div>
-        </div>
 
-        <div class="panel">
-          <button type="button">
-            3. Phong trào Luddites thế kỷ XIX
-            <span>＋</span>
-          </button>
-          <div class="panel-content">
-            <p>
-              Phong trào Luddites ở Anh diễn ra mạnh khoảng 1811–1816, gắn với thợ dệt, thợ kéo sợi và lao động thủ công.
-              Họ phản đối việc chủ xưởng dùng máy móc mới để thay thế lao động lành nghề, giảm tiền công và làm nhiều người mất việc.
-            </p>
+          <div class="panel">
+            <button type="button">
+              3. Dân tộc là gì?
+              <span>＋</span>
+            </button>
 
-            <div class="timeline">
-              <div class="time-item">
-                <div class="time-year">1811</div>
-                <p>Máy móc mới được đưa vào các xưởng dệt, làm thay đổi quan hệ lao động.</p>
+            <div class="panel-content">
+              <div class="theory-block">
+                <div class="theory-label">Khái niệm dân tộc</div>
+                <p class="small-theory">
+                  Theo quan điểm của chủ nghĩa Mác – Lênin, dân tộc là kết quả của quá trình phát triển lâu dài của xã hội loài người, trải qua các hình thức cộng đồng từ thấp đến cao như thị tộc, bộ lạc, bộ tộc và dân tộc. Sự biến đổi của phương thức sản xuất là nguyên nhân quyết định sự biến đổi của cộng đồng dân tộc.
+                </p>
               </div>
-              <div class="time-item">
-                <div class="time-year">1811–1816</div>
-                <p>Công nhân bí mật phá máy dệt, máy kéo sợi tại nhiều vùng ở Anh như Nottinghamshire, Yorkshire, Lancashire.</p>
-              </div>
-              <div class="time-item">
-                <div class="time-year">Sau đó</div>
-                <p>Chính quyền đàn áp mạnh, nhiều người bị bắt, xử tử hoặc lưu đày; phong trào dần suy yếu.</p>
-              </div>
-            </div>
 
-            <div class="quote">
-              Điểm quan trọng: họ không đơn giản là “ghét máy móc”, mà phản đối cách máy móc bị dùng để bóc lột lao động và phá vỡ sinh kế.
+              <div class="compare-grid">
+                <div class="compare-card">
+                  <h3>Ở phương Tây</h3>
+                  <p>
+                    Dân tộc xuất hiện khi phương thức sản xuất tư bản chủ nghĩa được xác lập, thay thế phương thức sản xuất phong kiến.
+                  </p>
+                </div>
+
+                <div class="compare-card">
+                  <h3>Ở phương Đông</h3>
+                  <p>
+                    Dân tộc được hình thành trên cơ sở nền văn hóa và tâm lý dân tộc đã phát triển tương đối chín muồi, cùng với một cộng đồng kinh tế đã đạt đến mức nhất định nhưng còn phân tán.
+                  </p>
+                </div>
+              </div>
+
+              <div class="quote">
+                Phần dân tộc giúp mở rộng nội dung của chương “Giai cấp và dân tộc”, nhưng trọng tâm tình huống tài xế công nghệ vẫn nằm ở vấn đề giai cấp và đấu tranh giai cấp.
+              </div>
             </div>
           </div>
         </div>
@@ -1565,8 +1692,22 @@
 
     panels.forEach(panel => {
       const button = panel.querySelector('button');
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
         panel.classList.toggle('active');
+      });
+    });
+
+    const theoryPageButtons = document.querySelectorAll('.theory-page-btn');
+    const theoryPages = document.querySelectorAll('.theory-page');
+
+    theoryPageButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        theoryPageButtons.forEach(btn => btn.classList.remove('active'));
+        theoryPages.forEach(page => page.classList.remove('active'));
+
+        button.classList.add('active');
+        document.getElementById(button.dataset.theoryPage).classList.add('active');
       });
     });
 
