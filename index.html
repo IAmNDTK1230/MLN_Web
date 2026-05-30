@@ -267,7 +267,15 @@
       font-size:38px;
       font-weight:900;
       transform:rotate(6deg);
-      box-shadow:0 14px 34px rgba(225,29,72,.28);
+      z-index:4;
+      text-shadow:0 2px 8px rgba(127,29,29,.24);
+      box-shadow:0 24px 52px rgba(225,29,72,.36), 0 0 0 8px rgba(255,255,255,.72);
+      animation:discountFloat 3.2s ease-in-out infinite;
+    }
+
+    @keyframes discountFloat{
+      0%,100%{transform:rotate(6deg) translateY(0)}
+      50%{transform:rotate(6deg) translateY(-7px)}
     }
 
     .phone{
@@ -293,48 +301,120 @@
     .map{
       height:46%;
       border-radius:26px;
-      background:linear-gradient(135deg,#7c2d12,#f97316);
+      background:
+        radial-gradient(circle at 18% 70%, rgba(132,204,22,.28), transparent 14%),
+        radial-gradient(circle at 88% 80%, rgba(132,204,22,.30), transparent 18%),
+        linear-gradient(135deg,#d9480f,#f97316 64%,#fb923c);
       position:relative;
       overflow:hidden;
       margin-bottom:14px;
     }
 
-    .map::before,.map::after{
+    .map::before{
       content:"";
       position:absolute;
-      height:9px;
-      border-radius:99px;
-      background:rgba(255,255,255,.32);
-    }
-
-    .map::before{
-      width:260px;
-      left:-42px;
-      top:72px;
-      transform:rotate(-18deg);
+      inset:0;
+      background:
+        linear-gradient(20deg, transparent 0 39%, rgba(255,248,225,.86) 39% 43%, transparent 43%),
+        linear-gradient(82deg, transparent 0 30%, rgba(255,248,225,.82) 30% 34%, transparent 34%),
+        linear-gradient(112deg, transparent 0 57%, rgba(255,248,225,.82) 57% 61%, transparent 61%),
+        linear-gradient(158deg, transparent 0 47%, rgba(255,248,225,.78) 47% 51%, transparent 51%),
+        linear-gradient(0deg, transparent 0 72%, rgba(255,248,225,.78) 72% 76%, transparent 76%);
+      opacity:.96;
     }
 
     .map::after{
-      width:220px;
-      right:-56px;
-      bottom:58px;
-      transform:rotate(22deg);
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 72%, rgba(101,163,13,.72) 0 8%, transparent 8.4%),
+        linear-gradient(135deg, rgba(132,204,22,.56), rgba(132,204,22,.18));
+      clip-path:polygon(0 52%, 24% 45%, 32% 73%, 13% 88%, 0 82%);
+      opacity:.88;
     }
+
+    .map-park{
+      position:absolute;
+      right:-2%;
+      bottom:-8%;
+      width:38%;
+      height:32%;
+      border-radius:24px;
+      background:linear-gradient(135deg,rgba(132,204,22,.62),rgba(101,163,13,.45));
+      transform:rotate(8deg);
+      z-index:1;
+    }
+
+    .map-park::before,
+    .map-park::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      background:rgba(21,128,61,.34);
+    }
+
+    .map-park::before{
+      width:34px;
+      height:34px;
+      left:26%;
+      top:38%;
+    }
+
+    .map-park::after{
+      width:24px;
+      height:24px;
+      right:24%;
+      top:52%;
+    }
+
+    .building{
+      position:absolute;
+      border-radius:7px;
+      background:rgba(180,83,9,.22);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+      z-index:1;
+    }
+
+    .building.b1{left:8%;top:15%;width:60px;height:44px;transform:rotate(-16deg)}
+    .building.b2{left:35%;top:10%;width:80px;height:48px;transform:rotate(-6deg)}
+    .building.b3{right:15%;top:16%;width:64px;height:42px;transform:rotate(11deg)}
+    .building.b4{left:20%;bottom:16%;width:72px;height:46px;transform:rotate(-10deg)}
+    .building.b5{right:25%;bottom:20%;width:82px;height:46px;transform:rotate(18deg)}
 
     .pin{
       position:absolute;
-      left:50%;
+      left:52%;
       top:48%;
-      transform:translate(-50%,-50%);
-      width:58px;
-      height:58px;
-      border-radius:50%;
-      background:var(--yellow);
-      color:#111;
+      width:62px;
+      height:62px;
+      border-radius:50% 50% 50% 0;
+      background:#fff;
+      transform:translate(-50%,-50%) rotate(-45deg);
       display:grid;
       place-items:center;
-      font-weight:900;
-      box-shadow:0 0 0 14px rgba(250,204,21,.22);
+      z-index:4;
+      box-shadow:0 14px 26px rgba(124,45,18,.24);
+    }
+
+    .pin::before{
+      content:"";
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#fde047,#facc15);
+      border:5px solid rgba(124,45,18,.16);
+      transform:rotate(45deg);
+    }
+
+    .pin::after{
+      content:"";
+      position:absolute;
+      inset:-18px;
+      border-radius:50%;
+      background:rgba(250,204,21,.18);
+      transform:rotate(45deg);
+      z-index:-1;
     }
 
     .screen-card{
@@ -353,6 +433,296 @@
       line-height:1.42;
       display:block;
       margin-top:3px;
+    }
+
+    .phone-card{
+      min-height:580px;
+      border-radius:46px;
+      padding:34px;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(225,29,72,.18), transparent 24%),
+        radial-gradient(circle at 18% 82%, rgba(249,115,22,.16), transparent 30%),
+        linear-gradient(145deg,rgba(255,255,255,.94),rgba(255,247,237,.68));
+      box-shadow:0 34px 90px rgba(180,83,9,.18);
+      isolation:isolate;
+    }
+
+    .phone-card::before{
+      right:34px;
+      top:34px;
+      padding:13px 20px;
+      border-radius:24px;
+      background:linear-gradient(135deg,#e11d48,#fb2466);
+      font-size:44px;
+      line-height:1;
+      z-index:5;
+      box-shadow:
+        0 26px 54px rgba(225,29,72,.36),
+        0 0 0 10px rgba(255,255,255,.76),
+        inset 0 1px 0 rgba(255,255,255,.28);
+    }
+
+    .phone-card::after{
+      content:"Chiết khấu tăng";
+      position:absolute;
+      right:50px;
+      top:104px;
+      z-index:4;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:#be123c;
+      font-size:12px;
+      font-weight:900;
+      transform:rotate(6deg);
+      box-shadow:0 12px 28px rgba(225,29,72,.16);
+    }
+
+    .phone{
+      position:relative;
+      width:min(300px,84%);
+      border-radius:48px;
+      border:11px solid #0b1222;
+      padding:14px;
+      background:
+        linear-gradient(180deg,#111827 0%,#0b1222 55%,#0f172a 100%);
+      box-shadow:
+        0 44px 90px rgba(15,23,42,.42),
+        inset 0 0 0 1px rgba(255,255,255,.06);
+      transform:rotate(-5deg) translateY(6px);
+      z-index:3;
+    }
+
+    .phone::before{
+      content:"";
+      position:absolute;
+      inset:-18px -20px auto auto;
+      width:92px;
+      height:210px;
+      border-radius:999px;
+      background:rgba(225,29,72,.12);
+      filter:blur(16px);
+      z-index:-1;
+    }
+
+    .notch{
+      width:96px;
+      height:8px;
+      margin:0 auto 12px;
+      background:#475569;
+      opacity:.88;
+    }
+
+    .phone-topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+      color:#cbd5e1;
+      font-size:11px;
+      font-weight:900;
+    }
+
+    .signal-bars{
+      display:flex;
+      align-items:end;
+      gap:2px;
+    }
+
+    .signal-bars i{
+      width:3px;
+      border-radius:999px;
+      background:#cbd5e1;
+      display:block;
+    }
+
+    .signal-bars i:nth-child(1){height:5px}
+    .signal-bars i:nth-child(2){height:8px}
+    .signal-bars i:nth-child(3){height:11px}
+
+    .map{
+      height:51%;
+      border-radius:30px;
+      margin-bottom:14px;
+      background:
+        radial-gradient(circle at 18% 73%, rgba(132,204,22,.38), transparent 16%),
+        radial-gradient(circle at 89% 82%, rgba(132,204,22,.42), transparent 20%),
+        linear-gradient(135deg,#c2410c,#f97316 58%,#fb923c);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);
+    }
+
+    .map::before{
+      background:
+        linear-gradient(19deg, transparent 0 38%, rgba(255,248,225,.92) 38% 42%, transparent 42%),
+        linear-gradient(84deg, transparent 0 30%, rgba(255,248,225,.88) 30% 34%, transparent 34%),
+        linear-gradient(112deg, transparent 0 58%, rgba(255,248,225,.88) 58% 62%, transparent 62%),
+        linear-gradient(156deg, transparent 0 48%, rgba(255,248,225,.82) 48% 52%, transparent 52%),
+        linear-gradient(0deg, transparent 0 70%, rgba(255,248,225,.84) 70% 74%, transparent 74%);
+      z-index:1;
+    }
+
+    .map::after{
+      z-index:1;
+    }
+
+    .map-park,
+    .building,
+    .pin{
+      z-index:2;
+    }
+
+    .map-toolbar{
+      position:absolute;
+      left:12px;
+      right:12px;
+      top:12px;
+      z-index:5;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+    }
+
+    .map-status,
+    .map-price{
+      border-radius:999px;
+      padding:7px 10px;
+      background:rgba(15,23,42,.82);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 24px rgba(15,23,42,.16);
+    }
+
+    .map-price{
+      background:rgba(255,255,255,.94);
+      color:#0f172a;
+    }
+
+    .driver-marker{
+      position:absolute;
+      left:33%;
+      top:58%;
+      z-index:4;
+      width:36px;
+      height:36px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      background:#0f172a;
+      border:2px solid rgba(255,255,255,.9);
+      box-shadow:0 14px 30px rgba(15,23,42,.28);
+      font-size:18px;
+    }
+
+    .pin{
+      left:56%;
+      top:49%;
+      width:68px;
+      height:68px;
+      box-shadow:0 16px 32px rgba(124,45,18,.28);
+    }
+
+    .pin::before{
+      width:42px;
+      height:42px;
+    }
+
+    .screen-card{
+      border-radius:23px;
+      background:rgba(30,41,59,.88);
+      border:1px solid rgba(255,255,255,.10);
+      padding:13px 14px;
+      margin-bottom:10px;
+      box-shadow:0 14px 30px rgba(0,0,0,.12);
+      backdrop-filter:blur(8px);
+    }
+
+    .ride-card{
+      display:grid;
+      gap:10px;
+    }
+
+    .ride-line{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .ride-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+    }
+
+    .ride-title::before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#22c55e;
+      box-shadow:0 0 0 5px rgba(34,197,94,.16);
+    }
+
+    .eta-pill{
+      border-radius:999px;
+      padding:5px 9px;
+      background:#f97316;
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .route-row{
+      display:grid;
+      grid-template-columns:18px 1fr auto;
+      gap:9px;
+      align-items:center;
+      color:#cbd5e1;
+      font-size:12px;
+      line-height:1.25;
+    }
+
+    .route-dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#22c55e;
+      justify-self:center;
+    }
+
+    .route-dot.end{
+      background:#ef4444;
+    }
+
+    .route-row strong{
+      color:#fff;
+      font-size:12.5px;
+    }
+
+    .money-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .money-row span{
+      margin:0;
+    }
+
+    .money-row strong{
+      border-radius:999px;
+      padding:6px 10px;
+      background:rgba(225,29,72,.16);
+      color:#fecdd3;
+      font-size:12px;
+      white-space:nowrap;
     }
 
     main{min-height:calc(100vh - 70px)}
@@ -546,13 +916,28 @@
 
     .theory-label{
       display:inline-flex;
+      align-items:center;
       border-radius:999px;
       padding:6px 10px;
       background:#fff7ed;
+      border:1px solid transparent;
       color:#c2410c;
       font-size:12px;
       font-weight:900;
+      line-height:1.2;
       margin-bottom:10px;
+    }
+
+    .theory-label-row{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .theory-label-row .theory-label{
+      margin-bottom:0;
     }
 
     .small-theory{
@@ -561,11 +946,105 @@
       color:#475569;
     }
 
+    .theory-label + .small-theory{
+      padding-left:10px;
+    }
+
+    .definition-highlight{
+      border-radius:8px;
+      padding:1px 4px;
+      margin:0 -2px;
+      background:#fef3c7;
+      color:#92400e;
+      box-shadow:0 0 0 2px rgba(245,158,11,.18);
+      font-weight:800;
+    }
+
+    .theory-citation{
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.55;
+      color:#64748b;
+      font-style:italic;
+    }
+
+    .panel button.breakdown-btn{
+      width:auto;
+      margin:0;
+      padding:6px 10px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      color:#c2410c;
+      box-shadow:none;
+      font-size:12px;
+      font-weight:900;
+      text-align:center;
+      line-height:1.2;
+    }
+
+    .panel button.breakdown-btn:hover{
+      transform:translateY(-1px);
+      background:#ffedd5;
+    }
+
+    .panel button.breakdown-btn.active{
+      background:#c2410c;
+      border-color:#c2410c;
+      color:#fff;
+    }
+
+    .breakdown-mark{
+      border-radius:8px;
+      padding:1px 4px;
+      margin:0 -2px;
+      background-repeat:no-repeat;
+      background-size:0 100%;
+      box-decoration-break:clone;
+      -webkit-box-decoration-break:clone;
+      transition:background-size .7s ease, box-shadow .28s ease, color .28s ease;
+    }
+
+    .breakdown-mark[data-visual-target]{
+      cursor:pointer;
+    }
+
+    .breakdown-mark.group-a{
+      background-image:linear-gradient(90deg,#fef3c7,#fef3c7);
+    }
+
+    .breakdown-mark.group-b{
+      background-image:linear-gradient(90deg,#dbeafe,#dbeafe);
+    }
+
+    .breakdown-active .breakdown-mark.group-a{
+      background-size:100% 100%;
+      color:#92400e;
+      box-shadow:0 0 0 2px rgba(245,158,11,.18);
+    }
+
+    .breakdown-active .breakdown-mark.group-b{
+      background-size:100% 100%;
+      color:#1d4ed8;
+      box-shadow:0 0 0 2px rgba(59,130,246,.18);
+    }
+
     .theory-visual-row{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:16px;
       margin:16px 0 18px;
+    }
+
+    .theory-visual-row.class-position-mode{
+      grid-template-areas:
+        "ruling slave"
+        "worker slave";
+      align-items:stretch;
     }
 
     .theory-visual-card{
@@ -582,6 +1061,176 @@
     .theory-visual-card.blue{
       background:linear-gradient(135deg,#eff6ff,#e0f2fe);
       border-color:rgba(37,99,235,.14);
+    }
+
+    .theory-visual-row.class-position-mode .theory-visual-card.ruling-card{
+      grid-area:ruling;
+    }
+
+    .theory-visual-row.class-position-mode .theory-visual-card.worker-card{
+      grid-area:worker;
+    }
+
+    .theory-image-card{
+      grid-area:slave;
+      display:none;
+      min-height:190px;
+      border-radius:30px;
+      overflow:hidden;
+      position:relative;
+      border:1px solid rgba(249,115,22,.16);
+      box-shadow:0 16px 42px rgba(180,83,9,.10);
+      background:#fff7ed;
+    }
+
+    .theory-visual-row.class-position-mode .theory-image-card{
+      display:block;
+      animation:visualReveal .42s ease both;
+    }
+
+    .theory-image-card img{
+      width:100%;
+      height:100%;
+      min-height:100%;
+      object-fit:cover;
+      display:block;
+      transition:opacity .24s ease, transform .24s ease;
+    }
+
+    .theory-image-card.is-switching img{
+      opacity:0;
+      transform:scale(1.035);
+    }
+
+    .visual-emoji.is-changing{
+      animation:iconChange .34s ease both;
+    }
+
+    .struggle-history{
+      display:none;
+      grid-template-columns:1.05fr .95fr;
+      gap:16px;
+      align-items:stretch;
+      margin:16px 0 18px;
+    }
+
+    .struggle-history.active{
+      display:grid;
+      animation:visualReveal .42s ease both;
+    }
+
+    .struggle-image{
+      min-height:300px;
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(249,115,22,.16);
+      box-shadow:0 16px 42px rgba(180,83,9,.10);
+      background:#fff7ed;
+    }
+
+    .struggle-image img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:opacity .28s ease, transform .28s ease;
+    }
+
+    .struggle-image.is-switching img{
+      opacity:0;
+      transform:scale(1.035);
+    }
+
+    .struggle-card-stack{
+      display:grid;
+      gap:16px;
+    }
+
+    .struggle-card{
+      position:relative;
+      border-radius:26px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:18px;
+      box-shadow:0 12px 32px rgba(180,83,9,.06);
+      cursor:pointer;
+      overflow:hidden;
+    }
+
+    .struggle-card b{
+      display:block;
+      color:#0f172a;
+      margin-bottom:8px;
+      font-size:18px;
+    }
+
+    .struggle-card-content{
+      filter:blur(8px);
+      opacity:.34;
+      transition:filter .28s ease, opacity .28s ease;
+      pointer-events:none;
+      user-select:none;
+    }
+
+    .struggle-card:not(.revealed)::after{
+      content:'Bấm để mở nội dung';
+      position:absolute;
+      inset:auto 18px 18px;
+      display:grid;
+      place-items:center;
+      min-height:42px;
+      border-radius:16px;
+      background:rgba(255,247,237,.92);
+      color:#c2410c;
+      font-size:13px;
+      font-weight:900;
+      box-shadow:0 10px 24px rgba(180,83,9,.10);
+      backdrop-filter:blur(8px);
+    }
+
+    .struggle-card.revealed{
+      cursor:default;
+    }
+
+    .struggle-card.revealed .struggle-card-content{
+      filter:none;
+      opacity:1;
+      pointer-events:auto;
+      user-select:auto;
+    }
+
+    .struggle-list{
+      margin:8px 0;
+      padding-left:20px;
+      color:#64748b;
+      line-height:1.62;
+      font-size:16px;
+    }
+
+    .struggle-subtitle-spaced{
+      margin-top:18px;
+    }
+
+    @keyframes visualReveal{
+      from{
+        opacity:0;
+        transform:translateX(18px);
+      }
+      to{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+
+    @keyframes iconChange{
+      0%{
+        opacity:.25;
+        transform:translateY(8px) scale(.86);
+      }
+      100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
     }
 
     .theory-visual-card h3,
@@ -670,10 +1319,35 @@
       align-items:center;
     }
 
+    .situation-layout{
+      grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);
+      gap:20px;
+      align-items:start;
+    }
+
+    .situation-copy h2{
+      font-size:clamp(30px,3.4vw,46px);
+      line-height:1.08;
+      max-width:900px;
+    }
+
+    .situation-copy .lead{
+      margin-top:14px;
+      font-size:17px;
+      line-height:1.58;
+      max-width:780px;
+    }
+
     .case-list{
       display:grid;
       gap:12px;
       margin-top:18px;
+    }
+
+    .situation-layout .case-list{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:16px;
     }
 
     .case-item{
@@ -684,6 +1358,18 @@
       border-radius:22px;
       background:rgba(255,255,255,.72);
       border:1px solid var(--line);
+    }
+
+    .situation-layout .case-item{
+      min-height:112px;
+      padding:12px;
+      border-radius:18px;
+      background:rgba(255,255,255,.82);
+    }
+
+    .situation-layout .case-item:last-child{
+      grid-column:1 / -1;
+      min-height:auto;
     }
 
     .case-dot{
@@ -698,10 +1384,29 @@
       flex:0 0 auto;
     }
 
+    .situation-layout .case-dot{
+      width:28px;
+      height:28px;
+      border-radius:11px;
+      font-size:13px;
+    }
+
     .case-item strong{
       display:block;
       margin-bottom:2px;
       color:#1f2937;
+    }
+
+    .situation-layout .case-item p{
+      font-size:14px;
+      line-height:1.52;
+    }
+
+    .situation-layout .quote{
+      margin-top:14px;
+      padding:16px 18px;
+      font-size:15px;
+      line-height:1.56;
     }
 
     .situation-photo-card{
@@ -712,11 +1417,21 @@
       box-shadow:0 20px 58px rgba(180,83,9,.13);
     }
 
+    .situation-layout .situation-photo-card{
+      position:sticky;
+      top:92px;
+      border-radius:28px;
+    }
+
     .situation-photo-card img{
       display:block;
       width:100%;
       height:430px;
       object-fit:cover;
+    }
+
+    .situation-layout .situation-photo-card img{
+      height:350px;
     }
 
     .photo-note{
@@ -725,6 +1440,11 @@
       line-height:1.55;
       color:#475569;
       background:rgba(255,255,255,.94);
+    }
+
+    .situation-layout .photo-note{
+      padding:13px 15px;
+      font-size:13.5px;
     }
 
     .video-shell{
@@ -1019,6 +1739,137 @@
       font-size:14px;
     }
 
+    .quiz-game{
+      margin-top:18px;
+      border-radius:36px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(255,255,255,.9);
+      padding:24px;
+      box-shadow:0 18px 54px rgba(180,83,9,.1);
+    }
+
+    .quiz-head{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      margin-bottom:16px;
+    }
+
+    .quiz-head p{
+      margin-top:6px;
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .quiz-progress{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .quiz-pill{
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:10px 14px;
+      min-width:105px;
+    }
+
+    .quiz-pill b{
+      display:block;
+      font-size:22px;
+      color:#0f172a;
+    }
+
+    .quiz-pill span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .quiz-card{
+      border-radius:30px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:20px;
+      box-shadow:0 12px 36px rgba(180,83,9,.06);
+    }
+
+    .quiz-question{
+      color:#0f172a;
+      font-size:20px;
+      line-height:1.35;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .quiz-options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .quiz-option{
+      width:100%;
+      min-height:74px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff7ed;
+      color:#334155;
+      padding:12px 14px;
+      font-family:inherit;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.35;
+      text-align:left;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .quiz-option:hover{
+      transform:translateY(-1px);
+      background:#ffedd5;
+    }
+
+    .quiz-option.correct{
+      background:#dcfce7;
+      border-color:#86efac;
+      color:#166534;
+    }
+
+    .quiz-option.wrong{
+      background:#ffe4e6;
+      border-color:#fecdd3;
+      color:#9f1239;
+    }
+
+    .quiz-option:disabled{
+      cursor:default;
+      transform:none;
+    }
+
+    .quiz-message{
+      margin-top:12px;
+      border-radius:18px;
+      background:#0f172a;
+      color:#fff;
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:700;
+      line-height:1.45;
+    }
+
+    .quiz-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
     .ending{
       border-radius:42px;
       padding:clamp(28px,4vw,52px);
@@ -1074,9 +1925,44 @@
         grid-template-columns:1fr;
       }
 
+      .situation-layout{
+        grid-template-columns:1fr;
+      }
+
+      .situation-layout .case-list{
+        grid-template-columns:1fr;
+      }
+
+      .situation-layout .case-item{
+        min-height:auto;
+      }
+
+      .situation-layout .case-item:last-child{
+        grid-column:auto;
+      }
+
+      .situation-layout .situation-photo-card{
+        position:static;
+      }
+
+      .struggle-history.active{
+        grid-template-columns:1fr;
+      }
+
+      .struggle-image{
+        min-height:240px;
+      }
+
       .theory-visual-card h3,
       .theory-visual-card p{
         max-width:100%;
+      }
+
+      .theory-visual-row.class-position-mode{
+        grid-template-areas:
+          "ruling"
+          "slave"
+          "worker";
       }
 
       .visual-emoji{
@@ -1092,8 +1978,12 @@
       .phone{max-height:330px;width:235px}
       .video-box{height:42vh}
       .situation-photo-card img{height:260px}
+      .situation-layout .situation-photo-card img{height:260px}
       .word-top{display:grid}
       .word-score{flex-wrap:wrap}
+      .quiz-head{display:grid}
+      .quiz-progress{justify-content:flex-start}
+      .quiz-options{grid-template-columns:1fr}
       .keyboard{grid-template-columns:repeat(7,1fr)}
       .section-head{display:grid}
     }
@@ -1109,7 +1999,7 @@
       </div>
 
       <div class="nav-links">
-        <button class="page-tab active" data-tab="theory">Lý thuyết</button>
+        <button class="page-tab" data-tab="theory">Lý thuyết</button>
         <button class="page-tab" data-tab="situation">Tình huống</button>
         <button class="page-tab" data-tab="video">Video</button>
         <button class="page-tab" data-tab="analysis">Phân tích</button>
@@ -1138,14 +2028,48 @@
       <div class="phone-card">
         <div class="phone">
           <div class="notch"></div>
-          <div class="map"><div class="pin">APP</div></div>
-          <div class="screen-card">
-            <b>Cuốc xe mới</b>
-            <span>Giá cước do hệ thống tự tính</span>
+          <div class="phone-topbar">
+            <span>09:41</span>
+            <div class="signal-bars"><i></i><i></i><i></i></div>
+          </div>
+          <div class="map">
+            <div class="map-toolbar">
+              <div class="map-status">Đang có cuốc</div>
+              <div class="map-price">38.000đ</div>
+            </div>
+            <div class="map-park"></div>
+            <div class="building b1"></div>
+            <div class="building b2"></div>
+            <div class="building b3"></div>
+            <div class="building b4"></div>
+            <div class="building b5"></div>
+            <div class="driver-marker">🛵</div>
+            <div class="pin"></div>
+          </div>
+          <div class="screen-card ride-card">
+            <div class="ride-line">
+              <div class="ride-title">Cuốc xe mới</div>
+              <span class="eta-pill">4 phút</span>
+            </div>
+            <div class="route-row">
+              <span class="route-dot"></span>
+              <span>Điểm đón</span>
+              <strong>ĐH FPT</strong>
+            </div>
+            <div class="route-row">
+              <span class="route-dot end"></span>
+              <span>Điểm đến</span>
+              <strong>Quận 9</strong>
+            </div>
           </div>
           <div class="screen-card">
-            <b>Chiết khấu nền tảng</b>
-            <span>Tài xế nhận phần còn lại sau mỗi chuyến</span>
+            <div class="money-row">
+              <div>
+                <b>Chiết khấu nền tảng</b>
+                <span>Tài xế nhận phần còn lại sau mỗi chuyến</span>
+              </div>
+              <strong>30%</strong>
+            </div>
           </div>
         </div>
       </div>
@@ -1153,7 +2077,7 @@
   </header>
 
   <main>
-    <section class="tab-content active" id="tab-theory">
+    <section class="tab-content" id="tab-theory">
       <div class="wrap">
         <div class="theory-hero">
           <div class="book-icon">📖</div>
@@ -1169,7 +2093,7 @@
 
         <div class="theory-page-tabs">
           <button class="theory-page-btn active" data-theory-page="theory-page-1">Phần 1 · Giai cấp</button>
-          <button class="theory-page-btn" data-theory-page="theory-page-2">Phần 2 · Đấu tranh giai cấp & dân tộc</button>
+          <button class="theory-page-btn" data-theory-page="theory-page-2">Phần 2 · Đấu tranh giai cấp</button>
         </div>
 
         <div class="theory-page active" id="theory-page-1">
@@ -1181,155 +2105,36 @@
 
             <div class="panel-content">
               <div class="theory-block">
-                <div class="theory-label">Khái niệm</div>
-                <p class="small-theory">
-                  Giai cấp là những tập đoàn người có địa vị kinh tế - xã hội khác nhau trong một hệ thống sản xuất xã hội nhất định trong lịch sử. Giai cấp là những tập đoàn người mà tập đoàn này có thể chiếm đoạt lao động của tập đoàn khác, do các tập đoàn đó có địa vị khác nhau trong một chế độ kinh tế - xã hội nhất định.
+                <div class="theory-label-row">
+                  <div class="theory-label">Khái niệm</div>
+                  <button class="breakdown-btn" id="breakdownBtn" type="button" aria-pressed="false">Bóc tách</button>
+                </div>
+                <p class="small-theory" id="classDefinition">
+                  “<span class="breakdown-mark group-b">Những tập đoàn to lớn</span> gồm những người <span class="breakdown-mark group-a" data-visual-target="slave-mode">khác nhau về địa vị của họ trong một hệ thống sản xuất xã hội</span> nhất định trong lịch sử, khác nhau về quan hệ của họ (thường thường thì những quan hệ này được pháp luật quy định và thừa nhận) <span class="breakdown-mark group-b">đối với tư liệu sản xuất</span>, về <span class="breakdown-mark group-b">vai trò của họ trong tổ chức lao động xã hội</span> và như vậy là <span class="breakdown-mark group-a" data-visual-target="capital-mode">khác nhau về cách thức hưởng thụ</span> và về phần của cải xã hội ít hoặc nhiều mà họ được hưởng. Giai cấp là những tập đoàn người, mà tập đoàn này thì có thể <span class="breakdown-mark group-b">chiếm đoạt lao động của tập đoàn khác</span>, do chỗ tập đoàn đó có địa vị khác nhau trong một chế độ kinh tế - xã hội nhất định”
                 </p>
+                <p class="theory-citation">Trích dẫn theo tác phẩm <em>Sáng kiến vĩ đại</em> của Lê Nin.</p>
               </div>
 
-              <div class="theory-visual-row">
-                <div class="theory-visual-card">
+              <div class="theory-visual-row" id="classVisualRow">
+                <div class="theory-visual-card ruling-card">
                   <span class="visual-badge">Quan hệ giai cấp</span>
                   <h3>Giai cấp thống trị</h3>
                   <p>Nắm tư liệu sản xuất, có khả năng chi phối và áp bức các giai cấp khác.</p>
-                  <div class="visual-emoji">🏛️</div>
+                  <div class="visual-emoji" id="rulingIcon">🏛️</div>
                 </div>
 
-                <div class="theory-visual-card blue">
+                <div class="theory-image-card" id="slaveModeImage" aria-hidden="true">
+                  <img id="classModeImage" src="images/Chế độ chiếm hữu nô lệ.png" alt="Minh họa chế độ chiếm hữu nô lệ">
+                </div>
+
+                <div class="theory-visual-card blue worker-card">
                   <span class="visual-badge">Người lao động</span>
                   <h3>Giai cấp bị thống trị</h3>
                   <p>Không sở hữu tư liệu sản xuất chủ yếu, phải lao động phụ thuộc để sinh sống.</p>
-                  <div class="visual-emoji">👷</div>
+                  <div class="visual-emoji" id="workerIcon">👷</div>
                 </div>
               </div>
 
-              <div class="panel nested-panel active">
-                <button type="button">
-                  1.1. Giai cấp thống trị và giai cấp bị thống trị
-                  <span>＋</span>
-                </button>
-
-                <div class="panel-content">
-                  <div class="compare-grid">
-                    <div class="compare-card">
-                      <h3>Giai cấp thống trị</h3>
-                      <p>
-                        Là giai cấp nắm trong tay quyền sở hữu về tư liệu sản xuất. Dựa trên ưu thế đó, giai cấp thống trị có khả năng chèn ép, áp bức các giai cấp còn lại và chi phối xã hội.
-                      </p>
-                      <p>
-                        Ví dụ: những người có nhiều ruộng đất cho người khác thuê được gọi là giai cấp địa chủ.
-                      </p>
-                    </div>
-
-                    <div class="compare-card">
-                      <h3>Giai cấp bị thống trị</h3>
-                      <p>
-                        Là những người không sở hữu hoặc sở hữu rất ít tư liệu sản xuất, phải lao động phụ thuộc vào giai cấp thống trị, thường bị chèn ép và bóc lột.
-                      </p>
-                      <p>
-                        Ví dụ: những người làm thuê hoặc canh tác ruộng đất cho người khác được gọi là nông dân.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="panel nested-panel">
-                <button type="button">
-                  1.2. Giai cấp trong chế độ chiếm hữu nô lệ
-                  <span>＋</span>
-                </button>
-
-                <div class="panel-content">
-                  <div class="compare-grid">
-                    <div class="compare-card">
-                      <h3>Chủ nô và nô lệ ở phương Tây</h3>
-                      <p>
-                        Nô lệ bị coi là tài sản thuộc về chủ nô. Chủ nô có quyền bóc lột sức lao động, mua bán, thậm chí quyết định sinh mạng của nô lệ.
-                      </p>
-                    </div>
-
-                    <div class="compare-card">
-                      <h3>Nô lệ ở phương Đông</h3>
-                      <p>
-                        Nô lệ không phải lực lượng sản xuất chính mà chủ yếu làm công việc gia đình. Do đó, mâu thuẫn giữa chủ nô và nô lệ không sâu sắc như ở phương Tây.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="panel nested-panel">
-                <button type="button">
-                  1.3. Giai cấp trong chế độ phong kiến
-                  <span>＋</span>
-                </button>
-
-                <div class="panel-content">
-                  <div class="compare-grid">
-                    <div class="compare-card">
-                      <h3>Phương Đông</h3>
-                      <p>
-                        Địa chủ sở hữu ruộng đất, nông dân lĩnh canh nhận ruộng để canh tác và phải nộp địa tô. Địa chủ không trực tiếp nắm toàn bộ quyền lực chính trị như lãnh chúa phương Tây.
-                      </p>
-                    </div>
-
-                    <div class="compare-card">
-                      <h3>Phương Tây</h3>
-                      <p>
-                        Lãnh chúa có quyền lực rất lớn về ruộng đất, đặt ra nhiều loại tô thuế. Nông nô sống phụ thuộc, nghèo khổ, phải nộp tô thuế nặng nề và làm nhiều công việc phục vụ lãnh chúa.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="panel nested-panel">
-                <button type="button">
-                  1.4. Giai cấp trong chế độ tư bản chủ nghĩa
-                  <span>＋</span>
-                </button>
-
-                <div class="panel-content">
-                  <div class="compare-grid">
-                    <div class="compare-card">
-                      <h3>Giai cấp tư sản</h3>
-                      <p>
-                        Là giai cấp sở hữu tư liệu sản xuất, thường gồm chủ xưởng, chủ đồn điền, thương nhân giàu có và những người nắm nhiều quyền lực kinh tế. Nhờ sở hữu tư liệu sản xuất, họ có khả năng chi phối và áp bức các giai cấp khác.
-                      </p>
-                    </div>
-
-                    <div class="compare-card">
-                      <h3>Giai cấp vô sản</h3>
-                      <p>
-                        Là những người không sở hữu tư liệu sản xuất chủ yếu, phải bán sức lao động để sống. Trong đó, giai cấp công nhân là lực lượng tiêu biểu, thường làm việc nặng nhọc nhưng tiền lương thấp.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="theory-mini-illustration">
-                    <div class="illus-card">
-                      <div class="illus-icon">🏭</div>
-                      <div>
-                        <h3>Tư liệu sản xuất</h3>
-                        <p>Nhà xưởng, vốn, nền tảng số, thuật toán và dữ liệu.</p>
-                      </div>
-                    </div>
-
-                    <div class="illus-card">
-                      <div class="illus-icon">🛵</div>
-                      <div>
-                        <h3>Sức lao động</h3>
-                        <p>Tài xế tạo ra dịch vụ nhưng phụ thuộc vào nền tảng để có cuốc xe.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="quote">
-                    Liên hệ với tài xế công nghệ: tài xế có phương tiện cá nhân như xe máy, ô tô, nhưng không sở hữu nền tảng số, thuật toán, dữ liệu khách hàng và cơ chế phân phối cuốc xe.
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -1343,99 +2148,72 @@
 
             <div class="panel-content">
               <div class="theory-block">
-                <div class="theory-label">Định nghĩa của V.I. Lênin</div>
+                <div class="theory-label-row">
+                  <div class="theory-label">Định nghĩa</div>
+                  <button class="breakdown-btn" id="struggleExampleBtn" type="button" aria-expanded="false">Ví dụ</button>
+                </div>
                 <p class="small-theory">
-                  V.I. Lênin định nghĩa đấu tranh giai cấp là “cuộc đấu tranh của quần chúng bị tước quyền, bị áp bức, và lao động, chống bọn có đặc quyền, đặc lợi, bọn áp bức và ăn bám; cuộc đấu tranh của những người công nhân làm thuê hay những người vô sản chống những người hữu sản hay giai cấp tư sản”.
+                  Là cuộc đấu tranh <span class="definition-highlight">giữa các giai cấp</span>, các tập đoàn người có <span class="definition-highlight">lợi ích đối lập</span> nhau không <span class="definition-highlight">thể điều hòa</span> được.
                 </p>
               </div>
 
-              <div class="theory-visual-row">
-                <div class="theory-visual-card">
-                  <span class="visual-badge">Mâu thuẫn lợi ích</span>
-                  <h3>Đấu tranh giai cấp</h3>
-                  <p>Là cuộc đấu tranh giữa những nhóm có lợi ích căn bản đối lập nhau.</p>
-                  <div class="visual-emoji">⚖️</div>
+              <div class="struggle-history" id="struggleExampleArea" aria-hidden="true">
+                <div class="struggle-card-stack">
+                  <div class="struggle-card" id="contextCard">
+                    <b>Bối cảnh lịch sử</b>
+                    <div class="struggle-card-content">
+                      <p>
+                        Thế kỉ XIX, Cách mạng công nghiệp phát triển mạnh đi kèm với việc máy móc được đưa vào sản xuất ngày càng nhiều, làm cho năng suất lao động tăng nhanh.
+                      </p>
+                      <p>
+                        Tuy nhiên, đối với công nhân:
+                      </p>
+                      <ul class="struggle-list">
+                        <li>Nhiều thợ thủ công bị mất việc.</li>
+                        <li>Tiền lương bị hạ thấp.</li>
+                        <li>Phụ nữ và trẻ em bị bóc lột nặng nề.</li>
+                      </ul>
+                      <p>
+                        Bãi công và đập phá máy móc là một trong những hình thức phản kháng của công nhân.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="struggle-card" id="meaningCard">
+                    <b>Hạn chế & Ý nghĩa lịch sử</b>
+                    <div class="struggle-card-content">
+                      <p>
+                        Về hạn chế:
+                      </p>
+                      <ul class="struggle-list">
+                        <li>Mang tính tự phát, chưa có tổ chức chặt chẽ.</li>
+                        <li>Mục tiêu đấu tranh còn mơ hồ.</li>
+                      </ul>
+                      <p class="struggle-subtitle-spaced">
+                        Ý nghĩa lịch sử:
+                      </p>
+                      <ul class="struggle-list">
+                        <li>Đánh dấu sự xuất hiện của giai cấp công nhân với tư cách một lực lượng xã hội độc lập.</li>
+                        <li>Phát triển từ đấu tranh tự phát sang đấu tranh tự giác, gắn với sự ra đời của chủ nghĩa xã hội khoa học và học thuyết Marx.</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="theory-visual-card blue">
-                  <span class="visual-badge">Kinh tế số</span>
-                  <h3>Nền tảng công nghệ</h3>
-                  <p>Thuật toán, dữ liệu và quyền phân phối cuốc xe trở thành công cụ kiểm soát mới.</p>
-                  <div class="visual-emoji">📱</div>
+                <div class="struggle-image">
+                  <img id="struggleExampleImage" src="images/Cuộc bãi công thế kỉ 19.png" alt="Cuộc bãi công thế kỉ 19">
                 </div>
-              </div>
-
-              <div class="concept-grid">
-                <div class="concept-card">
-                  <b>Thực chất</b>
-                  <p>
-                    Là cuộc đấu tranh giải quyết mâu thuẫn về lợi ích giữa quần chúng bị áp bức, người vô sản, người đi làm thuê với giai cấp thống trị, đặc quyền, đặc lợi và bóc lột.
-                  </p>
-                </div>
-
-                <div class="concept-card">
-                  <b>Nguyên nhân khách quan</b>
-                  <p>
-                    Xuất phát từ sự phát triển xã hội hóa ngày càng sâu rộng của lực lượng sản xuất, trong khi tư liệu sản xuất lại bị chiếm hữu tư nhân.
-                  </p>
-                </div>
-
-                <div class="concept-card">
-                  <b>Biểu hiện xã hội</b>
-                  <p>
-                    Là mâu thuẫn giữa giai cấp cách mạng, tiến bộ, đại diện cho phương thức sản xuất mới với giai cấp thống trị, bóc lột, gắn với quan hệ sản xuất lỗi thời.
-                  </p>
-                </div>
-              </div>
-
-              <div class="quote">
-                Liên hệ với tình huống: khi nền tảng tăng chiết khấu để tối đa hóa lợi nhuận, còn tài xế tắt app để bảo vệ thu nhập, đó là biểu hiện của mâu thuẫn lợi ích trong kinh tế nền tảng.
               </div>
             </div>
           </div>
 
-          <div class="panel">
-            <button type="button">
-              3. Dân tộc là gì?
-              <span>＋</span>
-            </button>
-
-            <div class="panel-content">
-              <div class="theory-block">
-                <div class="theory-label">Khái niệm dân tộc</div>
-                <p class="small-theory">
-                  Theo quan điểm của chủ nghĩa Mác – Lênin, dân tộc là kết quả của quá trình phát triển lâu dài của xã hội loài người, trải qua các hình thức cộng đồng từ thấp đến cao như thị tộc, bộ lạc, bộ tộc và dân tộc. Sự biến đổi của phương thức sản xuất là nguyên nhân quyết định sự biến đổi của cộng đồng dân tộc.
-                </p>
-              </div>
-
-              <div class="compare-grid">
-                <div class="compare-card">
-                  <h3>Ở phương Tây</h3>
-                  <p>
-                    Dân tộc xuất hiện khi phương thức sản xuất tư bản chủ nghĩa được xác lập, thay thế phương thức sản xuất phong kiến.
-                  </p>
-                </div>
-
-                <div class="compare-card">
-                  <h3>Ở phương Đông</h3>
-                  <p>
-                    Dân tộc được hình thành trên cơ sở nền văn hóa và tâm lý dân tộc đã phát triển tương đối chín muồi, cùng với một cộng đồng kinh tế đã đạt đến mức nhất định nhưng còn phân tán.
-                  </p>
-                </div>
-              </div>
-
-              <div class="quote">
-                Phần dân tộc giúp mở rộng nội dung của chương “Giai cấp và dân tộc”, nhưng trọng tâm tình huống tài xế công nghệ vẫn nằm ở vấn đề giai cấp và đấu tranh giai cấp.
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
     <section class="tab-content" id="tab-situation">
-      <div class="wrap story-layout">
-        <div>
+      <div class="wrap story-layout situation-layout">
+        <div class="situation-copy">
           <div class="kicker">II · Tình huống</div>
           <h2>Liệu tài xế xe ôm công nghệ được xem là “người làm chủ” hay “người làm thuê kiểu mới”?</h2>
 
@@ -1683,6 +2461,35 @@
             </div>
           </div>
         </div>
+
+        <div class="quiz-game">
+          <div class="quiz-head">
+            <div>
+              <h3>Quiz nhanh</h3>
+              <p>Chọn đáp án đúng cho từng câu hỏi. Sau khi trả lời, hệ thống sẽ hiện đáp án và chuyển câu tiếp theo.</p>
+            </div>
+            <div class="quiz-progress">
+              <div class="quiz-pill">
+                <b id="quizRoundText">1/12</b>
+                <span>Câu hỏi</span>
+              </div>
+              <div class="quiz-pill">
+                <b id="quizScoreText">0</b>
+                <span>Điểm</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quiz-card">
+            <div class="quiz-question" id="quizQuestion"></div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-message" id="quizMessage">Chọn một đáp án để bắt đầu.</div>
+            <div class="quiz-actions">
+              <button class="btn" id="nextQuizBtn" style="display:none">Câu tiếp theo →</button>
+              <button class="btn secondary" id="resetQuizBtn">Làm lại quiz</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1736,9 +2543,7 @@
     homeBtn.addEventListener('click', () => {
       hero.style.display = 'block';
       pageTabs.forEach(tab => tab.classList.remove('active'));
-      pageTabs[0].classList.add('active');
       tabContents.forEach(content => content.classList.remove('active'));
-      document.getElementById('tab-theory').classList.add('active');
       window.scrollTo({ top: 0, behavior: 'instant' });
     });
 
@@ -1751,6 +2556,151 @@
         panel.classList.toggle('active');
       });
     });
+
+    const breakdownBtn = document.getElementById('breakdownBtn');
+    const classDefinition = document.getElementById('classDefinition');
+    const classVisualRow = document.getElementById('classVisualRow');
+    const slaveModeImage = document.getElementById('slaveModeImage');
+    const classModeImage = document.getElementById('classModeImage');
+    const slaveModeTrigger = document.querySelector('[data-visual-target="slave-mode"]');
+    const capitalModeTrigger = document.querySelector('[data-visual-target="capital-mode"]');
+    const rulingIcon = document.getElementById('rulingIcon');
+    const workerIcon = document.getElementById('workerIcon');
+
+    if (breakdownBtn && classDefinition) {
+      breakdownBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isActive = classDefinition.classList.toggle('breakdown-active');
+        breakdownBtn.classList.toggle('active', isActive);
+        breakdownBtn.setAttribute('aria-pressed', String(isActive));
+      });
+    }
+
+    let activeClassMode = '';
+
+    function updateClassModeContent({ imageSrc, imageAlt, rulingIconValue, workerIconValue }){
+      if (classModeImage) {
+        classModeImage.src = imageSrc;
+        classModeImage.alt = imageAlt;
+      }
+
+      [rulingIcon, workerIcon].forEach(icon => {
+        if (!icon) return;
+        icon.classList.remove('is-changing');
+        void icon.offsetWidth;
+        icon.classList.add('is-changing');
+      });
+
+      if (rulingIcon) rulingIcon.textContent = rulingIconValue;
+      if (workerIcon) workerIcon.textContent = workerIconValue;
+    }
+
+    function activateClassVisualMode({ mode, imageSrc, imageAlt, rulingIconValue, workerIconValue }){
+      if (classVisualRow && slaveModeImage) {
+        classDefinition?.classList.add('breakdown-active');
+        breakdownBtn?.classList.add('active');
+        breakdownBtn?.setAttribute('aria-pressed', 'true');
+        classVisualRow.classList.add('class-position-mode');
+        slaveModeImage.setAttribute('aria-hidden', 'false');
+      }
+
+      if (!slaveModeImage || !activeClassMode || activeClassMode === mode) {
+        updateClassModeContent({ imageSrc, imageAlt, rulingIconValue, workerIconValue });
+        activeClassMode = mode;
+        return;
+      }
+
+      slaveModeImage.classList.add('is-switching');
+      window.setTimeout(() => {
+        updateClassModeContent({ imageSrc, imageAlt, rulingIconValue, workerIconValue });
+        activeClassMode = mode;
+        window.requestAnimationFrame(() => {
+          slaveModeImage.classList.remove('is-switching');
+        });
+      }, 180);
+    }
+
+    if (slaveModeTrigger) {
+      slaveModeTrigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        activateClassVisualMode({
+          mode: 'slave',
+          imageSrc: 'images/Chế độ chiếm hữu nô lệ.png',
+          imageAlt: 'Minh họa chế độ chiếm hữu nô lệ',
+          rulingIconValue: '👑',
+          workerIconValue: '⛓️'
+        });
+      });
+    }
+
+    if (capitalModeTrigger) {
+      capitalModeTrigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        activateClassVisualMode({
+          mode: 'capital',
+          imageSrc: 'images/Thụ hưởng của cải tư bản.png',
+          imageAlt: 'Minh họa thụ hưởng của cải tư bản',
+          rulingIconValue: '💼',
+          workerIconValue: '⚒️'
+        });
+      });
+    }
+
+    const struggleExampleBtn = document.getElementById('struggleExampleBtn');
+    const struggleExampleArea = document.getElementById('struggleExampleArea');
+    const struggleExampleImage = document.getElementById('struggleExampleImage');
+    const struggleImageFrame = struggleExampleImage?.closest('.struggle-image');
+    const contextCard = document.getElementById('contextCard');
+    const meaningCard = document.getElementById('meaningCard');
+
+    function switchStruggleImage(src, alt){
+      if (!struggleExampleImage || !struggleImageFrame) return;
+
+      if (struggleExampleImage.src.endsWith(encodeURI(src))) {
+        struggleExampleImage.alt = alt;
+        return;
+      }
+
+      struggleImageFrame.classList.add('is-switching');
+      window.setTimeout(() => {
+        struggleExampleImage.src = src;
+        struggleExampleImage.alt = alt;
+        window.requestAnimationFrame(() => {
+          struggleImageFrame.classList.remove('is-switching');
+        });
+      }, 180);
+    }
+
+    if (struggleExampleBtn && struggleExampleArea) {
+      struggleExampleBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        struggleExampleArea.classList.add('active');
+        struggleExampleArea.setAttribute('aria-hidden', 'false');
+        struggleExampleBtn.classList.add('active');
+        struggleExampleBtn.setAttribute('aria-expanded', 'true');
+        contextCard?.classList.remove('revealed');
+        meaningCard?.classList.remove('revealed');
+        switchStruggleImage('images/Cuộc bãi công thế kỉ 19.png', 'Cuộc bãi công thế kỉ 19');
+        window.setTimeout(() => {
+          struggleExampleArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      });
+    }
+
+    if (contextCard) {
+      contextCard.addEventListener('click', (event) => {
+        event.stopPropagation();
+        contextCard.classList.add('revealed');
+        switchStruggleImage('images/Bối cảnh cuộc bãi công.png', 'Bối cảnh lịch sử cuộc bãi công');
+      });
+    }
+
+    if (meaningCard) {
+      meaningCard.addEventListener('click', (event) => {
+        event.stopPropagation();
+        meaningCard.classList.add('revealed');
+      });
+    }
 
     const theoryPageButtons = document.querySelectorAll('.theory-page-btn');
     const theoryPages = document.querySelectorAll('.theory-page');
@@ -1915,6 +2865,210 @@
     resetWordBtn.addEventListener('click', resetWordGame);
 
     resetWordGame();
+
+    const quizQuestions = [
+      {
+        question:'Theo V. Lênin, giai cấp được định nghĩa dựa trên điều gì?',
+        options:[
+          'Sự khác biệt về tri thức và kinh nghiệm của các nhóm người.',
+          'Địa vị trong hệ thống sản xuất xã hội, quan hệ với tư liệu sản xuất, và vai trò trong tổ chức lao động.',
+          'Sự phân chia giàu - nghèo trong xã hội.',
+          'Quyền lực chính trị của từng nhóm người trong xã hội.'
+        ],
+        answer:1
+      },
+      {
+        question:'Nguồn gốc trực tiếp dẫn đến sự xuất hiện của giai cấp trong lịch sử là gì?',
+        options:[
+          'Sự phát triển của lực lượng sản xuất.',
+          'Chế độ tư hữu về tư liệu sản xuất.',
+          'Sự phân chia lao động xã hội.',
+          'Mâu thuẫn giữa các nhóm người trong xã hội.'
+        ],
+        answer:1
+      },
+      {
+        question:'Trong xã hội có giai cấp, đấu tranh giai cấp là gì?',
+        options:[
+          'Cuộc chiến bạo lực nhằm thay đổi hệ thống chính trị.',
+          'Xung đột về lợi ích giữa các tầng lớp trung gian trong xã hội.',
+          'Cuộc đấu tranh giữa các tập đoàn người có lợi ích căn bản đối lập nhau.',
+          'Sự thay đổi hòa bình trong cấu trúc xã hội.'
+        ],
+        answer:2
+      },
+      {
+        question:'Theo quan điểm của C. Mác và Ph. Ăng-ghen, động lực chính thúc đẩy sự phát triển xã hội là gì?',
+        options:[
+          'Ý chí của các nhà lãnh đạo cách mạng.',
+          'Cuộc đấu tranh giai cấp.',
+          'Sự phát triển khoa học công nghệ.',
+          'Quan hệ quốc tế giữa các quốc gia.'
+        ],
+        answer:1
+      },
+      {
+        question:'Theo quan điểm triết học Mác - Lênin, đấu tranh giai cấp sẽ kết thúc khi nào?',
+        options:[
+          'Khi chế độ tư hữu bị xóa bỏ hoàn toàn.',
+          'Khi giai cấp vô sản chiếm được chính quyền.',
+          'Khi không còn sự phân hóa giàu - nghèo trong xã hội.',
+          'Khi xã hội đạt được trình độ sản xuất tiên tiến.'
+        ],
+        answer:0
+      },
+      {
+        question:'Vai trò chính của đấu tranh giai cấp trong xã hội là gì?',
+        options:[
+          'Là động lực thúc đẩy sự phát triển xã hội.',
+          'Bảo vệ quyền lợi của các nhóm thiểu số.',
+          'Duy trì trật tự xã hội hiện tại.',
+          'Thúc đẩy sự tiến bộ khoa học kỹ thuật.'
+        ],
+        answer:0
+      },
+      {
+        question:'Theo C. Mác, nguyên nhân sâu xa dẫn đến đấu tranh giai cấp là gì?',
+        options:[
+          'Mâu thuẫn giữa lực lượng sản xuất và quan hệ sản xuất.',
+          'Sự phát triển không đồng đều giữa các quốc gia.',
+          'Ý thức hệ đối lập giữa các tầng lớp xã hội.',
+          'Sự bất mãn của tầng lớp lao động với tầng lớp quản lý.'
+        ],
+        answer:0
+      },
+      {
+        question:'Tại Việt Nam, đấu tranh giai cấp hiện nay cần bám sát vào yếu tố nào?',
+        options:[
+          'Lịch sử xã hội cụ thể của đất nước.',
+          'Ứng dụng triệt để các hình thức bạo lực cách mạng.',
+          'Loại bỏ hoàn toàn các thành phần kinh tế tư nhân.',
+          'Xóa bỏ nhanh chóng các tầng lớp trung gian trong xã hội.'
+        ],
+        answer:0
+      },
+      {
+        question:'Đâu là ý nghĩa của đấu tranh giai cấp đối với sự phát triển kinh tế?',
+        options:[
+          'Thúc đẩy sự ổn định kinh tế qua việc giảm xung đột.',
+          'Đẩy mạnh chuyển đổi mô hình sản xuất từ tư bản sang xã hội chủ nghĩa.',
+          'Làm giảm sự phát triển của lực lượng sản xuất.',
+          'Hạn chế sự phân hóa giàu - nghèo trong xã hội.'
+        ],
+        answer:1
+      },
+      {
+        question:'Trong bối cảnh toàn cầu hóa hiện nay, đấu tranh giai cấp ở Việt Nam cần chú ý đến yếu tố nào?',
+        options:[
+          'Hạn chế nhập khẩu hàng hóa từ các quốc gia tư bản.',
+          'Tăng cường hợp tác quốc tế và xử lý ảnh hưởng từ các yếu tố ngoại lai.',
+          'Loại bỏ hoàn toàn sự tồn tại của kinh tế tư nhân.',
+          'Áp dụng mô hình kinh tế tư bản để phát triển đất nước.'
+        ],
+        answer:1
+      },
+      {
+        question:'Theo quan điểm của triết học Mác - Lênin, sự xuất hiện "của dư" trong sản xuất dẫn đến điều gì?',
+        options:[
+          'Sự bình đẳng trong xã hội.',
+          'Chế độ lao động tập thể hóa.',
+          'Khả năng chiếm đoạt lao động của người khác.',
+          'Phát triển nền kinh tế toàn cầu.'
+        ],
+        answer:2
+      },
+      {
+        question:'Đặc điểm của giai cấp thống trị trong xã hội có giai cấp là gì?',
+        options:[
+          'Nắm giữ tư liệu sản xuất và chiếm đoạt sản phẩm lao động của các giai cấp khác.',
+          'Tạo ra giá trị thặng dư để phát triển xã hội.',
+          'Không tham gia vào các hoạt động quản lý sản xuất.',
+          'Tạo điều kiện bình đẳng cho tất cả các giai cấp khác.'
+        ],
+        answer:0
+      }
+    ];
+
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    const quizRoundText = document.getElementById('quizRoundText');
+    const quizScoreText = document.getElementById('quizScoreText');
+    const quizQuestion = document.getElementById('quizQuestion');
+    const quizOptions = document.getElementById('quizOptions');
+    const quizMessage = document.getElementById('quizMessage');
+    const nextQuizBtn = document.getElementById('nextQuizBtn');
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+
+    function renderQuiz(){
+      const current = quizQuestions[quizIndex];
+      quizAnswered = false;
+
+      quizRoundText.textContent = `${quizIndex + 1}/${quizQuestions.length}`;
+      quizScoreText.textContent = `${quizScore}`;
+      quizQuestion.textContent = current.question;
+      quizMessage.textContent = 'Chọn một đáp án.';
+      nextQuizBtn.style.display = 'none';
+      quizOptions.innerHTML = '';
+
+      current.options.forEach((option,index) => {
+        const button = document.createElement('button');
+        button.className = 'quiz-option';
+        button.type = 'button';
+        button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+        button.addEventListener('click', () => chooseQuizAnswer(index));
+        quizOptions.appendChild(button);
+      });
+    }
+
+    function chooseQuizAnswer(index){
+      if(quizAnswered) return;
+
+      quizAnswered = true;
+      const current = quizQuestions[quizIndex];
+      const buttons = Array.from(quizOptions.querySelectorAll('.quiz-option'));
+
+      buttons.forEach((button,buttonIndex) => {
+        button.disabled = true;
+        if(buttonIndex === current.answer) button.classList.add('correct');
+        if(buttonIndex === index && index !== current.answer) button.classList.add('wrong');
+      });
+
+      if(index === current.answer){
+        quizScore++;
+        quizScoreText.textContent = `${quizScore}`;
+        quizMessage.textContent = 'Chính xác.';
+      }else{
+        quizMessage.textContent = `Chưa đúng. Đáp án đúng là ${String.fromCharCode(65 + current.answer)}.`;
+      }
+
+      nextQuizBtn.textContent =
+        quizIndex === quizQuestions.length - 1 ? 'Xem kết quả' : 'Câu tiếp theo →';
+      nextQuizBtn.style.display = 'inline-flex';
+    }
+
+    function nextQuiz(){
+      if(quizIndex < quizQuestions.length - 1){
+        quizIndex++;
+        renderQuiz();
+        return;
+      }
+
+      quizMessage.textContent = `Hoàn thành quiz: ${quizScore}/${quizQuestions.length} câu đúng.`;
+      nextQuizBtn.style.display = 'none';
+    }
+
+    function resetQuiz(){
+      quizIndex = 0;
+      quizScore = 0;
+      renderQuiz();
+    }
+
+    nextQuizBtn.addEventListener('click', nextQuiz);
+    resetQuizBtn.addEventListener('click', resetQuiz);
+
+    resetQuiz();
   </script>
 </body>
 </html>
