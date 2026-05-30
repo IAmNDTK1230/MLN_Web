@@ -1540,6 +1540,65 @@
       line-height:1.45;
     }
 
+
+    .compare-vertical-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .compare-text-box{
+      border-radius:30px;
+      background:rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.88);
+      padding:24px;
+      box-shadow:0 18px 50px rgba(180,83,9,.08);
+    }
+
+    .compare-text-box ul{
+      margin:12px 0 0;
+      padding-left:20px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .compare-image-card{
+      border-radius:30px;
+      overflow:hidden;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:0 20px 58px rgba(180,83,9,.13);
+    }
+
+    .compare-image-card img{
+      width:100%;
+      height:100%;
+      min-height:360px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .compare-image-note{
+      padding:14px 16px;
+      background:rgba(255,255,255,.94);
+      color:#475569;
+      font-size:14px;
+      line-height:1.55;
+      font-weight:650;
+    }
+
+    .compare-full-image{
+      margin-top:18px;
+    }
+
+    .compare-full-image img{
+      width:100%;
+      max-height:430px;
+      object-fit:cover;
+      display:block;
+    }
+
     .compare-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -1958,6 +2017,7 @@
       .word-body,
       .concept-grid,
       .compare-grid,
+      .compare-vertical-layout,
       .theory-visual-row,
       .theory-mini-illustration{
         grid-template-columns:1fr;
@@ -2398,7 +2458,7 @@
         <div class="section-head">
           <div>
             <div class="kicker">V · So sánh lịch sử</div>
-            <h2>Cuộc bãi công thế kỷ XIX đến sự đồng loạt tắt ứng dụng của tài xế công nghệ </h2>
+            <h2>Từ máy móc đến thuật toán</h2>
           </div>
         </div>
 
@@ -2409,17 +2469,26 @@
         </div>
 
         <div class="tab-panel active" id="tab1">
-          <h3>1. Bãi công và đập phá máy móc thế kỷ XIX</h3>
-          <p>
-            Phong trào đập phá máy móc thế kỷ XIX là một trong những hình thức đấu tranh tự phát đầu tiên của công nhân. 
-            Do thất nghiệp, nghèo đói và bị bóc lột nặng nề, một bộ phận công nhân lầm tưởng máy móc là nguyên nhân trực tiếp làm họ mất việc nên đã đập phá máy móc, nhà xưởng.
-          </p>
-          <ul>
-            <li>Đây là hình thức đấu tranh còn tự phát, cảm tính.</li>
-            <li>Công nhân chưa nhận thức rõ bản chất bóc lột của chủ nghĩa tư bản.</li>
-            <li>Dù bị đàn áp, phong trào giúp công nhân dần trưởng thành hơn trong nhận thức đấu tranh.</li>
-            <li>Về sau, họ chuyển sang bãi công để đòi quyền lợi kinh tế trực tiếp như tiền lương, thời gian làm việc và điều kiện lao động.</li>
-          </ul>
+          <div class="compare-vertical-layout">
+            <div class="compare-text-box">
+              <h3>1. Bãi công và đập phá máy móc thế kỷ XIX</h3>
+              <p>
+                Phong trào đập phá máy móc thế kỷ XIX là hình thức đấu tranh tự phát đầu tiên của công nhân. Do thất nghiệp và nghèo đói, họ lầm tưởng máy móc là kẻ thù nên đã đập phá nhà xưởng.
+              </p>
+              <ul>
+                <li>Dù bị đàn áp, phong trào giúp công nhân trưởng thành hơn trong nhận thức đấu tranh.</li>
+                <li>Từ phản kháng tự phát, công nhân dần chuyển sang bãi công để đòi quyền lợi kinh tế trực tiếp.</li>
+                <li>Các yêu cầu về sau tập trung vào tiền lương, thời gian làm việc và điều kiện lao động.</li>
+              </ul>
+            </div>
+
+            <div class="compare-image-card">
+              <img src="./images/bai-cong-the-ki-xix.jpg" alt="Bãi công và đập phá máy móc thế kỷ XIX ở Vương quốc Anh">
+              <div class="compare-image-note">
+                Minh họa phong trào công nhân thế kỷ XIX: phản kháng tự phát, nhắm vào máy móc và nhà xưởng.
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="tab-panel" id="tab2">
@@ -2447,6 +2516,13 @@
                 <li>Phản đối quyền kiểm soát thuật toán, dữ liệu, chiết khấu và lợi nhuận.</li>
                 <li>Sử dụng chính nền tảng số, như việc tắt ứng dụng tập thể, để gây sức ép kinh tế.</li>
               </ul>
+            </div>
+          </div>
+
+          <div class="compare-image-card compare-full-image">
+            <img src="./images/the-ky-xix-tai-xe-cong-nghe.png" alt="So sánh công nhân thế kỷ XIX và tài xế công nghệ ngày nay">
+            <div class="compare-image-note">
+              So sánh điểm khác biệt: ngày xưa là phản kháng máy móc, ngày nay là phản kháng cơ chế kiểm soát thuật toán, dữ liệu và lợi nhuận.
             </div>
           </div>
         </div>
