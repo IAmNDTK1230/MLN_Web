@@ -137,7 +137,10 @@
     }
 
     .hero{
-      padding:64px 0 42px;
+      min-height:calc(100vh - 64px);
+      padding:clamp(28px,5vh,58px) 0;
+      display:flex;
+      align-items:center;
     }
 
     .hero-grid{
@@ -727,6 +730,14 @@
 
     main{min-height:calc(100vh - 70px)}
 
+    body.home-mode main{
+      display:none;
+    }
+
+    body.home-mode{
+      overflow-y:hidden;
+    }
+
     .tab-content{
       display:none;
       padding:62px 0;
@@ -838,6 +849,12 @@
       box-shadow:0 20px 58px rgba(180,83,9,.08);
       overflow:hidden;
       margin-bottom:14px;
+      scroll-margin-top:94px;
+      transition:box-shadow .32s ease, transform .32s ease;
+    }
+
+    .panel.active{
+      box-shadow:0 24px 68px rgba(180,83,9,.12);
     }
 
     .panel button{
@@ -877,13 +894,36 @@
     }
 
     .panel-content{
-      display:none;
-      padding:0 24px 24px;
+      display:block;
+      max-height:0;
+      overflow:hidden;
+      padding:0 24px;
+      opacity:0;
+      transform:translateY(-8px);
+      visibility:hidden;
+      pointer-events:none;
+      transition:
+        max-height .58s cubic-bezier(.22,1,.36,1),
+        padding-bottom .36s ease,
+        opacity .28s ease,
+        transform .36s ease,
+        visibility 0s linear .58s;
     }
 
     .panel.active > .panel-content,
     .nested-panel.active > .panel-content{
-      display:block;
+      max-height:1800px;
+      padding-bottom:24px;
+      opacity:1;
+      transform:translateY(0);
+      visibility:visible;
+      pointer-events:auto;
+      transition:
+        max-height .58s cubic-bezier(.22,1,.36,1),
+        padding-bottom .36s ease,
+        opacity .28s ease,
+        transform .36s ease,
+        visibility 0s;
     }
 
     .panel-content ul{
@@ -1038,6 +1078,7 @@
       grid-template-columns:1fr 1fr;
       gap:16px;
       margin:16px 0 18px;
+      scroll-margin-top:94px;
     }
 
     .theory-visual-row.class-position-mode{
@@ -1112,6 +1153,7 @@
       gap:16px;
       align-items:stretch;
       margin:16px 0 18px;
+      scroll-margin-top:94px;
     }
 
     .struggle-history.active{
@@ -1990,7 +2032,7 @@
   </style>
 </head>
 
-<body>
+<body class="home-mode">
   <nav class="nav">
     <div class="wrap nav-inner">
       <div class="brand" id="homeBtn">
@@ -2084,7 +2126,7 @@
 
           <div class="theory-hero-text">
             <div class="kicker">I · Kiến thức nền</div>
-            <h2>Giai cấp, đấu tranh giai cấp và dân tộc</h2>
+            <h2>Giai cấp, đấu tranh giai cấp</h2>
             <p class="lead">
               Từ lý thuyết Mác - Lênin đến tình huống tài xế công nghệ trong nền kinh tế nền tảng.
             </p>
@@ -2097,7 +2139,7 @@
         </div>
 
         <div class="theory-page active" id="theory-page-1">
-          <div class="panel active">
+          <div class="panel">
             <button type="button">
               1. Giai cấp là gì?
               <span>＋</span>
@@ -2112,7 +2154,7 @@
                 <p class="small-theory" id="classDefinition">
                   “<span class="breakdown-mark group-b">Những tập đoàn to lớn</span> gồm những người <span class="breakdown-mark group-a" data-visual-target="slave-mode">khác nhau về địa vị của họ trong một hệ thống sản xuất xã hội</span> nhất định trong lịch sử, khác nhau về quan hệ của họ (thường thường thì những quan hệ này được pháp luật quy định và thừa nhận) <span class="breakdown-mark group-b">đối với tư liệu sản xuất</span>, về <span class="breakdown-mark group-b">vai trò của họ trong tổ chức lao động xã hội</span> và như vậy là <span class="breakdown-mark group-a" data-visual-target="capital-mode">khác nhau về cách thức hưởng thụ</span> và về phần của cải xã hội ít hoặc nhiều mà họ được hưởng. Giai cấp là những tập đoàn người, mà tập đoàn này thì có thể <span class="breakdown-mark group-b">chiếm đoạt lao động của tập đoàn khác</span>, do chỗ tập đoàn đó có địa vị khác nhau trong một chế độ kinh tế - xã hội nhất định”
                 </p>
-                <p class="theory-citation">Trích dẫn theo tác phẩm <em>Sáng kiến vĩ đại</em> của Lê Nin.</p>
+                <p class="theory-citation">Trích dẫn theo tác phẩm <em>Sáng kiến vĩ đại</em> của Lênin.</p>
               </div>
 
               <div class="theory-visual-row" id="classVisualRow">
@@ -2140,7 +2182,7 @@
         </div>
 
         <div class="theory-page" id="theory-page-2">
-          <div class="panel active">
+          <div class="panel">
             <button type="button">
               2. Đấu tranh giai cấp là gì?
               <span>＋</span>
@@ -2515,6 +2557,7 @@
     const homeBtn = document.getElementById('homeBtn');
 
     function openMainTab(tabName){
+      document.body.classList.remove('home-mode');
       hero.style.display = 'none';
 
       pageTabs.forEach(tab => {
@@ -2541,19 +2584,78 @@
     });
 
     homeBtn.addEventListener('click', () => {
+      document.body.classList.add('home-mode');
       hero.style.display = 'block';
       pageTabs.forEach(tab => tab.classList.remove('active'));
       tabContents.forEach(content => content.classList.remove('active'));
       window.scrollTo({ top: 0, behavior: 'instant' });
     });
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function wait(ms){
+      return new Promise(resolve => window.setTimeout(resolve, ms));
+    }
+
+    async function scrollDownBeforeReveal(amount = 118, delay = 180){
+      window.scrollBy({
+        top: amount,
+        behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+      });
+
+      if (!prefersReducedMotion.matches) {
+        await wait(delay);
+      }
+    }
+
+    function keepRevealBottomInView(element, bottomMargin = 32){
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const bottomLimit = viewportHeight - bottomMargin;
+
+      if (rect.bottom > bottomLimit) {
+        window.scrollBy({
+          top: rect.bottom - bottomLimit,
+          behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+        });
+      }
+    }
+
+    async function scrollAfterReveal(element, delay = 620){
+      await wait(prefersReducedMotion.matches ? 0 : delay);
+      keepRevealBottomInView(element);
+
+      if (!prefersReducedMotion.matches) {
+        await wait(220);
+        keepRevealBottomInView(element);
+      }
+    }
+
     const panels = document.querySelectorAll('.panel');
 
     panels.forEach(panel => {
-      const button = panel.querySelector('button');
-      button.addEventListener('click', (event) => {
+      const button = panel.querySelector(':scope > button') || panel.querySelector('button');
+      button.setAttribute('aria-expanded', String(panel.classList.contains('active')));
+
+      button.addEventListener('click', async (event) => {
         event.stopPropagation();
-        panel.classList.toggle('active');
+
+        if (panel.classList.contains('active')) {
+          panel.classList.remove('active');
+          button.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        if (panel.dataset.opening === 'true') return;
+
+        panel.dataset.opening = 'true';
+        await scrollDownBeforeReveal();
+        panel.classList.add('active');
+        button.setAttribute('aria-expanded', 'true');
+        await scrollAfterReveal(panel);
+        delete panel.dataset.opening;
       });
     });
 
@@ -2595,13 +2697,23 @@
       if (workerIcon) workerIcon.textContent = workerIconValue;
     }
 
-    function activateClassVisualMode({ mode, imageSrc, imageAlt, rulingIconValue, workerIconValue }){
+    async function activateClassVisualMode({ mode, imageSrc, imageAlt, rulingIconValue, workerIconValue }){
+      const shouldRevealVisual = classVisualRow && slaveModeImage && !classVisualRow.classList.contains('class-position-mode');
+
+      if (shouldRevealVisual) {
+        await scrollDownBeforeReveal(132, 190);
+      }
+
       if (classVisualRow && slaveModeImage) {
         classDefinition?.classList.add('breakdown-active');
         breakdownBtn?.classList.add('active');
         breakdownBtn?.setAttribute('aria-pressed', 'true');
         classVisualRow.classList.add('class-position-mode');
         slaveModeImage.setAttribute('aria-hidden', 'false');
+      }
+
+      if (shouldRevealVisual) {
+        await scrollAfterReveal(classVisualRow);
       }
 
       if (!slaveModeImage || !activeClassMode || activeClassMode === mode) {
@@ -2621,9 +2733,9 @@
     }
 
     if (slaveModeTrigger) {
-      slaveModeTrigger.addEventListener('click', (event) => {
+      slaveModeTrigger.addEventListener('click', async (event) => {
         event.stopPropagation();
-        activateClassVisualMode({
+        await activateClassVisualMode({
           mode: 'slave',
           imageSrc: 'images/Chế độ chiếm hữu nô lệ.png',
           imageAlt: 'Minh họa chế độ chiếm hữu nô lệ',
@@ -2634,9 +2746,9 @@
     }
 
     if (capitalModeTrigger) {
-      capitalModeTrigger.addEventListener('click', (event) => {
+      capitalModeTrigger.addEventListener('click', async (event) => {
         event.stopPropagation();
-        activateClassVisualMode({
+        await activateClassVisualMode({
           mode: 'capital',
           imageSrc: 'images/Thụ hưởng của cải tư bản.png',
           imageAlt: 'Minh họa thụ hưởng của cải tư bản',
@@ -2672,8 +2784,14 @@
     }
 
     if (struggleExampleBtn && struggleExampleArea) {
-      struggleExampleBtn.addEventListener('click', (event) => {
+      struggleExampleBtn.addEventListener('click', async (event) => {
         event.stopPropagation();
+        const shouldRevealExample = !struggleExampleArea.classList.contains('active');
+
+        if (shouldRevealExample) {
+          await scrollDownBeforeReveal(132, 190);
+        }
+
         struggleExampleArea.classList.add('active');
         struggleExampleArea.setAttribute('aria-hidden', 'false');
         struggleExampleBtn.classList.add('active');
@@ -2681,9 +2799,10 @@
         contextCard?.classList.remove('revealed');
         meaningCard?.classList.remove('revealed');
         switchStruggleImage('images/Cuộc bãi công thế kỉ 19.png', 'Cuộc bãi công thế kỉ 19');
-        window.setTimeout(() => {
-          struggleExampleArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 80);
+
+        if (shouldRevealExample) {
+          await scrollAfterReveal(struggleExampleArea);
+        }
       });
     }
 
